@@ -1,52 +1,38 @@
-using DrWatson, Glob
+using DrWatson, Glob, Revise
 @quickactivate
-foreach(include, glob("*.jl", srcdir()))
+foreach(includet, glob("*.jl", srcdir()))
 
-
-using ProgressMeter, Suppressor, DataFrames
 using Plots, LaTeXStrings
 
-P = Dict{Symbol, Any}(
+p = Dict{Symbol, Any}(
     :scaled => false,
-    :S => 20,
-    :μ => .1,
-    :σ => .005,
-    :k => 1.,
-    :b0 => 1.,
-    :K => 5*ones(20),
-    :λ => 0,
-    :z => 0, #10^(-1/4),
-    :r => 1, #rand(LogNormal(1,.08),100),
-    #:dist_r => LogNormal(1,.1),
-    :N => 1,
+    :S => 50,
+    :μ => .8,
+    :σ => .05,
+    :k => 1,
+    :a => 1,
+    :b => 1,
+    :b0 => 0.,
     :threshold => false,
+    :λ => 0,
+    :z => 0,
+    :K => .3,
+    :order => 2,
     :dist => "normal",
+    :N => 5,
     :symm => false,
-    :seed => 17,
+    :seed => 1
 );
 
-#plot multi log, init. cond. [.06,6]
-
-#P[:K]=P[:r].^(-4)
-#P[:r]=P[:K].^(-1/4)
-
-#P[:μ]*=P[:r]/P[:S] #mode(P[:dist_r])/P[:S]
-#P[:σ]*=P[:μ]
-#P[:K]*=P[:r]/(P[:σ]*sqrt(P[:S]+P[:μ]))
-evolve!(P; trajectory = true);
+evolve!(p; trajectory = true);
 
 #trajectories
-plot!(P[:trajectory],
-ylabel = L"B_i(t)",
-xlabel = L"t",
-yscale = :log,
-#yticks = [10^(-3),10^(-2),10^(-1), 10^(0), 10, 10^2, 10^3],
-#ylims = [.025,.65],
-#xlims = [0,250],
-linewidth = 3,
-legend = false,
-alpha = 1,
-grid = false,
-palette = :blues, 
-#palette = :YlOrBr_5,
+plot(
+    p[:trajectory],
+    ylabel = L"B_i(t)",
+    xlabel = L"t",
+    linewidth = 1,
+    legend = false,
+    grid = false,
+    palette = :blues
 )

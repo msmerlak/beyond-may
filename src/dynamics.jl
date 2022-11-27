@@ -4,22 +4,20 @@ using LinearAlgebra
 
 ## dynamical system
 
-
-
 function F!(f, x, p)
     x .= ppart.(x)
-    f .= p[:P].(x) - 
-end
+    pop = p[:r] .* x.^p[:k] - p[:z] .* x
 
-function J!(j, x, p)
-    j = -x .* p[:a]
-    j[diagind(j)] .= p[:r] * p[:b0]^(1 - p[:k]) .* (dproduction.(x, Ref(p)) .- 2 * x ./ p[:K]) .- p[:z] .- p[:a] * x
+    X = tensorpower(x.^p[:b], p[:order] - 1)
+    comm = - x.^p[:a] .* map(a -> a ⋅ X, p[:A])
+    f .= pop + comm
 end
-
 ## solving
 
 MAX_TIME = 1e4
-MAX_ABUNDANCE = 1e5
+MAX_ABUNDANCE = 1e4
+
+converged(ϵ = 1e-7) = TerminateSteadyState(ϵ)
 
 blowup() = DiscreteCallback((u, t, integrator) -> maximum(u) > MAX_ABUNDANCE, terminate!)
 
@@ -28,7 +26,7 @@ function evolve!(p; trajectory=false)
     if !haskey(p, :rng)
         p[:rng] = MersenneTwister(p[:seed])
     end
-    if !haskey(p, :a)
+    if !haskey(p, :A)
         add_interactions!(p)
     end
     if !haskey(p, :r)
@@ -40,8 +38,8 @@ function evolve!(p; trajectory=false)
 
     pb = ODEProblem(
         ODEFunction(
-            (f, x, p, t) -> F!(f, x, p); #in-place F faster
-            jac=(j, x, p, t) -> J!(j, x, p) #specify jacobian speeds things up
+            (f, x, p, t) -> F!(f, x, p) #in-place F faster
+            # jac=(j, x, p, t) -> J!(j, x, p) #specify jacobian speeds things up
         ),
         fill(0.1, p[:S]), #initial condition
         (0.0, MAX_TIME),
@@ -49,7 +47,7 @@ function evolve!(p; trajectory=false)
     )
 
     sol = solve(pb,
-        callback=CallbackSet(TerminateSteadyState(1e-3), blowup()),
+        callback=CallbackSet(converged(), blowup()),
         save_on=trajectory #don't save whole trajectory, only endpoint
     )
     p[:equilibrium] = sol.retcode == :Terminated ? sol.u[end] : NaN
@@ -108,7 +106,7 @@ end
 
 
 function add_interactions!(p)
-    # add a random interaction matrix to p, the dict of parameters
+    # add a random interactions to p, the dict of parameters
     (m, s) = p[:scaled] ? (p[:μ] / p[:S], p[:σ] / sqrt(p[:S])) : (p[:μ], p[:σ])
 
     if p[:dist] == "normal"
@@ -119,19 +117,13 @@ function add_interactions!(p)
         dist = Gamma(m^2 / s^2, s^2 / m)
     end
 
-    a = rand(p[:rng], dist, (p[:S], p[:S]))
-    a[diagind(a)] .= 0.0 #self-regulation is not part of interaction matrix
-
-
-    if p[:symm]
-        for i in 1:p[:S], j in 1:p[:S]
-            if i > j
-                a[i, j] = a[j, i]
-            end
-        end
+    A = [rand(p[:rng], dist, Tuple(fill(p[:S], p[:order] - 1))) for _ in 1:p[:S]]
+    for i in 1:p[:S]
+        A[i][fill(i, p[:order] - 1)...] = 1/p[:K]
     end
-    p[:a] = a
+    p[:A] = A
 end
+
 
 function add_growth_rates!(p)
     if haskey(p, :dist_r)
@@ -141,35 +133,8 @@ function add_growth_rates!(p)
     end
 end
 
-function stability!(p)
-    # run N simulates and append results to p
 
-    p[:rng] = MersenneTwister(p[:seed])
-    stability = Vector{Bool}(undef, p[:N])
-    diversity = Vector{Float64}(undef, p[:N])
-    richness = Vector{Float64}(undef, p[:N])
-
-    Threads.@threads for i in 1:p[:N]
-        add_interactions!(p)
-        add_growth_rates!(p)
-        evolve!(p)
-        stability[i] = p[:converged]
-        diversity[i] = p[:diversity]
-        richness[i] = p[:richness]
-    end
-    delete!(p, :converged)
-    delete!(p, :rng)
-
-    p[:richness] = mean(richness) / p[:S]
-    p[:prob_stab] = mean(stability)
-
-
-    p[:diversity] = mean(diversity)
-    p[:diversity_se] = std(diversity) / sqrt(p[:N])
-end
-
-
-function diversity(p)
+function diversity!(p)
     # run N simulates and append results to p
     diversity = Vector{Float64}(undef, p[:N])
     p[:rng] = MersenneTwister()
@@ -185,7 +150,7 @@ function diversity(p)
     return mean(diversity)
 end
 
-function full_coexistence(p)
+function full_coexistence!(p)
     # run N simulates and append results to p
     full_coexistence = Vector{Float64}(undef, p[:N])
     p[:rng] = MersenneTwister()
@@ -195,7 +160,8 @@ function full_coexistence(p)
         add_growth_rates!(p)
         add_initial_condition!(p)
         evolve!(p)
-        full_coexistence[i] = p[:converged] && p[:richness] == p[:S] ? 1 : 0
+        # full_coexistence[i] = p[:converged] && p[:richness] == p[:S] ? 1 : 0
+        full_coexistence[i] = p[:richness] == p[:S] ? 1 : 0
     end
 
     return mean(full_coexistence)

@@ -1,5 +1,24 @@
 ppart(x) = max(x, 0)
 
+using Tensorial:Vec, ⊗
+function tensorpower(x::Vector, n)
+    if n == 1 
+        return x
+    elseif n == 2
+        X = Vec{length(x)}(x)
+        return X ⊗ X
+    elseif n == 3
+        X = Vec{length(x)}(x)
+        return X ⊗ X ⊗ X
+    else
+        @warn "Can't compute higher powers for now"
+    end
+end
+
+function mytensorproduct(x, y)
+    z = zeros(size(x)..., size(y)...)
+    
+end
 
 function offdiag(A::AbstractMatrix)
     [A[ι] for ι in CartesianIndices(A) if ι[1] ≠ ι[2]]
