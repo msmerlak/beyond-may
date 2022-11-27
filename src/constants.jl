@@ -1,3 +1,5 @@
+using Colors, ColorSchemes
+
 COLOR_LOG = :turquoise3
 COLOR_SUB = :darkgoldenrod1
 
