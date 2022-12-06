@@ -2,7 +2,7 @@
 
 julia_version = "1.8.1"
 manifest_format = "2.0"
-project_hash = "651c5eecdcfabc45556935fed3503896486b7237"
+project_hash = "7d1bddda275a6a6053e4298c332a3414e7c4136f"
 
 [[deps.AbstractFFTs]]
 deps = ["ChainRulesCore", "LinearAlgebra"]
@@ -356,6 +356,12 @@ deps = ["ArgTools", "FileWatching", "LibCURL", "NetworkOptions"]
 uuid = "f43a241f-c20a-4ad4-852c-f6b1247861c6"
 version = "1.6.0"
 
+[[deps.DrWatson]]
+deps = ["Dates", "FileIO", "JLD2", "LibGit2", "MacroTools", "Pkg", "Random", "Requires", "Scratch", "UnPack"]
+git-tree-sha1 = "52d2dbd1835ff1073dbafbef02353c723930e0a1"
+uuid = "634d3b9d-ee7a-5ddf-bec9-22491ea816e1"
+version = "2.12.0"
+
 [[deps.DualNumbers]]
 deps = ["Calculus", "NaNMath", "SpecialFunctions"]
 git-tree-sha1 = "5837a837389fccf076445fce071c8ddaea35a566"
@@ -412,6 +418,12 @@ deps = ["LinearAlgebra"]
 git-tree-sha1 = "14a6f7a21125f715d935fe8f83560ee833f7d79d"
 uuid = "29a986be-02c6-4525-aec4-84b980013641"
 version = "1.2.7"
+
+[[deps.FileIO]]
+deps = ["Pkg", "Requires", "UUIDs"]
+git-tree-sha1 = "7be5f99f7d15578798f338f5433b6c432ea8037b"
+uuid = "5789e2e9-d7fb-5bc7-8068-2c6fae9b9549"
+version = "1.16.0"
 
 [[deps.FileWatching]]
 uuid = "7b1f6079-737a-58dc-b8bc-7a2ca5c1b5ee"
@@ -624,6 +636,12 @@ version = "0.9.2"
 git-tree-sha1 = "a3f24677c21f5bbe9d2a714f95dcd58337fb2856"
 uuid = "82899510-4779-5014-852e-03e436cf321d"
 version = "1.0.0"
+
+[[deps.JLD2]]
+deps = ["FileIO", "MacroTools", "Mmap", "OrderedCollections", "Pkg", "Printf", "Reexport", "TranscodingStreams", "UUIDs"]
+git-tree-sha1 = "ec8a9c9f0ecb1c687e34c1fda2699de4d054672a"
+uuid = "033835bb-8acc-5ee8-8aae-3f567f8a3819"
+version = "0.4.29"
 
 [[deps.JLFzf]]
 deps = ["Pipe", "REPL", "Random", "fzf_jll"]

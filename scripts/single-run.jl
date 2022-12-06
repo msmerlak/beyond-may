@@ -7,21 +7,20 @@ using Plots, LaTeXStrings
 p = Dict{Symbol, Any}(
     :scaled => false,
     :S => 50,
-    :μ => .8,
-    :σ => .05,
-    :k => 1,
+    :μ => 0.,
+    :σ => .1,
+    :k => .75,
     :a => 1,
     :b => 1,
-    :b0 => 0.,
-    :threshold => false,
-    :λ => 0,
-    :z => 0,
-    :K => .3,
-    :order => 2,
+    :b0 => .01,
+    :threshold => true,
+    :z => 0.1,
+    :K => 1.,
+    :order => 4,
     :dist => "normal",
-    :N => 5,
+    :N => 1,
     :symm => false,
-    :seed => 1
+    :seed => rand(UInt)
 );
 
 evolve!(p; trajectory = true);

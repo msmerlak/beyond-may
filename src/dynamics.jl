@@ -1,23 +1,37 @@
 using DifferentialEquations
 using Random, Distributions
 using LinearAlgebra
+using ForwardDiff
 
 ## dynamical system
 
 function F!(f, x, p)
     x .= ppart.(x)
-    pop = p[:r] .* x.^p[:k] - p[:z] .* x
 
-    X = tensorpower(x.^p[:b], p[:order] - 1)
-    comm = - x.^p[:a] .* map(a -> a ⋅ X, p[:A])
+    pop = p[:r] .* x.^p[:k] - p[:z] .* x
+    pop[x .< p[:b0]] .= 0
+    comm = - x.^p[:a] .* contract(p[:A], x.^p[:b])
+
     f .= pop + comm
 end
+
+function F(x, p)
+    x .= ppart.(x)
+    pop = p[:r] .* x.^p[:k] - p[:z] .* x
+    pop[x .< p[:b0]] .= 0
+    comm = - x.^p[:a] .* contract(p[:A], x.^p[:b])
+
+    return pop + comm
+end
+
+J(x, p) = ForwardDiff.jacobian(y -> F(y, p), x)
+
 ## solving
 
-MAX_TIME = 1e4
-MAX_ABUNDANCE = 1e4
+MAX_TIME = 1e3
+MAX_ABUNDANCE = 1e3
 
-converged(ϵ = 1e-7) = TerminateSteadyState(ϵ)
+converged(ϵ = 1e-3) = TerminateSteadyState(ϵ)
 
 blowup() = DiscreteCallback((u, t, integrator) -> maximum(u) > MAX_ABUNDANCE, terminate!)
 
@@ -41,7 +55,7 @@ function evolve!(p; trajectory=false)
             (f, x, p, t) -> F!(f, x, p) #in-place F faster
             # jac=(j, x, p, t) -> J!(j, x, p) #specify jacobian speeds things up
         ),
-        fill(0.1, p[:S]), #initial condition
+        ones(p[:S]), #initial condition
         (0.0, MAX_TIME),
         p
     )
@@ -117,9 +131,11 @@ function add_interactions!(p)
         dist = Gamma(m^2 / s^2, s^2 / m)
     end
 
-    A = [rand(p[:rng], dist, Tuple(fill(p[:S], p[:order] - 1))) for _ in 1:p[:S]]
+    A = rand(
+        p[:rng], dist, Tuple(fill(p[:S], p[:order]))
+    )
     for i in 1:p[:S]
-        A[i][fill(i, p[:order] - 1)...] = 1/p[:K]
+        A[fill(i, p[:order])...] = 1/p[:K]
     end
     p[:A] = A
 end
