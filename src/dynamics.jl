@@ -8,18 +8,18 @@ using ForwardDiff
 function F!(f, x, p)
     x .= ppart.(x)
 
-    pop = p[:r] .* x.^p[:k] - p[:z] .* x
+    pop = p[:r] .* x.^p[:α] - p[:z] .* x
     pop[x .< p[:b0]] .= 0
-    comm = - x.^p[:a] .* contract(p[:A], x.^p[:b])
+    comm = - x.^p[:β] .* contract(p[:A], x.^p[:γ])
 
     f .= pop + comm
 end
 
 function F(x, p)
     x .= ppart.(x)
-    pop = p[:r] .* x.^p[:k] - p[:z] .* x
+    pop = p[:r] .* x.^p[:α] - p[:z] .* x
     pop[x .< p[:b0]] .= 0
-    comm = - x.^p[:a] .* contract(p[:A], x.^p[:b])
+    comm = - x.^p[:β] .* contract(p[:A], x.^p[:γ])
 
     return pop + comm
 end
@@ -36,6 +36,10 @@ converged(ϵ = 1e-3) = TerminateSteadyState(ϵ)
 blowup() = DiscreteCallback((u, t, integrator) -> maximum(u) > MAX_ABUNDANCE, terminate!)
 
 function evolve!(p; trajectory=false)
+
+    if !haskey(p, :seed)
+        p[:seed] = rand(UInt32)
+    end
 
     if !haskey(p, :rng)
         p[:rng] = MersenneTwister(p[:seed])
@@ -83,7 +87,7 @@ function equilibria!(p)
     if !haskey(p, :rng) 
         p[:rng] = MersenneTwister(p[:seed])
     end
-    if !haskey(p, :a)
+    if !haskey(p, :β)
         add_interactions!(p)
     end
     if !haskey(p, :r)
