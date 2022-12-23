@@ -43,15 +43,14 @@
 Fifty years ago, Robert May predicted that large, complex systems are unlikely to be stable. Here, we revisit May's argument to show that there are, in fact, two kinds of complexity-stability relationships in disordered dynamical systems: in some cases, strong interaction and large diversity are, indeed, destabilizing; in other cases, they are stabilizing. Which class a given system falls into depends on the relative convexity of the response to self- vs. cross-interactions. We illustrate the transition between "May" (complexity begets instability) and "anti-May" (complexity begets stability) behavior with a non-linear  generalization of the Lotka-Volterra model. 
 \end{abstract}
 
-
 \maketitle
 
 \section{Introduction}
 
-Few mathematical arguments have influenced biological thinking like May's 1970 prediction that large, complex systems cannot be stable. It is, indeed, a perplexing prediction. On the one hand, the argument is so simple and compelling that it is hard not to conclude that it must hold universally. On the other, it is clear that at least some large, complex systems are stable---or else which stable patterns would biology be studying in the first place? If anything, the opposite relationship between complexity and stability seems to hold empirically: rich, strongly coupled ecosystems (eg. rainforests) tend to be  stable over time, while sparser ones (eg. arctic environments) often exhibit large fluctuations, exctinctions, and invasions. 
+Few mathematical arguments have influenced biological thinking like May's prediction that large, complex systems cannot be stable. It is, on the face of it, a perplexing conclusion. On the one hand, May's argument is so simple and compelling that it hard not to conclude that it must hold universally. On the other, it is clear that at least some large, complex systems are stable---or else which stable patterns would biology be studying in the first place? If anything, the opposite relationship between complexity and stability seems to hold empirically: rich, strongly coupled ecosystems (eg. rainforests) tend to be  stable over time, while sparser ones (eg. arctic environments) often exhibit large fluctuations, exctinctions, and invasions. 
 
-May's argument can be paraphrased as follows. If a system with $N$ populations $x_i$ is stable, then it can be characterized by an equilibrium $x^*$. Near that equilibrium $x = x^* + y$, the dynamics of the system will be described by linear equations $\delta\dot{y} = A y$, and stability of these equations requires that all eigenvalues of $A$ have negative real part. But if $A$ can be represented as $A = B - I$, where $B$ consists of random, independent interactions with zero mean and variance $\sigma^2$, and $-I$ corresponds to stabilizing self-interactions on some natural timescale, then the circular law of random matrix theory implies that all eigenvalues of $A$ will have negative real part only if $\sigma^2 N < 1$. This places a sharp constraint on both diversity $N$ and interaction strengh $\sigma$, often referred to as "complexity begets instability". (This argument generalizes to $\langle B_{ij}\rangle \neq 0$, to incomplete connectivity, or to correlated interactions.)
-
+May's argument goes as follows. If a system with $N$ populations $x_i$ is stable, then it can be characterized by an equilibrium $x^*$. Near that equilibrium $x = x^* + \delta x$, the dynamics of the system will be described by linear equations $d(\delta x)/dt = A (\delta x)$, and stability of these equations requires that all eigenvalues of $A$ have negative real part. But if $A$ can be represented as $A = B - I$, where $B$ consists of random, independent interactions with zero mean and variance $\sigma^2$, and $-I$ corresponds to stabilizing self-interactions on some natural timescale, then the circular law of random matrix theory implies that all eigenvalues of $A$ will have negative real part only if $\sigma^2 N < 1$. This places a sharp constraint on both diversity $N$ and interaction strengh $\sigma$, often referred to as "complexity begets instability". (This argument generalizes to $\langle B_{ij}\rangle \neq 0$, to incomplete connectivity, or to correlated interactions.)
+ 
 In ecology, many authors have sought to ease the tension between May's prediction and empirical observation by invoking effects not captured by dynamical systems with random coefficients: spatial or food-web structure, time delays, etc. Here, we show that May's argument is incomplete: random dynamical systems do not necessarily imply that stability decreases with diversity or interaction strength---the opposite behavior is also possible, without the need for special or additional structure. 
 
 \section{Results}
@@ -68,11 +67,15 @@ The classic generalized Lotka-Volterra competition model corresponds to $f$, $g$
 
 \subsection{Homogeneous interactions}
 
-Under what condition is \eqref{dynamics} linearly stable? We begin by considering the simple case where all self-interactions have the same strength $a_{ii} = a_{\textrm{s}}$, and similarly for cross-interactions $a_{ij} = a_{\textrm{c}}$ ($i\neq j$). In that case, a straightforward computation shows that an equilibrium $x_*$ will be linearly stable if  
+Under what condition does \eqref{dynamics} admit a linearly stable equilibrium? We begin by considering the simple case where all self-interactions have the same strength $a_{ii} = a_{\textrm{s}}$, and similarly for cross-interactions $a_{ij} = a_{\textrm{c}}$ ($i\neq j$). Under these assumptions, a straightforward computation shows that an equilibrium $x_*$ will be linearly stable if  
 \begin{equation}\label{homogeneous-general}
-    \left(\frac{f'_*}{f_*} - \frac{g'_*}{g_*}\right) + (a_{\textrm{s}} - a_{\textrm{c}})\,\frac{g_*h'_*}{f_*} < 0 \, . 
+    \left(\frac{f'_*}{f_*} - \frac{g'_*}{g_*}\right) + (a_{\textrm{s}} - a_{\textrm{c}})\,\frac{g_*h'_*}{f_*} < 0. 
 \end{equation}
-Thus, the stability of a competitive equilibrium depends on the relative strength of self- and cross-interactions ($a_{\textrm{s}} - a_{\textrm{c}}$), but also on the relative convexity of the production and response functions ($f'_*/f_* - g'_*/g_*$). With power laws, \eqref{homogeneous-general} evaluates to $(\alpha - \beta)(N-1) < \gamma(a_{\textrm{s}}/a_{\textrm{c}}- 1) - (\alpha - \beta)(a_{\textrm{s}}/a_{\textrm{c}})$, leading to three different regimes:
+Thus, the stability of a competitive equilibrium depends on the relative strength of self- and cross-interactions ($a_{\textrm{s}} - a_{\textrm{c}}$), but also on the relative convexity of the production and response functions ($f'_*/f_* - g'_*/g_*$). With power laws, \eqref{homogeneous-general} evaluates to 
+\begin{equation}
+    (\alpha - \beta)(N-1) < \gamma(a_{\textrm{s}}/a_{\textrm{c}}- 1) - (\alpha - \beta)(a_{\textrm{s}}/a_{\textrm{c}}),
+\end{equation}
+leading to three different regimes:
 \begin{itemize}
     \item If $\alpha = \beta$, stability requires $a_{\textrm{s}} > a_{\textrm{c}}$, i.e. self-interactions must be stronger than cross-interactions. This is the usual conclusion drawn from the Lotka-Volterra model. 
     \item If $\alpha > \beta$, stability places an upper bound on $N$: the more complex the system, the less likely to be stable. We can call this "May" behavior.

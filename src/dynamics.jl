@@ -34,6 +34,10 @@ blowup() = DiscreteCallback((u, t, integrator) -> maximum(u) > MAX_ABUNDANCE, te
 
 function evolve!(p; trajectory=false)
 
+    if !haskey(p, :seed)
+        p[:seed] = rand(UInt32)
+    end
+
     if !haskey(p, :rng)
         p[:rng] = MersenneTwister(p[:seed])
     end
