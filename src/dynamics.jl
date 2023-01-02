@@ -8,18 +8,18 @@ using ForwardDiff
 function F!(f, x, p)
     x .= ppart.(x)
 
-    pop = p[:r] .* x.^p[:k] - p[:z] .* x
-    pop[x .< p[:b0]] .= 0
-    comm = - x.^p[:a] .* contract(p[:A], x.^p[:b])
+    pop = p[:r] .* x.^p[:α] - p[:z] .* x
+    pop[x .< p[:x0]] .= 0
+    comm = - x.^p[:β] .* contract(p[:A], x.^p[:γ])
 
     f .= pop + comm
 end
 
 function F(x, p)
     x .= ppart.(x)
-    pop = p[:r] .* x.^p[:k] - p[:z] .* x
-    pop[x .< p[:b0]] .= 0
-    comm = - x.^p[:a] .* contract(p[:A], x.^p[:b])
+    pop = p[:r] .* x.^p[:α] - p[:z] .* x
+    pop[x .< p[:x0]] .= 0
+    comm = - x.^p[:β] .* contract(p[:A], x.^p[:γ])
 
     return pop + comm
 end
@@ -66,8 +66,8 @@ function evolve!(p; trajectory=false)
     )
     p[:equilibrium] = sol.retcode == :Terminated ? sol.u[end] : NaN
     p[:converged] = (sol.retcode == :Terminated && maximum(p[:equilibrium]) < MAX_ABUNDANCE)
-    p[:richness] = sum(sol.u[end] .> p[:b0] * p[:threshold])
-    p[:diversity] = p[:richness] == 0 ? 0 : Ω(sol.u[end] .* (sol.u[end] .> p[:b0] * p[:threshold]))
+    p[:richness] = sum(sol.u[end] .> p[:x0] * p[:threshold])
+    p[:diversity] = p[:richness] == 0 ? 0 : Ω(sol.u[end] .* (sol.u[end] .> p[:x0] * p[:threshold]))
 
     if trajectory
         p[:trajectory] = sol
@@ -83,7 +83,7 @@ function equilibria!(p)
     if !haskey(p, :rng) 
         p[:rng] = MersenneTwister(p[:seed])
     end
-    if !haskey(p, :a)
+    if !haskey(p, :β)
         add_interactions!(p)
     end
     if !haskey(p, :r)
@@ -112,7 +112,7 @@ function equilibria!(p)
     end
     p[:equilibria] = uniquetol(equilibria, atol=0.1)
     p[:num_equilibria] = length(p[:equilibria])
-    p[:num_interior_equilibria] = sum(map(x -> all(x .> p[:b0] * p[:threshold]), p[:equilibria]))
+    p[:num_interior_equilibria] = sum(map(x -> all(x .> p[:x0] * p[:threshold]), p[:equilibria]))
 
     return p[:num_equilibria]
 end
@@ -135,7 +135,7 @@ function add_interactions!(p)
         p[:rng], dist, Tuple(fill(p[:S], p[:order]))
     )
     for i in 1:p[:S]
-        A[fill(i, p[:order])...] = 1/p[:K]
+        A[fill(i, p[:order])...] = 1/p[:α]
     end
     p[:A] = A
 end
