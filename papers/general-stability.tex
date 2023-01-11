@@ -54,7 +54,7 @@ In ecology, many authors have sought to ease the tension between May's predictio
 
 Consider the dynamical system in $N$ variables
 \begin{equation}\label{dynamics}
-    \dot{x}_i = f(x_i) + \sum_{j}a_{ij}g(x_i)h(x_j).
+    \dot{x}_i = f(x_i) + \sum_{j}a_{ij}g(x_i)h(x_j) \, .
 \end{equation}
 Here $f(x_i)$ represents the contribution of a population $i$ to its own growth (its "production function"), while $g(x_i)$ and $h(x_j)$ capture the interaction of $i$ with other populations. That interaction is weighted by a coefficient $a_{ij}$, such that $a_{ij} > 0$ (resp. $a_{ji} < 0$) implies a positive (resp. negative) effect of $j$ on the growth of $i$. In the following we call $g(x_i)$ the "response function". 
 
@@ -64,7 +64,7 @@ The classic generalized Lotka-Volterra competition model corresponds to $f$, $g$
 
 Under what condition is \eqref{dynamics} linearly stable? We begin by considering the simple case where all self-interactions have the same strength $a_{ii} = a_{\textrm{s}}$, and similarly for cross-interactions $a_{ij} = a_{\textrm{c}}$ ($i\neq j$). In that case, a straightforward computation shows that an equilibrium $x_*$ will be linearly stable if  
 \begin{equation}\label{homogeneous-general}
-    \left(\frac{f'_*}{f_*} - \frac{g'_*}{g_*}\right) + (a_{\textrm{s}} - a_{\textrm{c}})\,\frac{g_*h'_*}{f_*} < 0. 
+    \left(\frac{f'_*}{f_*} - \frac{g'_*}{g_*}\right) + (a_{\textrm{s}} - a_{\textrm{c}})\,\frac{g_*h'_*}{f_*} < 0 \, . 
 \end{equation}
 Thus, the stability of a competitive equilibrium depends on the relative strength of self- and cross-interactions ($a_{\textrm{s}} - a_{\textrm{c}}$), but also on the relative convexity of the production and response functions ($f'_*/f_* - g'_*/g_*$). With power laws, \eqref{homogeneous-general} evaluates to $(\alpha - \beta)(N-1) < \gamma(a_{\textrm{s}}/a_{\textrm{c}}- 1) - (\alpha - \beta)(a_{\textrm{s}}/a_{\textrm{c}})$, leading to three different regimes:
 \begin{itemize}
@@ -75,9 +75,48 @@ Thus, the stability of a competitive equilibrium depends on the relative strengt
 
 \subsection{Random interactions}
 
-Consider now \eqref{dynamics} with i.i.d. interactions $a_{ij}$ with mean $\mu$ and standard deviation $\sigma$. 
-
-
+Consider now \eqref{dynamics} with i.i.d. interactions $a_{ij}$ with mean $\mu$ and standard deviation $\sigma$
+and let us specialize to the power laws case, with $f(x_i)=x_i^{\alpha}$, 
+$g(x_i)=-x_i^{\beta}$ and $h(x_i)=x_i^{\gamma}$. 
+Additional proportionality constants can be reabsorbed in the statistics
+of $a$ and by a rescaling of time, moreover we chose to explicitly
+factor out a minus sign in order to more straightforwardly connect
+with competitive models.
+The evolution equations read
+\begin{equation}
+    \dot{x_i}=x_i^{\alpha} - x_i^{\beta}\sum_{j}a_{ij}x_j^{\gamma} \, .
+\label{eq: full abg}
+\end{equation}
+Following, e.g., Ref.~[Roy2019] we can derive, for large $N$,
+a dynamical mean field theory (DMFT) which provide a stochastic 
+differential equation describing the entire ensemble of $N$ variables
+thorugh the evolution of the representtive random variables $x$
+\begin{equation}
+    \dot{x} = x^{\alpha}-x^{\beta}\left( \mu N \langle x^{\gamma}\rangle + \sigma \sqrt{N} \eta\right) \, ,
+\label{eq: dmft}
+\end{equation}
+where $\langle . \rangle$ stands for expectation value
+and $\eta$ is a gaussian variable
+with zero mean and correlation 
+$\langle x^{\gamma}(t)x^{\gamma}(s)\rangle$. 
+The averages and correlations have to be computed self-consistently.
+The equilibrium solution can be written as
+\begin{equation}
+    x^* = \left( \mu N \langle (x^*)^{\gamma}\rangle + \sigma \sqrt{N\langle(x^*)^{2\gamma}\rangle}\xi\right)^{1/(\alpha-\beta)} \, ,
+\end{equation}
+where $\xi$ is a standard normal random variable (i.e. $\xi\sim\mathcal{N}(0,1)$).
+The equilibrium probability distribution function for $x^*$, $P(x)$,
+can be obtained as the pushforward of the distribition of $\xi$.
+The change of measure gives
+\begin{equation}
+    \left|\frac{d \xi}{d x}\right|=\frac{|\alpha-\beta|x^{\alpha-\beta-1}}{\sigma \sqrt{N\langle(x^*)^{2\gamma}\rangle}} \, ,
+\end{equation}
+therefore we obtain
+\begin{equation}
+    P(x)=\frac{|\alpha-\beta|x^{\alpha-\beta-1}}{\sqrt{2\pi}\sigma \sqrt{N\langle(x^*)^{2\gamma}\rangle}}
+    \exp{\left\{-\frac{(x^{\alpha-\beta}-\mu N\langle(x^*)^{\gamma}\rangle)^2}{2\sigma^2N\langle(x^*)^{2\gamma}\rangle}\right\}} \, ,
+\end{equation}
+where the expectations have to be computed self-consistently.
 
 \end{document}
 %
