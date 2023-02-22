@@ -1,15 +1,13 @@
 using DifferentialEquations
 using Random, Distributions
 using LinearAlgebra
-using ForwardDiff
 
 ## dynamical system
 
 function F!(f, x, p)
     x .= ppart.(x)
-
     pop = p[:r] .* x.^p[:α] - p[:z] .* x
-    pop[x .< p[:b0]] .= 0
+    if p[:threshold] pop[x .< p[:b0]] .= 0 end
     comm = - x.^p[:β] .* contract(p[:A], x.^p[:γ])
 
     f .= pop + comm
@@ -18,46 +16,31 @@ end
 function F(x, p)
     x .= ppart.(x)
     pop = p[:r] .* x.^p[:α] - p[:z] .* x
-    pop[x .< p[:b0]] .= 0
+    if p[:threshold] pop[x .< p[:b0]] .= 0 end
     comm = - x.^p[:β] .* contract(p[:A], x.^p[:γ])
 
     return pop + comm
 end
-
-J(x, p) = ForwardDiff.jacobian(y -> F(y, p), x)
 
 ## solving
 
 MAX_TIME = 1e3
 MAX_ABUNDANCE = 1e3
 
-converged(ϵ = 1e-3) = TerminateSteadyState(ϵ)
-
-blowup() = DiscreteCallback((u, t, integrator) -> maximum(u) > MAX_ABUNDANCE, terminate!)
+converged(ϵ = 1e-5) = TerminateSteadyState(ϵ)
+blowup(max_abundance = MAX_ABUNDANCE) = DiscreteCallback((u, t, integrator) -> maximum(u) > max_abundance, terminate!)
 
 function evolve!(p; trajectory=false)
 
-    if !haskey(p, :seed)
-        p[:seed] = rand(UInt32)
-    end
-
-    if !haskey(p, :rng)
-        p[:rng] = MersenneTwister(p[:seed])
-    end
-    if !haskey(p, :A)
-        add_interactions!(p)
-    end
-    if !haskey(p, :r)
-        add_growth_rates!(p)
-    end
-    if !haskey(p, :x0)
-        add_initial_condition!(p)
-    end
+    !haskey(p, :seed) && (p[:seed] = rand(UInt32))
+    !haskey(p, :rng) && (p[:rng] = MersenneTwister(p[:seed]))
+    !haskey(p, :A) && add_interactions!(p)
+    !haskey(p, :r) && add_growth_rates!(p)
+    !haskey(p, :x0) && add_initial_condition!(p)
 
     pb = ODEProblem(
         ODEFunction(
-            (f, x, p, t) -> F!(f, x, p) #in-place F faster
-            # jac=(j, x, p, t) -> J!(j, x, p) #specify jacobian speeds things up
+            (f, x, p, t) -> F!(f, x, p)
         ),
         ones(p[:S]), #initial condition
         (0.0, MAX_TIME),
@@ -70,8 +53,8 @@ function evolve!(p; trajectory=false)
     )
     p[:equilibrium] = sol.retcode == :Terminated ? sol.u[end] : NaN
     p[:converged] = (sol.retcode == :Terminated && maximum(p[:equilibrium]) < MAX_ABUNDANCE)
-    p[:richness] = sum(sol.u[end] .> p[:b0] * p[:threshold])
-    p[:diversity] = p[:richness] == 0 ? 0 : Ω(sol.u[end] .* (sol.u[end] .> p[:b0] * p[:threshold]))
+    p[:richness] = sum(sol.u[end] .> p[:b0])
+    p[:diversity] = p[:richness] == 0 ? 0 : Ω(sol.u[end] .* (sol.u[end] .> p[:b0]))
 
     if trajectory
         p[:trajectory] = sol
@@ -82,46 +65,6 @@ end
 function add_initial_condition!(p)
     p[:x0] = rand(p[:rng], Uniform(2, 10), p[:S])
 end
-
-function equilibria!(p)
-    if !haskey(p, :rng) 
-        p[:rng] = MersenneTwister(p[:seed])
-    end
-    if !haskey(p, :β)
-        add_interactions!(p)
-    end
-    if !haskey(p, :r)
-        add_growth_rates!(p)
-    end
-
-    equilibria = Vector{Float64}[]
-    sizehint!(equilibria, p[:N])
-
-    Threads.@threads for _ in 1:p[:N]
-        add_initial_condition!(p)
-        pb = ODEProblem(
-            ODEFunction(
-                (f, x, p, t) -> F!(f, x, p); #in-place F faster
-                jac=(j, x, p, t) -> J!(j, x, p) #specify jacobian speeds things up
-            ),
-            p[:x0],
-            (0.0, MAX_TIME),
-            p
-        )
-        sol = solve(pb,
-            callback=CallbackSet(TerminateSteadyState(1e-3), blowup()),
-            save_on=false #don't save whole trajectory, only endpoint
-        )
-        push!(equilibria, sol.u[end])
-    end
-    p[:equilibria] = uniquetol(equilibria, atol=0.1)
-    p[:num_equilibria] = length(p[:equilibria])
-    p[:num_interior_equilibria] = sum(map(x -> all(x .> p[:b0] * p[:threshold]), p[:equilibria]))
-
-    return p[:num_equilibria]
-end
-
-
 
 function add_interactions!(p)
     # add a random interactions to p, the dict of parameters
@@ -166,7 +109,7 @@ function diversity!(p)
         evolve!(p)
         diversity[i] = p[:diversity]
     end
-
+    ù
     return mean(diversity)
 end
 

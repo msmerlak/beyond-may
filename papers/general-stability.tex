@@ -22,7 +22,7 @@
 
 \begin{document}
 
-\title{Complexity-stability relationships in large, complex systems}
+\title{Beyond May: Complexity-stability relationships in high-dimensional dynamical systems}
 
 \author{Onofrio Mazzarisi}
 \author{Matteo Smerlak}
@@ -43,8 +43,8 @@ Fifty years ago, Robert May predicted that large, complex systems are unlikely t
 
 Few mathematical arguments have influenced biological thinking like May's prediction that large, complex systems cannot be stable. It is, on the face of it, a perplexing conclusion. On the one hand, May's argument is so simple and compelling that it hard not to conclude that it must hold universally. On the other, it is clear that at least some large, complex systems are stable---or else which stable patterns would biology be studying in the first place? If anything, the opposite relationship between complexity and stability seems to hold empirically: rich, strongly coupled ecosystems (eg. rainforests) tend to be  stable over time, while sparser ones (eg. arctic environments) often exhibit large fluctuations, exctinctions, and invasions. 
 
-May's argument goes as follows. If a system with $N$ populations $x_i$ is stable, then it can be characterized by an equilibrium $x^*$. Near that equilibrium $x = x^* + \delta x$, the dynamics of the system will be described by linear equations $d(\delta x)/dt = A (\delta x)$, and stability of these equations requires that all eigenvalues of $A$ have negative real part. But if $A$ can be represented as $A = B - I$, where $B$ consists of random, independent interactions with zero mean and variance $\sigma^2$, and $-I$ corresponds to stabilizing self-interactions on some natural timescale, then the circular law of random matrix theory implies that all eigenvalues of $A$ will have negative real part only if $\sigma^2 N < 1$. This places a sharp constraint on both diversity $N$ and interaction strengh $\sigma$, often referred to as "complexity begets instability". (This argument generalizes to $\langle B_{ij}\rangle \neq 0$, to incomplete connectivity, or to correlated interactions.)
- 
+May's argument goes as follows. A system with $N$ populations $x_i$ is stable is one that can be characterized by an equilibrium point $x^*$. Near that equilibrium $x = x^* + \delta x$, the dynamics of the system will be described by linear equations $d(\delta x)/dt = A (\delta x)$, and stability of these equations requires that all eigenvalues of $A$ have negative real part. But if $A$ can be represented as $A = B - I$, where $B$ consists of random, independent interactions with zero mean and variance $\sigma^2$, and $-I$ corresponds to stabilizing self-interactions on some natural timescale, then the circular law of random matrix theory implies that all eigenvalues of $A$ will have negative real part only if $\sigma^2 N < 1$. This places a sharp constraint on both diversity $N$ and interaction strengh $\sigma$, often referred to as "complexity begets instability". (This argument generalizes to $\langle B_{ij}\rangle \neq 0$, to incomplete connectivity, or to correlated interactions.)
+
 In ecology, many authors have sought to ease the tension between May's prediction and empirical observation by invoking effects not captured by dynamical systems with random coefficients: spatial or food-web structure, time delays, etc. Here, we show that May's argument is incomplete: random dynamical systems do not necessarily imply that stability decreases with diversity or interaction strength---the opposite behavior is also possible, without the need for special or additional structure. 
 
 \section{Results}
@@ -78,9 +78,12 @@ leading to three different regimes:
 
 \subsection{Random interactions}
 
-Consider now \eqref{dynamics} with i.i.d. interactions $a_{ij}$ with mean $\mu$ and standard deviation $\sigma$. 
-
-
+With more general interactions coefficients $A = (a_{ij})$, the Jacobian of the system \eqref{dynamics} evaluated at a putative fixed point $x_*$ reads
+\end{eqnarray}
+\begin{equation}
+    J_* = \mathcal{D}(f'_* - f_*g'_*/g_*) + \mathcal{D}(g_*)A\mathcal{D}(h'_*)
+\end{equation}
+Let us now consider the case where $a_{ij}$ are i.i.d. with mean $\mu$ and standard deviation $\sigma$. 
 
 \end{document}
 %
