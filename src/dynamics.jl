@@ -1,7 +1,6 @@
 using DifferentialEquations
 using Random, Distributions
 using LinearAlgebra
-using ForwardDiff
 
 #= dynamical system =#
 
@@ -50,8 +49,7 @@ function evolve!(p; trajectory=false)
 
     pb = ODEProblem(
         ODEFunction(
-            (f, x, p, t) -> F!(f, x, p) #in-place F faster
-            # jac=(j, x, p, t) -> J!(j, x, p) #specify jacobian speeds things up
+            (f, x, p, t) -> F!(f, x, p)
         ),
         ones(p[:S]).*p[:x0], #initial condition
         (0.0, MAX_TIME),
