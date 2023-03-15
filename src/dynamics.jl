@@ -7,9 +7,8 @@ using ForwardDiff
 
 function F!(f, x, p)
     x .= ppart.(x)
-
     pop = p[:r] .* x.^p[:α] - p[:z] .* x
-    pop[x .< p[:x0]] .= 0
+    pop[x .< p[:b0]] .= 0
     comm = - x.^p[:β] .* contract(p[:A], x.^p[:γ])
 
     f .= pop + comm
@@ -18,7 +17,7 @@ end
 function F(x, p)
     x .= ppart.(x)
     pop = p[:r] .* x.^p[:α] - p[:z] .* x
-    pop[x .< p[:x0]] .= 0
+    pop[x .< p[:b0]] .= 0
     comm = - x.^p[:β] .* contract(p[:A], x.^p[:γ])
 
     return pop + comm
@@ -46,7 +45,7 @@ function evolve!(p; trajectory=false)
     if !haskey(p, :r)
         add_growth_rates!(p)
     end
-    if !haskey(p, :x0)
+    if !haskey(p, :b0)
         add_initial_condition!(p)
     end
 
@@ -66,8 +65,8 @@ function evolve!(p; trajectory=false)
     )
     p[:equilibrium] = sol.retcode == :Terminated ? sol.u[end] : NaN
     p[:converged] = (sol.retcode == :Terminated && maximum(p[:equilibrium]) < MAX_ABUNDANCE)
-    p[:richness] = sum(sol.u[end] .> p[:x0] * p[:threshold])
-    p[:diversity] = p[:richness] == 0 ? 0 : Ω(sol.u[end] .* (sol.u[end] .> p[:x0] * p[:threshold]))
+    p[:richness] = sum(sol.u[end] .> p[:b0] * p[:threshold])
+    p[:diversity] = p[:richness] == 0 ? 0 : Ω(sol.u[end] .* (sol.u[end] .> p[:b0] * p[:threshold]))
 
     if trajectory
         p[:trajectory] = sol
@@ -76,7 +75,7 @@ function evolve!(p; trajectory=false)
 end
 
 function add_initial_condition!(p)
-    p[:x0] = rand(p[:rng], Uniform(2, 10), p[:S])
+    p[:b0] = rand(p[:rng], Uniform(2, 10), p[:S])
 end
 
 function equilibria!(p)
@@ -100,7 +99,7 @@ function equilibria!(p)
                 (f, x, p, t) -> F!(f, x, p); #in-place F faster
                 jac=(j, x, p, t) -> J!(j, x, p) #specify jacobian speeds things up
             ),
-            p[:x0],
+            p[:b0],
             (0.0, MAX_TIME),
             p
         )
@@ -112,7 +111,7 @@ function equilibria!(p)
     end
     p[:equilibria] = uniquetol(equilibria, atol=0.1)
     p[:num_equilibria] = length(p[:equilibria])
-    p[:num_interior_equilibria] = sum(map(x -> all(x .> p[:x0] * p[:threshold]), p[:equilibria]))
+    p[:num_interior_equilibria] = sum(map(x -> all(x .> p[:b0] * p[:threshold]), p[:equilibria]))
 
     return p[:num_equilibria]
 end
