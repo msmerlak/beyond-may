@@ -40,7 +40,7 @@
              %  but any date may be explicitly specified
 
 \begin{abstract}
-Fifty years ago, Robert May predicted that large, complex systems are unlikely to be stable. Here, we revisit May's argument to show that there are, in fact, two kinds of complexity-stability relationships in disordered dynamical systems: in some cases, strong interaction and large diversity are, indeed, destabilizing; in other cases, they are stabilizing. Which class a given system falls into depends on the relative convexity of the response to self- vs. cross-interactions. We illustrate the transition between "May" (complexity begets instability) and "anti-May" (complexity begets stability) behavior with a non-linear  generalization of the Lotka-Volterra model. 
+Fifty years ago, Robert May predicted that large, complex systems are unlikely to be stable. Here, we revisit May's argument to show that there are, in fact, two kinds of complexity-stability relationships in disordered dynamical systems, depending on the relative convexity of the response to self- vs. cross-interactions. We illustrate the transition between "May" (complexity begets instability) and "anti-May" (complexity begets stability) behavior with a non-linear generalization of the Lotka-Volterra model. 
 \end{abstract}
 
 \maketitle
@@ -51,7 +51,8 @@ Few mathematical arguments have influenced biological thinking like May's predic
 
 May's argument goes as follows. A system with $N$ populations $x_i$ is stable is one that can be characterized by an equilibrium point $x^*$. Near that equilibrium $x = x^* + \delta x$, the dynamics of the system will be described by linear equations $d(\delta x)/dt = A (\delta x)$, and stability of these equations requires that all eigenvalues of $A$ have negative real part. But if $A$ can be represented as $A = B - I$, where $B$ consists of random, independent interactions with zero mean and variance $\sigma^2$, and $-I$ corresponds to stabilizing self-interactions on some natural timescale, then the circular law of random matrix theory implies that all eigenvalues of $A$ will have negative real part only if $\sigma^2 N < 1$. This places a sharp constraint on both diversity $N$ and interaction strengh $\sigma$, often referred to as "complexity begets instability". (This argument generalizes to $\langle B_{ij}\rangle \neq 0$, to incomplete connectivity, or to correlated interactions.)
 
-In ecology, many authors have sought to ease the tension between May's prediction and empirical observation by invoking effects not captured by dynamical systems with random coefficients: spatial or food-web structure, time delays, etc. Here, we show that May's argument is incomplete: random dynamical systems do not necessarily imply that stability decreases with diversity or interaction strength---the opposite behavior is also possible, without the need for special or additional structure. 
+In ecology, many authors have sought to ease the tension between May's prediction and empirical observation by invoking effects not captured by dynamical systems with random coefficients, such as spatial or food-web structure, time delays, etc. 
+Here, we show that May's argument is itself incomplete: random dynamical systems do not necessarily imply that stability decreases with diversity or interaction strength---the opposite behavior is also possible, without the need for special or additional structure. 
 
 \section{Results}
 
@@ -61,9 +62,16 @@ Consider the dynamical system in $N$ variables
 \begin{equation}\label{dynamics}
     \dot{x}_i = f(x_i) + \sum_{j}a_{ij}g(x_i)h(x_j) \, .
 \end{equation}
-Here $f(x_i)$ represents the contribution of a population $i$ to its own growth (its "production function"), while $g(x_i)$ and $h(x_j)$ capture the interaction of $i$ with other populations. That interaction is weighted by a coefficient $a_{ij}$, such that $a_{ij} > 0$ (resp. $a_{ji} < 0$) implies a positive (resp. negative) effect of $j$ on the growth of $i$. In the following we call $g(x_i)$ the "response function". 
+Here $f(x_i)$ represents the contribution of a population $i$ to its own growth, while $g(x_i)$ and $h(x_j)$ capture the interaction of $i$ with other populations. 
+That interaction is weighted by a coefficient $a_{ij}$, such that $a_{ij} > 0$ (resp. $a_{ji} < 0$) implies a positive (resp. negative) effect of $j$ on the growth of $i$. 
+In the following we refer to $f(x_i)$ as the ``production function'' and $g(x_i)$ as the ``response function''. 
 
-The classic generalized Lotka-Volterra competition model corresponds to $f$, $g$, $h$ all linear. However, it is natural both physically and biologically to consider more general functions, including power laws $f(x)\sim x^\alpha$, $g(x)\sim x^\beta$, $h(x) \sim x^\gamma$. From a physical perspective, we can imagine populations $x_i$ forming three-dimensional clusters whose growth is limited to their two-dimensional surface, leading to a production function $f(x) \sim x^{2/3}$. Biologically, the growth of organisms (populations of cells) has long been known to scale like $f(x) \sim x^k$ with $k\simeq 3/4$, which can be understood in terms of hydrodynamic constraints on vascular and pulmonary networks. For reasons that are not currently understood, a similar pattern of growth appears to recur at the community level. It is also common to model predator-prey interactions with a square root laws ($g(x) \sim h(x) \sim x^{1/2}$), for example. 
+The classic generalized Lotka-Volterra (GLV) competition model corresponds to $f$, $g$, $h$ all linear. 
+However, it is natural both physically and biologically to consider more general functions, including power laws $f(x)\sim x^\alpha$, $g(x)\sim x^\beta$, $h(x) \sim x^\gamma$. 
+From a physical perspective, we can imagine populations $x_i$ forming three-dimensional clusters whose growth is limited to their two-dimensional surface, leading to a production function $f(x) \sim x^{2/3}$. 
+Biologically, the growth of organisms (populations of cells) has long been known to scale like $f(x) \sim x^k$ with $k\simeq 3/4$, which can be understood in terms of hydrodynamic constraints on vascular and pulmonary networks. 
+For reasons that are not currently understood, a similar pattern of growth appears to recur at the community level. 
+It is also common to model predator-prey interactions with a square root laws ($g(x) \sim h(x) \sim x^{1/2}$), for example. 
 
 \subsection{Homogeneous interactions}
 
@@ -78,7 +86,8 @@ Thus, the stability of a competitive equilibrium depends on the relative strengt
 leading to three different regimes:
 \begin{itemize}
     \item If $\alpha = \beta$, stability requires $a_{\textrm{s}} > a_{\textrm{c}}$, i.e. self-interactions must be stronger than cross-interactions. This is the usual conclusion drawn from the Lotka-Volterra model. 
-    \item If $\alpha > \beta$, stability places an upper bound on $N$: the more complex the system, the less likely to be stable. We can call this "May" behavior.
+    \item If $\alpha > \beta$, stability places an upper bound on $N$: the more complex the system, the less likely to be stable. 
+    We can call this "May" behavior.
     \item If $\alpha < \beta$, stability places an lower bound on $N$: the more complex the system, the more likely to be stable. This is "anti-May" behavior.
 \end{itemize}
 

@@ -79,7 +79,7 @@ function evolve!(p; trajectory=false)
 end
 
 function add_initial_condition!(p)
-    p[:x0] = rand(p[:rng], Uniform(2, 10), p[:S])
+    p[:b0] = rand(p[:rng], Uniform(2, 10), p[:S])
 end
 
 function add_interactions!(p)

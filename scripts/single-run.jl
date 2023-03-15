@@ -70,3 +70,5 @@ linecolor = :black,
 grid = false,
 size = (600,200)
 )
+
+p[:diversity]
