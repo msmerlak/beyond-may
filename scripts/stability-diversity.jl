@@ -10,24 +10,21 @@ using Plots, LaTeXStrings
 P = Dict{Symbol, Any}(
         :scaled => false,
         :S => 2:5:100,
-        :μ => 0.,
-        :σ => .1,
-        :k => 1.,
-        :α => 1,
+        :μ => 0.1,
+        :σ => .05,
+        :α => .7,
         :β => 1,
         :γ => 1,
-        :b0 => 1.,
-        :threshold => false,
-        :z => 0.1,
-        :K => 1.,
-        :order => 4,
+        :extinction_threshold => 1e-2,
+        :z => 0.,
+        :K => 1e4,
         :dist => "normal",
         :N => 2,
-        :symm => false,
+        # :symm => false,
     );
 
 ϕ = ThreadsX.collect(
-    full_coexistence!(p) for p in expand(P)
+    diversity!(p) for p in expand(P)
     );
 
 plot(

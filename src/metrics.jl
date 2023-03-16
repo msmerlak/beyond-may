@@ -5,6 +5,7 @@ function diversity!(p)
 
     for i in 1:p[:N]
         add_interactions!(p)
+        add_growth_rates!(p)
         add_initial_condition!(p)
         evolve!(p)
         
@@ -22,6 +23,7 @@ function stability!(p)
 
     for i in 1:p[:N]
         add_interactions!(p)
+        add_growth_rates!(p)
         add_initial_condition!(p)
         evolve!(p)
         stability[i] = p[:converged] && p[:richness] == p[:S] ? 1 : 0
