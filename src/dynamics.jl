@@ -26,14 +26,16 @@ J(x, p) = ForwardDiff.jacobian(y -> F(y, p), x)
 ## solving
 
 MAX_TIME = 1e3
-MAX_ABUNDANCE = 1e2
+MAX_ABUNDANCE = 1e3
 
 converged(ϵ = 1e-3) = TerminateSteadyState(ϵ)
 
 blowup() = DiscreteCallback((u, t, integrator) -> maximum(u) > MAX_ABUNDANCE, terminate!)
 
 function evolve!(p; trajectory=false)
-
+    if !haskey(p, :seed)
+        p[:seed] = 1234
+    end
     if !haskey(p, :rng)
         p[:rng] = MersenneTwister(p[:seed])
     end
@@ -102,9 +104,9 @@ function add_interactions!(p)
         A = (A + A')/2
     end
     
-    for i in 1:p[:S]
-        A[fill(i, order)...] = 1/p[:K]
-    end
+    # for i in 1:p[:S]
+        # A[fill(i, order)...] = p[:μₛ]
+    # end
     
     p[:A] = A
 end

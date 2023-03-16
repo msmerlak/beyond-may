@@ -3,7 +3,6 @@ Pkg.add("DrWatson")
 
 using DrWatson
 @quickactivate
-
 Pkg.instantiate()
 
 using Glob, Revise
@@ -14,8 +13,8 @@ using Plots, LaTeXStrings
 gr(label = false)
 using Contour
 
-function plot_contour_line!(plt, ϕ, P; label, level = .5)
-    
+function plot_contour_line!(plt, ϕ, P; level = 0.9, label)
+
     c = Contour.contours(
     P[:α], 
     P[:β],
@@ -24,10 +23,9 @@ function plot_contour_line!(plt, ϕ, P; label, level = .5)
     )
     
     for cl in levels(c)
-        for line in lines(cl)
-            plot!(plt, coordinates(line)...,
-            label = label)
-        end
+        # for line in lines(cl)
+            plot!(plt, coordinates(lines(cl)[1])..., lw = 2, ls = :dash, label = label)
+        # end
     end
     return current()
 
@@ -35,21 +33,22 @@ end
 
 P = Dict{Symbol, Any}(
         :scaled => false,
-        :S => 20,
+        :S => 100,
         :μ => 1e-2,
-        :σ => 1e-6,
+        # :μₛ => 1e-2,
+        :σ => 1e-4,
         :α => 0.1:.1:1.5,
         :β => 0.1:.1:1.5,
         :γ => 1.,
-        :extinction_threshold => 1e-2,
+        :extinction_threshold => 1e-4,
         :z => 0.,
-        :K => 1e8,
         :dist => "normal",
-        :N => 2,
+        :N => 10,
     );
 
-P[:σ] = 1e-1
 ϕ = ThreadsX.collect(diversity!(p) for p in expand(P));
+plot()
+
 heatmap(
     P[:α],
     P[:β],
@@ -59,8 +58,16 @@ heatmap(
 )
 plot!(x -> x)
 
-plt = plot()
-for σ ∈ 1e-4:2e-4:1e-3
+P[:α] = 1
+P[:β] = .6
+
+evolve!(P; trajectory = true)
+plot(P[:trajectory], legend = false, palette = :blues)
+
+plt = plot(x->x, xlims = (0, 1), color = :black, lw = 2)
+xlabel!(L"\alpha")
+ylabel!(L"\beta")
+for σ ∈ (1e-3, 5e-3, 1e-2) 
     P[:σ] = σ
     ϕ = ThreadsX.collect(diversity!(p) for p in expand(P));
     plot_contour_line!(plt, ϕ, P; label = "σ = $(P[:σ])")
