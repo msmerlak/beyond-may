@@ -7,7 +7,6 @@ using LinearAlgebra
 function F!(f, x, p)
     x .= ppart.(x)
     pop = p[:r] .* x.^p[:α] - p[:z] .* x
-    if p[:threshold] pop[x .< p[:b0]] .= 0 end
     comm = - x.^p[:β] .* contract(p[:A], x.^p[:γ])
 
     f .= pop + comm
@@ -16,7 +15,6 @@ end
 function F(x, p)
     x .= ppart.(x)
     pop = p[:r] .* x.^p[:α] - p[:z] .* x
-    if p[:threshold] pop[x .< p[:b0]] .= 0 end
     comm = - x.^p[:β] .* contract(p[:A], x.^p[:γ])
 
     return pop + comm
@@ -31,18 +29,27 @@ converged(ϵ = 1e-5) = TerminateSteadyState(ϵ)
 blowup(max_abundance = MAX_ABUNDANCE) = DiscreteCallback((u, t, integrator) -> maximum(u) > max_abundance, terminate!)
 
 function evolve!(p; trajectory=false)
-
-    !haskey(p, :seed) && (p[:seed] = rand(UInt32))
-    !haskey(p, :rng) && (p[:rng] = MersenneTwister(p[:seed]))
-    !haskey(p, :A) && add_interactions!(p)
-    !haskey(p, :r) && add_growth_rates!(p)
-    !haskey(p, :x0) && add_initial_condition!(p)
+    if !haskey(p, :seed)
+        p[:seed] = 1234
+    end
+    if !haskey(p, :rng)
+        p[:rng] = MersenneTwister(p[:seed])
+    end
+    if !haskey(p, :A)
+        add_interactions!(p)
+    end
+    if !haskey(p, :r)
+        add_growth_rates!(p)
+    end
+    if !haskey(p, :x0)
+        add_initial_condition!(p)
+    end
 
     pb = ODEProblem(
         ODEFunction(
-            (f, x, p, t) -> F!(f, x, p)
+            (f, x, p, t) -> F!(f, x, p) #in-place 
         ),
-        ones(p[:S]), #initial condition
+        p[:x0], #initial condition
         (0.0, MAX_TIME),
         p
     )
@@ -52,9 +59,13 @@ function evolve!(p; trajectory=false)
         save_on=trajectory #don't save whole trajectory, only endpoint
     )
     p[:equilibrium] = sol.retcode == :Terminated ? sol.u[end] : NaN
-    p[:converged] = (sol.retcode == :Terminated && maximum(p[:equilibrium]) < MAX_ABUNDANCE)
-    p[:richness] = sum(sol.u[end] .> p[:b0])
-    p[:diversity] = p[:richness] == 0 ? 0 : Ω(sol.u[end] .* (sol.u[end] .> p[:b0]))
+    p[:converged] = sol.retcode == :Terminated && maximum(p[:equilibrium]) < MAX_ABUNDANCE/2
+
+    survivors = sol.u[end] .> p[:extinction_threshold]
+    
+    p[:richness] = sum(survivors)
+    q = p[:equilibrium]/sum(p[:equilibrium])
+    p[:diversity] = 1/(p[:S] * sum(q.^2))
 
     if trajectory
         p[:trajectory] = sol
@@ -63,8 +74,9 @@ function evolve!(p; trajectory=false)
 end
 
 function add_initial_condition!(p)
-    p[:x0] = rand(p[:rng], Uniform(2, 10), p[:S])
+    p[:x0] = rand(p[:rng], Uniform(1, 10), p[:S])
 end
+
 
 function add_interactions!(p)
     # add a random interactions to p, the dict of parameters
@@ -77,13 +89,21 @@ function add_interactions!(p)
     elseif p[:dist] == "gamma"
         dist = Gamma(m^2 / s^2, s^2 / m)
     end
-
+    
+    order = haskey(p, :order) ? p[:order] : 2
+        
     A = rand(
-        p[:rng], dist, Tuple(fill(p[:S], p[:order]))
+        p[:rng], dist, Tuple(fill(p[:S], order))
     )
-    for i in 1:p[:S]
-        A[fill(i, p[:order])...] = 1/p[:K]
+
+    if order == 2 && haskey(p, :symm) && symm
+        A = (A + A')/2
     end
+    
+    # for i in 1:p[:S]
+        # A[fill(i, order)...] = p[:μₛ]
+    # end
+    
     p[:A] = A
 end
 
@@ -94,38 +114,4 @@ function add_growth_rates!(p)
     else
         p[:r] = ones(p[:S])
     end
-end
-
-
-function diversity!(p)
-    # run N simulates and append results to p
-    diversity = Vector{Float64}(undef, p[:N])
-    p[:rng] = MersenneTwister()
-
-    for i in 1:p[:N]
-        add_interactions!(p)
-        add_growth_rates!(p)
-        add_initial_condition!(p)
-        evolve!(p)
-        diversity[i] = p[:diversity]
-    end
-    ù
-    return mean(diversity)
-end
-
-function full_coexistence!(p)
-    # run N simulates and append results to p
-    full_coexistence = Vector{Float64}(undef, p[:N])
-    p[:rng] = MersenneTwister()
-
-    for i in 1:p[:N]
-        add_interactions!(p)
-        add_growth_rates!(p)
-        add_initial_condition!(p)
-        evolve!(p)
-        # full_coexistence[i] = p[:converged] && p[:richness] == p[:S] ? 1 : 0
-        full_coexistence[i] = p[:richness] == p[:S] ? 1 : 0
-    end
-
-    return mean(full_coexistence)
 end

@@ -3,7 +3,6 @@ Pkg.add("DrWatson")
 
 using DrWatson
 @quickactivate
-
 Pkg.instantiate()
 
 using Glob, Revise
@@ -11,10 +10,11 @@ foreach(includet, glob("*.jl", srcdir()))
 
 using ProgressMeter, ThreadsX
 using Plots, LaTeXStrings
+gr(label = false)
 using Contour
 
-function plot_contour_line!(plt, P; label, level = .5)
-    
+function plot_contour_line!(plt, ϕ, P; level = 0.9, label)
+
     c = Contour.contours(
     P[:α], 
     P[:β],
@@ -23,10 +23,9 @@ function plot_contour_line!(plt, P; label, level = .5)
     )
     
     for cl in levels(c)
-        for line in lines(cl)
-            plot!(plt, coordinates(line)...,
-            label = label)
-        end
+        # for line in lines(cl)
+            plot!(plt, coordinates(lines(cl)[1])..., lw = 2, ls = :dash, label = label)
+        # end
     end
     return current()
 
@@ -34,27 +33,36 @@ end
 
 P = Dict{Symbol, Any}(
         :scaled => false,
-        :S => 100,
-        :μ => .1,
-        :σ => .1,
-        :α => 0:.1:1.5,
-        :β => 0:.1:1.5,
-        :γ => 1,
-        :b0 => 1e-2,
-        :threshold => true,
-        :z => 0.,
-        :K => 1000.,
+        :S => 20,
+        :μ => .01:.1:2.,
+        :σ => .001:.05:.5,
+        :k => .75,
+        :a => 1,
+        :b => 1,
+        :b0 => 10.,
+        :threshold => false,
+        :z => 0.1,
+        :K => 10.,
         :order => 2,
         :dist => "normal",
-        :N => 10,
+        :N => 4,
         :symm => false,
     );
 
-plt = plot()
-for σ ∈ .01:.02:.1
-    P[:σ] = σ
+begin
     ϕ = ThreadsX.collect(diversity!(p) for p in expand(P));
-    plot_contour_line!(plt, P; label = "σ = $(P[:σ])")
+
+    sublinear = heatmap(
+        P[:μ], 
+        P[:σ],
+        reshape(ϕ, length(P[:μ]), length(P[:σ]))',
+        dpi = 500,
+        alpha = 1.,
+        grid = false,
+        xlabel = L"\mu",
+        ylabel = L"\sigma",
+        title = L"\textrm{Stability \,\, in \,\, parameter \,\, space}"
+    )
 end
 current()
 savefig(plotsdir("phase-diag"))
