@@ -24,7 +24,7 @@ function plot_contour_line!(plt, ϕ, P; level = 0.9, label)
     
     for cl in levels(c)
         # for line in lines(cl)
-            plot!(plt, coordinates(lines(cl)[1])..., lw = 2, ls = :dash, label = label)
+            plot!(plt, coordinates(lines(cl)[1])..., lw = 2, color = :black, label = label)
         # end
     end
     return current()
