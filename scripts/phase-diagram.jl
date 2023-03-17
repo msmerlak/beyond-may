@@ -24,7 +24,7 @@ function plot_contour_line!(plt, ϕ, P; level = 0.9, label)
     
     for cl in levels(c)
         # for line in lines(cl)
-            plot!(plt, coordinates(lines(cl)[1])..., lw = 2, color = :black, label = label)
+            plot!(plt, coordinates(lines(cl)[1])..., lw = 2, ls = :dash, label = label)
         # end
     end
     return current()
@@ -33,36 +33,44 @@ end
 
 P = Dict{Symbol, Any}(
         :scaled => false,
-        :S => 20,
-        :μ => .01:.1:2.,
-        :σ => .001:.05:.5,
-        :k => .75,
-        :a => 1,
-        :b => 1,
-        :b0 => 10.,
-        :threshold => false,
-        :z => 0.1,
-        :K => 10.,
-        :order => 2,
+        :S => 100,
+        :μ => 1e-2,
+        # :μₛ => 1e-2,
+        :σ => 1e-4,
+        :α => 0.1:.1:1.5,
+        :β => 0.1:.1:1.5,
+        :γ => 1.,
+        :extinction_threshold => 1e-4,
+        :z => 0.,
         :dist => "normal",
-        :N => 4,
-        :symm => false,
+        :N => 10,
     );
 
-begin
-    ϕ = ThreadsX.collect(diversity!(p) for p in expand(P));
+ϕ = ThreadsX.collect(diversity!(p) for p in expand(P));
+plot()
 
-    sublinear = heatmap(
-        P[:μ], 
-        P[:σ],
-        reshape(ϕ, length(P[:μ]), length(P[:σ]))',
-        dpi = 500,
-        alpha = 1.,
-        grid = false,
-        xlabel = L"\mu",
-        ylabel = L"\sigma",
-        title = L"\textrm{Stability \,\, in \,\, parameter \,\, space}"
-    )
+heatmap(
+    P[:α],
+    P[:β],
+    Matrix(reshape(ϕ, length(P[:α]), length(P[:β]))'),
+    xlabel = L"\alpha",
+    ylabel = L"\beta"
+)
+plot!(x -> x)
+
+P[:α] = 1
+P[:β] = .6
+
+evolve!(P; trajectory = true)
+plot(P[:trajectory], legend = false, palette = :blues)
+
+plt = plot(x->x, xlims = (0, 1), color = :black, lw = 2)
+xlabel!(L"\alpha")
+ylabel!(L"\beta")
+for σ ∈ (1e-3, 5e-3, 1e-2) 
+    P[:σ] = σ
+    ϕ = ThreadsX.collect(diversity!(p) for p in expand(P));
+    plot_contour_line!(plt, ϕ, P; label = "σ = $(P[:σ])")
 end
 current()
 savefig(plotsdir("phase-diag"))
