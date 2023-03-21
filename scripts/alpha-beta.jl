@@ -14,21 +14,18 @@ gr(label = false)
 using Contour
 
 function plot_contour_line!(plt, ϕ, P; level = 0.9, label)
-
     c = Contour.contours(
     P[:α], 
     P[:β],
     Matrix(reshape(ϕ, length(P[:α]), length(P[:β]))'),
     [level]
     )
-    
     for cl in levels(c)
         # for line in lines(cl)
             plot!(plt, coordinates(lines(cl)[1])..., lw = 2, ls = :dash, label = label)
         # end
     end
     return current()
-
 end
 
 P = Dict{Symbol, Any}(
@@ -45,24 +42,6 @@ P = Dict{Symbol, Any}(
         :dist => "normal",
         :N => 10,
     );
-
-ϕ = ThreadsX.collect(diversity!(p) for p in expand(P));
-plot()
-
-heatmap(
-    P[:α],
-    P[:β],
-    Matrix(reshape(ϕ, length(P[:α]), length(P[:β]))'),
-    xlabel = L"\alpha",
-    ylabel = L"\beta"
-)
-plot!(x -> x)
-
-P[:α] = 1
-P[:β] = .6
-
-evolve!(P; trajectory = true)
-plot(P[:trajectory], legend = false, palette = :blues)
 
 plt = plot(x->x, xlims = (0, 1), color = :black, lw = 2)
 xlabel!(L"\alpha")
