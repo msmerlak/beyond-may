@@ -2,7 +2,7 @@
 
 julia_version = "1.7.2"
 manifest_format = "2.0"
-project_hash = "82e175a89825331b3506e3f79aaa8f68a5cbb7a9"
+project_hash = "edbbdc6a64f84abb09ee4c118fb09485a98a91c7"
 
 [[deps.AbstractFFTs]]
 deps = ["ChainRulesCore", "LinearAlgebra"]
@@ -1447,12 +1447,6 @@ deps = ["CUDA", "LRUCache", "LinearAlgebra", "Requires", "Strided", "TupleTools"
 git-tree-sha1 = "c082dda2ace9de2bc71b644ae29e2adf1a8137b2"
 uuid = "6aa20fa7-93e2-5fca-9bc0-fbd0db3c71a2"
 version = "3.2.4"
-
-[[deps.Tensorial]]
-deps = ["ForwardDiff", "LinearAlgebra", "StaticArrays", "Statistics"]
-git-tree-sha1 = "e72e62ec42a08f7470dc3a0c92ccc6151637542a"
-uuid = "98f94333-fa9f-48a9-ad80-1c66397b2b38"
-version = "0.12.10"
 
 [[deps.Test]]
 deps = ["InteractiveUtils", "Logging", "Random", "Serialization"]

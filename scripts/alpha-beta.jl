@@ -108,3 +108,14 @@ end
 plot(B, σₘ, 
 lw = 4,
 lc = :black)
+
+plt = plot(x->x, xlims = (0, 1), color = :black, lw = 2)
+xlabel!(L"\alpha")
+ylabel!(L"\beta")
+for σ ∈ (1e-3, 5e-3, 1e-2) 
+    P[:σ] = σ
+    ϕ = ThreadsX.collect(diversity!(p) for p in expand(P));
+    plot_contour_line!(plt, ϕ, P; label = "σ = $(P[:σ])")
+end
+current()
+savefig(plotsdir("phase-diag"))
