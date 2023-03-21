@@ -1,47 +1,64 @@
-using Pkg
-Pkg.add("DrWatson")
-
-using DrWatson
+using DrWatson, Glob, Revise
 @quickactivate
+foreach(include, glob("*.jl", srcdir()))
 
-Pkg.instantiate()
-
-using Glob, Revise
-foreach(includet, glob("*.jl", srcdir()))
-
-using ProgressMeter, ThreadsX
+using ProgressMeter, Suppressor, ThreadsX
 using Plots, LaTeXStrings
 
-P = Dict{Symbol, Any}(
-        :scaled => false,
-        :S => 20,
-        :μ => .01:.1:2.,
-        :σ => .001:.05:.5,
-        :k => .75,
-        :a => 1,
-        :b => 1,
-        :b0 => 10.,
+p = Dict{Symbol, Any}(
+        :scaled => true,
+        :S => 50,
+        :μ => .01:.01:1.25,
+        :μₛ => 0,
+        :σ => .01:.01:.5,
+        :α => 1,
+        :β => 1.5,
+        :γ => 1,
+        :x0 => .1,
         :threshold => false,
-        :z => 0.1,
-        :K => 10.,
-        :order => 2,
         :dist => "normal",
-        :N => 4,
+        :N => 1,
         :symm => false,
+        :seed => rand(UInt)
     );
 
-begin
-    ϕ = ThreadsX.collect(diversity!(p) for p in expand(P));
+#begin
+    ϕ = ThreadsX.collect(diversity!(q) for q in expand(p));
 
     sublinear = heatmap(
-        P[:μ], 
-        P[:σ],
-        reshape(ϕ, length(P[:μ]), length(P[:σ]))',
+        p[:μ], 
+        p[:σ],
+        reshape(ϕ, length(p[:μ]), length(p[:σ]))',
         dpi = 500,
         alpha = 1.,
         grid = false,
-        xlabel = L"\mu",
-        ylabel = L"\sigma",
-        title = L"\textrm{Stability \,\, in \,\, parameter \,\, space}"
+        xlabel = L"\mu N",
+        ylabel = L"\sigma \sqrt{N}",
+        c=cgrad(:Reds, rev=true),
+        ylims=[.0,.5],
+        xlims=[.0,1.25],
     )
-end
+#end
+
+#= critical line for gaussian approximation =#
+    μ_critical, σ_critical = critical_line_gauss(p, μ_range=(.01:.25:1.26))
+    plot!(μ_critical, σ_critical,
+    labels = false,
+    linewidth = 4,
+    linecolor = :black,
+    grid = false,
+    ylims=[.0,.5],
+    xlims=[.01,1.25]
+    )
+
+#= critical line =#
+    μ_critical, σ_critical = critical_line(p, μ_range=(.05:.2:1.25),
+    n_max = 1e2)
+    plot!(μ_critical, σ_critical,
+    labels = false,
+    linewidth = 4,
+    linecolor = :black,
+    grid = false,
+    ylims=[.0,.5],
+    xlims=[.01,1.25]
+    )
