@@ -52,4 +52,4 @@ for σ ∈ (1e-3, 5e-3, 1e-2)
     plot_contour_line!(plt, ϕ, P; label = "σ = $(P[:σ])")
 end
 current()
-savefig(plotsdir("phase-diag"))
+savefig(plotsdir("alpha-beta"))
