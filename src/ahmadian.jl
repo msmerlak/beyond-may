@@ -48,30 +48,3 @@ function ahmadian(p)
     
     scatter!(spectrum(p); alpha = .2, label = false)
 end
-
-include(srcdir("dynamics.jl"))
-p = Dict{Symbol, Any}(
-    :scaled => false,    
-    :S => 50,
-    :μ => 1e-2,
-    :μₛ => 1e-3,
-    :σ => 0.005,
-    :α => .7,
-    :β => 1.,
-    :γ => 1.,
-    :extinction_threshold => 1e-2,
-    :dist => "gamma",
-    :N => 1,
-    :seed => rand(UInt)
-);
-evolve!(p; trajectory = true);
-
-using Plots
-traj = plot(
-    p[:trajectory],
-    linewidth = 1,
-    legend = false,
-    grid = false,
-    palette = :blues,
-)
-plot(traj, ahmadian(p))
