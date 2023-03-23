@@ -22,7 +22,7 @@ end
 
 ## solving
 
-MAX_TIME = 1e5
+MAX_TIME = 1e3
 MAX_ABUNDANCE = 1e3
 
 converged(ϵ = 1e-4) = TerminateSteadyState(ϵ)

@@ -1,14 +1,10 @@
-using Pkg
-Pkg.add("DrWatson")
-
 using DrWatson
 @quickactivate
-Pkg.instantiate()
 
 using Glob, Revise
 foreach(includet, glob("*.jl", srcdir()))
 
-using ProgressMeter, ThreadsX
+using ThreadsX
 using Plots, LaTeXStrings
 gr(label = false)
 using Contour
@@ -29,26 +25,34 @@ function plot_contour_line!(plt, ϕ, P; level = 0.9, label)
 end
 
 P = Dict{Symbol, Any}(
-        :scaled => false,
-        :S => 100,
-        :μ => 1e-2,
-        # :μₛ => 1e-2,
-        :σ => 1e-4,
+        :scaled => true,
+        :S => 10,
+        :μ => .5,
+        :σ => .7,
         :α => 0.1:.1:1.5,
         :β => 0.1:.1:1.5,
         :γ => 1.,
         :extinction_threshold => 1e-4,
-        :z => 0.,
-        :dist => "normal",
-        :N => 10,
+        :dist => "gamma",
+        :N => 5,
     );
+
+ϕ = ThreadsX.collect(stability!(p) for p in expand(P));
+contour(P[:α], 
+P[:β],
+    Matrix(reshape(ϕ, length(P[:α]), length(P[:β]))')
+    )
+
+
+plt = plot()    
+plot_contour_line!(plt, ϕ, P; label = "σ = $(P[:σ])")
 
 plt = plot(x->x, xlims = (0, 1), color = :black, lw = 2)
 xlabel!(L"\alpha")
 ylabel!(L"\beta")
-for σ ∈ (1e-3, 5e-3, 1e-2) 
+for σ ∈ (0.01, .3, .5) 
     P[:σ] = σ
-    ϕ = ThreadsX.collect(diversity!(p) for p in expand(P));
+    ϕ = ThreadsX.collect(stability!(p) for p in expand(P));
     plot_contour_line!(plt, ϕ, P; label = "σ = $(P[:σ])")
 end
 current()

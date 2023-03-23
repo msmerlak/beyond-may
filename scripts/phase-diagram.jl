@@ -9,7 +9,7 @@ Pkg.instantiate()
 using Glob, Revise
 foreach(includet, glob("*.jl", srcdir()))
 
-using ProgressMeter, ThreadsX
+using ThreadsX
 using Plots, LaTeXStrings
 
 P = Dict{Symbol, Any}(
