@@ -1,6 +1,6 @@
 using DrWatson, Glob, Revise
 @quickactivate
-foreach(include, glob("*.jl", srcdir()))
+foreach(includet, glob("*.jl", srcdir()))
 
 using ProgressMeter, Suppressor, ThreadsX
 using Plots, LaTeXStrings
@@ -8,11 +8,11 @@ using Plots, LaTeXStrings
 p = Dict{Symbol, Any}(
         :scaled => true,
         :S => 50,
-        :μ => .01:.01:1.25,
-        :μₛ => 0,
-        :σ => .01:.01:.5,
-        :α => 1,
-        :β => 1.5,
+        :μ => .01:.1:1.21,
+        :μₛ => true,
+        :σ => .01:.1:1.21,
+        :α => .5,
+        :β => 3.,
         :γ => 1,
         :x0 => .1,
         :threshold => false,
@@ -34,9 +34,9 @@ p = Dict{Symbol, Any}(
         grid = false,
         xlabel = L"\mu N",
         ylabel = L"\sigma \sqrt{N}",
-        c=cgrad(:Reds, rev=true),
-        ylims=[.0,.5],
-        xlims=[.0,1.25],
+        c=cgrad(:Greys, rev=true),
+        ylims=[.0,.4],
+        xlims=[.0,1.2],
     )
 #end
 
@@ -45,20 +45,26 @@ p = Dict{Symbol, Any}(
     plot!(μ_critical, σ_critical,
     labels = false,
     linewidth = 4,
-    linecolor = :black,
+    linecolor = :red,
     grid = false,
-    ylims=[.0,.5],
-    xlims=[.01,1.25]
+    ylims=[.0,1.2],
+    xlims=[.0,1.2],
+    yticks = [0, 0.6, 1.2],
+    xticks = [0, 0.6, 1.2],
+    size = (600,400),
     )
 
 #= critical line =#
-    μ_critical, σ_critical = critical_line(p, μ_range=(.05:.2:1.25),
-    n_max = 1e2)
+    μ_critical, σ_critical = critical_line(p, μ_range=(.01:.2:1.25),
+    n_max = 1e1)
     plot!(μ_critical, σ_critical,
     labels = false,
     linewidth = 4,
-    linecolor = :black,
+    linecolor = :green,
     grid = false,
-    ylims=[.0,.5],
-    xlims=[.01,1.25]
+    ylims=[.0,1.2],
+    xlims=[.0,1.2],
+    yticks = [0, 0.6, 1.2],
+    xticks = [0, 0.6, 1.2],
+    size = (600,400),
     )
