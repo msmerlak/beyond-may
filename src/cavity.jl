@@ -44,11 +44,11 @@ function Cavity(p;
     e2_n = e2_init*ones(Iter+1) #<n²>
 
     for i in 1:Iter
-        ϕ_new = first(quadgk(x -> P_n(x, e1_n[i], e2_n[i], p) , n_min, n_max, rtol=tol))
-        e1_new = first(quadgk(x -> x*P_n(x, e1_n[i], e2_n[i], p)/ϕ_n[i] , n_min, n_max, rtol=tol))
-        e2_new = first(quadgk(x -> x*x*P_n(x, e1_n[i], e2_n[i], p)/ϕ_n[i] , n_min, n_max, rtol=tol))
+    #    ϕ_new = first(quadgk(x -> P_n(x, e1_n[i], e2_n[i], p) , n_min, n_max, rtol=tol))
+        e1_new = first(quadgk(x -> x*P_n(x, e1_n[i], e2_n[i], p) , n_min, n_max, rtol=tol))
+        e2_new = first(quadgk(x -> x*x*P_n(x, e1_n[i], e2_n[i], p) , n_min, n_max, rtol=tol))
 
-        ϕ_n[i+1] = (1-rela)*ϕ_n[i] + rela*ϕ_new
+    #    ϕ_n[i+1] = (1-rela)*ϕ_n[i] + rela*ϕ_new
         e1_n[i+1] = (1-rela)*e1_n[i] + rela*e1_new
         e2_n[i+1] = (1-rela)*e2_n[i] + rela*e2_new
     end
@@ -74,14 +74,14 @@ function σ_crit(p;
     σc = σc_init*ones(Iter+1) 
     for i in 1:Iter
         p[:σ] = σc[i]
-        ϕ_new = first(quadgk(x -> P_n(x, e1_n[i], e2_n[i], p) , n_min, n_max, rtol=tol))
-        e1_new = first(quadgk(x -> x*P_n(x, e1_n[i], e2_n[i], p)/ϕ_n[i] , n_min, n_max, rtol=tol))
-        e2_new = first(quadgk(x -> x*x*P_n(x, e1_n[i], e2_n[i], p)/ϕ_n[i] , n_min, n_max, rtol=tol))
+#        ϕ_new = first(quadgk(x -> P_n(x, e1_n[i], e2_n[i], p) , n_min, n_max, rtol=tol))
+        e1_new = first(quadgk(x -> x*P_n(x, e1_n[i], e2_n[i], p) , n_min, n_max, rtol=tol))
+        e2_new = first(quadgk(x -> x*x*P_n(x, e1_n[i], e2_n[i], p) , n_min, n_max, rtol=tol))
         σc_new = abs(α-β)^(1/2)*((first(quadgk(x -> P_n(x, e1_n[i], e2_n[i], p)*x^(2*(β-α+1)),
         n_min, n_max, rtol=tol))))^(-1/2)
 
         
-        ϕ_n[i+1] = (1-rela)*ϕ_n[i] + rela*ϕ_new
+        #ϕ_n[i+1] = (1-rela)*ϕ_n[i] + rela*ϕ_new
         e1_n[i+1] = (1-rela)*e1_n[i] + rela*e1_new
         e2_n[i+1] = (1-rela)*e2_n[i] + rela*e2_new
         σc[i+1] = (1-rela)*σc[i] + rela*σc_new
