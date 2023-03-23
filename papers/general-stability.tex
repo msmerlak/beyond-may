@@ -21,6 +21,9 @@
 ]{revtex4-2}
 
 \usepackage{colortbl}
+\usepackage{graphicx} 
+\usepackage{booktabs}
+\usepackage{caption}
 \newcommand{\red}{\textcolor{red}}
 
 \begin{document}
@@ -146,7 +149,7 @@ random interaction case equivalent of
 the expression in Eq.~\eqref{homogeneous-general} 
 which appears again in the denominator of the summand.
 It reduces indeed to the homogenous case for $\sigma\to 0$.
-\red{To be discussed.}
+\red{Discuss better.}
 
 There are straightforward results 
 that follows from this expression.
@@ -185,7 +188,6 @@ and write
         +(\mu_s-\mu) \cfrac{g_*(x)h_*'(x)}{f_*(x)} \Bigl |^2}
     < \sigma^{-2} \ .
 \end{equation}
-\red{There are things to clarify and discuss.}
 This expression allows us to obtain insights on the stability properties of
 the system in the case in which we are able to compute or estimate 
 the probability distribution function $P(x_*)$.
@@ -254,9 +256,7 @@ In this case the stationary solution is given by
 The equilibrium probability distribution function for $x_*$, $P(x_*)$,
 can be obtained as the pushforward of the distribition of $\xi$.
 The change of measure
-\begin{equation}
-    \left|\frac{d \xi}{d x_*}\right|=\frac{|\alpha-\beta|x_*^{\alpha-\beta-1}}{\sigma \sqrt{N\langle x_*^{2\gamma}\rangle}} \, ,
-\end{equation}
+$\left|d \xi/d x_*\right|=|\alpha-\beta|x_*^{\alpha-\beta-1}/\sigma \sqrt{N\langle x_*^{2\gamma}\rangle}$,
 leads to
 \begin{equation}\label{eq: dist general}
     P(x_*)=\frac{|\alpha-\beta|x_*^{\alpha-\beta-1}}{\sqrt{2\pi\sigma^2 N\langle x_*^{2\gamma}\rangle}}
@@ -265,20 +265,27 @@ leads to
 where the expectations have to be computed self-consistently, 
 taking also in account normalization constraint.
 
-Let us focus to the case $\alpha=1$, $\beta=2$ and $\gamma=1$, with
+Let us focus to the case $\alpha=1$, $\beta=1.5$ and $\gamma=1$, with
 $a_s=0$ in order to leverage the equilibrium solution in Eq.~\eqref{eq: dist general}.
+which is tested against simulations in Fig.~\ref{fig: cavity sol.}.
 
 \dots
 
 \subsection{Simulations}
 
-\begin{itemize}
-    \item Equilibrium distribution and histogram for "anti-May" example
-    \item ($\mu N$, $\sigma\sqrt{N}$) plane for "May" and "anti-May" examples
-        with stability lines.
-    \item ($\alpha$, $\beta$) plane with homogeneous interactions line.
-    \item Others?
-\end{itemize}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=.45\textwidth]{figs/cavity.pdf}
+        \caption{...}
+        \label{fig: cavity sol.}
+    \end{figure}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=.45\textwidth]{figs/beta1_5-S50-N10.pdf}
+    \caption{...}
+    \label{fig: stability line + sims}
+\end{figure}
 
 \section{Conclusions}
 
