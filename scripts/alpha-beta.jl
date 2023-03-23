@@ -26,6 +26,8 @@ function σ_critical(α, β = 1)
         s < .9 && return σ
     end
 end
- 
+
+σ_critical(.3)
+
 α_range = .1:.1:1.
 @time map(σ_critical, α_range)
