@@ -1,6 +1,6 @@
 using DrWatson, Glob, Revise
 @quickactivate
-foreach(include, glob("*.jl", srcdir()))
+foreach(includet, glob("*.jl", srcdir()))
 
 using ProgressMeter, Suppressor, ThreadsX
 using Plots, LaTeXStrings
@@ -31,9 +31,9 @@ begin
         grid = false,
         xlabel = L"\mu N",
         ylabel = L"\sigma \sqrt{N}",
-        c=cgrad(:Reds, rev=true),
-        ylims=[.0,.5],
-        xlims=[.0,1.25],
+        c=cgrad(:Greys, rev=true),
+        ylims=[.0,.4],
+        xlims=[.0,1.2],
     )
 #end
 
@@ -42,20 +42,26 @@ begin
     plot!(μ_critical, σ_critical,
     labels = false,
     linewidth = 4,
-    linecolor = :black,
+    linecolor = :red,
     grid = false,
-    ylims=[.0,.5],
-    xlims=[.01,1.25]
+    ylims=[.0,1.2],
+    xlims=[.0,1.2],
+    yticks = [0, 0.6, 1.2],
+    xticks = [0, 0.6, 1.2],
+    size = (600,400),
     )
 
 #= critical line =#
-    μ_critical, σ_critical = critical_line(p, μ_range=(.05:.2:1.25),
-    n_max = 1e2)
+    μ_critical, σ_critical = critical_line(p, μ_range=(.01:.2:1.25),
+    n_max = 1e1)
     plot!(μ_critical, σ_critical,
     labels = false,
     linewidth = 4,
-    linecolor = :black,
+    linecolor = :green,
     grid = false,
-    ylims=[.0,.5],
-    xlims=[.01,1.25]
+    ylims=[.0,1.2],
+    xlims=[.0,1.2],
+    yticks = [0, 0.6, 1.2],
+    xticks = [0, 0.6, 1.2],
+    size = (600,400),
     )

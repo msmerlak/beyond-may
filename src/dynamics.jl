@@ -20,8 +20,6 @@ function F!(f, x, p)
     f .= pop + comm
 end
 
-J(x, p) = ForwardDiff.jacobian(y -> F(y, p), x)
-
 #= solving =#
 
 MAX_TIME = 1e5
