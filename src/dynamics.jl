@@ -98,6 +98,3 @@ function add_interactions!(p)
     A[diagind(A)] .= p[:scaled] ? p[:μₛ] / p[:S] : p[:μₛ]
     p[:A] = A
 end
-
-
-prova
