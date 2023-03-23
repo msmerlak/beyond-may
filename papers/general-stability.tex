@@ -20,6 +20,12 @@
 %floatfix,
 ]{revtex4-2}
 
+\usepackage{colortbl}
+\usepackage{graphicx} 
+\usepackage{booktabs}
+\usepackage{caption}
+\newcommand{\red}{\textcolor{red}}
+
 \begin{document}
 
 \title{Beyond May: Complexity-stability relationships in high-dimensional dynamical systems}
@@ -41,13 +47,7 @@ Fifty years ago, Robert May predicted that large, complex systems are unlikely t
 
 \section{Introduction}
 
-Few mathematical arguments have influenced biological thinking like May's 1970 prediction that large, complex ecosystems cannot be stable. 
-The argument is straightforward and runs as follows. 
-If a system with $N$ populations is stable, then it can be characterized by an equilibrium point. 
-Near that equilibrium, the dynamics of the system will be described by linear equations, and stability of these equations requires that all eigenvalues of the matrix $A$ have negative real part. 
-But if $A$ takes the form $A = B - I$, where $B$ consists of independent random interactions with zero mean and variance $\sigma^2$, and $-I$ corresponds to stabilizing self-interactions on some natural timescale, then the circular law of random matrix theory implies that all eigenvalues of $A$ will have negative real part only if $\sigma^2 N < 1$. 
-This condition places a sharp constraint on both diversity $N$ and interaction strengh $\sigma$, often referred to as ``complexity begets instability''. 
-(This argument generalizes to $\langle B_{ij}\rangle \neq 0$, to incomplete connectivity, or to correlated interactions.)
+Few mathematical arguments have influenced biological thinking like May's 1970 prediction that large, complex systems cannot be stable. It is, indeed, a perplexing prediction. On the one hand, the argument is so simple and compelling that it is hard not to conclude that it must hold universally. On the other, it is clear that at least some large, complex systems are stable---or else which stable patterns would biology be studying in the first place? If anything, the opposite relationship between complexity and stability seems to hold empirically: rich, strongly coupled ecosystems (eg. rainforests) tend to be  stable over time, while sparser ones (eg. arctic environments) often exhibit large fluctuations, exctinctions, and invasions. 
 
 May's prediction is intriging. On the one hand, his argument is simple and compelling, suggesting general applicability. 
 On the other, it is clear that at least some large, complex systems are stable, else science would be impossible. 
@@ -94,44 +94,214 @@ With power laws, \eqref{homogeneous-general} evaluates to $(\alpha - \beta)(N-1)
 
 \subsection{Random interactions}
 
-Consider now \eqref{dynamics} with i.i.d. interactions $a_{ij}$ with mean $\mu$ and standard deviation $\sigma$
-and let us specialize to the power laws case, with $f(x_i)=x_i^{\alpha}$, $g(x_i)=-x_i^{\beta}$ and $h(x_i)=x_i^{\gamma}$. 
-Additional proportionality constants can be reabsorbed in the statistics of $a$ and by a rescaling of time, moreover we chose to explicitly factor out a minus sign in order to more straightforwardly connect with competitive models.
-The evolution equations read
+Consider now Eq.~\eqref{dynamics} with i.i.d. random 
+interactions $a_{ij}$ with mean $\mu$ and standard 
+deviation $\sigma$, with the diagonal elements $a_{ii}$ 
+extracted from a distribution with mean $\mu_s$ 
+possibly different from $\mu$ and same standard deviation
+as for the off-diagonal elements.  
+We can compute the Jacobian matrix at equilibrium
+\begin{align}
+    J_{ij}^* & = a_{ij}g_*(x_i)h_*'(x_j) \qquad \qquad \textrm{for} \ i\neq j \label{eq: jac off-diag}\\
+    J_{ii}^* & = f_*'(x_i) - \frac{g_*'(x_i)f_*(x_i)}{g_*(x_i)} - a_{ii}g_*(x_i)h_*'(x_j) \ , \label{eq: jac diag}
+\end{align}
+where we used $\sum_{j}a_{ij}g_*(x_i)h_*(x_j)=-f_*(x_i)/g_*(x_i)$.
+In order to investigates its spectral properties, 
+we follow Stone~[Stone2018] and use a
+result in random matrix theory~[Ahmadian2015]
+which generalize the classical `circular law'~[Circular].
+
+In Ref.~[Ahmadian2015] Ahmadian \emph{et al.} 
+consider matrices of the form $M + LSR$, where $M$,  
+$L$ and $R$ are deterministic matrices, and $S$ 
+is a random matrix with i.i.d. coefficients, 
+zero mean and variance $\sigma^2$. They 
+show that in the complex plane the boundary of the 
+eigenspectrum of large matrices of this form is defined by
 \begin{equation}
-    \dot{x_i}=x_i^{\alpha} - x_i^{\beta}\sum_{j}a_{ij}x_j^{\gamma} \, .
+    \textrm{Tr}[(M_\zeta M_\zeta^\dagger)^{-1}]\geq \sigma^{-2} \, , 
+\end{equation}
+where $M_\zeta = L^{-1}(\zeta I - M)R^{-1}$ and $\zeta\in\mathbb{C}$. 
+If $L$, $R$ and $M$ are all diagonal $N\times N$ matrices, 
+this condition simplifies to
+\begin{equation}
+    \sum_{i=1}^N\frac{(L_{i}R_{i})^2}{ \vert \zeta - M_{i}\vert^2 }\geq \sigma^{-2} \ .
+\label{eq: domain}
+\end{equation}
+
+Now we decompose the interaction matrix as
+$a = \mu \mathbf{1} + (\mu_s-\mu)I + S$,
+with $\mathbf{1}$ the rank-one matrix with all entries equal to $1$
+and $S$ a random matrix as defined above.
+We can limit ourselves to consider 
+$a = (\mu_s-\mu)I + S$ by relying on 
+rank-one perturbation theory, we would only neglect outliers
+uninfluential for the linear stbaility properties of the system by doing so
+(see Ref.~[Stone2018]).
+The Jacobian in Eqs.~\eqref{eq: jac off-diag} and \eqref{eq: jac diag} assumes therefore the form $M + LJR$ with
+\begin{align}
+    M & = \textrm{diag}\left(f_*'(\mathbf x) -
+    \frac{g_*'(\mathbf x)f_*(\mathbf x)}{g_*(\mathbf x)}
+    +(\mu_s-\mu)g_*(\mathbf x)h_*'(\mathbf x)\right) \ , \\
+    L &= \textrm{diag}(g_*(\mathbf x)) \ , \\
+    R &= \textrm{diag}(h_*'(\mathbf x)) \ .
+\end{align}
+The domain of the eigenvalues of $J^*$, defined by
+Eq.~\eqref{eq: domain}, 
+first touches the right half-plane at $\zeta = 0$, 
+hence linear stability requires   
+\begin{equation}\label{eq: random-stability}
+    \sum_{i=1}^N \cfrac{\left(\cfrac{g_*(x_i)h_*'(x_i)}{f_*(x_i)}\right)^2}{
+        \Bigl |\left(\cfrac{f_*'(x_i)}{f_*(x_i)} -
+        \cfrac{g_*'(x_i)}{g_*(x_i)}\right)
+        +(\mu_s-\mu) \cfrac{g_*(x_i)h_*'(x_i)}{f_*(x_i)} \Bigl |^2}
+    < \sigma^{-2}. 
+\end{equation}
+This expression can be considered the
+random interaction case equivalent of
+the expression in Eq.~\eqref{homogeneous-general} 
+which appears again in the denominator of the summand.
+It reduces indeed to the homogenous case for $\sigma\to 0$.
+\red{Discuss better.}
+
+There are straightforward results 
+that follows from this expression.
+For generalized Lotka-Volterra (GLV) models,
+i.e. $f(x_i)=x_i$, $g(x_i)=x_i$ and $h(x_i)=x_i$,
+the expression in Eq.~\eqref{eq: random-stability}
+becomes independent on the equilibria and we easily 
+recover the linear stability condition
+\begin{equation}
+    \sigma\sqrt{N} < (\mu_s-\mu) \ .
+\end{equation}
+Moreover we can define an equivalence class of models
+which share the same simple condition
+for linear stability defined by the equivalence relation
+\begin{equation}\label{eq: equiv class glv}
+    \left(\cfrac{f_*'(x_i)}{f_*(x_i)} -
+        \cfrac{g_*'(x_i)}{g_*(x_i)}\right)\Bigl/
+        \cfrac{g_*(x_i)h_*'(x_i)}{f_*(x_i)}=c \ ,
+\end{equation}
+where $c$ is a constant,
+resulting in the condition $\sigma\sqrt{N} < (\mu_s-\mu) +c$.
+
+In the general case in which the dependence on the equilibria
+$\mathbf{x}_*$ does not cancel out, is not possible to
+obtain a clean complexity-stability relationship as before.
+We can make progress in the large $N$ limit by
+trasforming the sum in an integral 
+$\sum_{i=1}^N\to N\int dx_*P(x_*)$, where $P(x_*)$ 
+is the equilibrium distribution of the system
+depending on the statistic of the interactions,
+and write
+\begin{equation}\label{eq: random-stability int}
+    \int dx_* \cfrac{NP(x_*) \left(\cfrac{g_*(x)h_*'(x)}{f_*(x)}\right)^2}{
+        \Bigl |\left(\cfrac{f_*'(x)}{f_*(x)} -
+        \cfrac{g_*'(x)}{g_*(x)}\right)
+        +(\mu_s-\mu) \cfrac{g_*(x)h_*'(x)}{f_*(x)} \Bigl |^2}
+    < \sigma^{-2} \ .
+\end{equation}
+This expression allows us to obtain insights on the stability properties of
+the system in the case in which we are able to compute or estimate 
+the probability distribution function $P(x_*)$.
+
+In order to investigate the different regimes
+of complexity-stability behaviour,
+let us specialize to the power laws case, with 
+\begin{equation}
+    f(x_i)=x_i^{\alpha} \ , \quad g(x_i)=-x_i^{\beta} \ , \quad h(x_i)=x_i^{\gamma} \ .
+\end{equation} 
+Additional proportionality constants can be reabsorbed in the statistics
+of $a$ and by a rescaling of time, moreover we chose to explicitly
+factor out a minus sign in order to more straightforwardly connect
+with competitive models.
+
+We wish to consider explictly cases
+for "May" and "anti-May" regimes.
+An example of the former is given by GLV.
+In order to explore the latter, we 
+need to resort to Eq.~\eqref{eq: random-stability int} and therefore
+to compute the equilibrium probability distribution function
+for the system. This can be achieved in different ways,
+depending among other things on specific constraint that
+one can impose on the system. 
+One approach is reported below, then we specialize to a choice of
+the power laws exponens.
+
+Following, e.g., Ref.~[Roy2019] we can derive from 
+the evolution equation
+\begin{equation}
+    \dot{x_i}=x_i^{\alpha} - x_i^{\beta}\sum_{j}a_{ij}x_j^{\gamma} \, ,
 \label{eq: full abg}
 \end{equation}
-Following, e.g., Ref.~[Roy2019] we can derive, for large $N$,
-a dynamical mean field theory (DMFT) which provide a stochastic 
-differential equation describing the entire ensemble of $N$ variables
-thorugh the evolution of the representtive random variables $x$
+for large $N$, a dynamical mean field theory (DMFT) 
+describing the entire ensemble of $N$ variables
+thorugh the evolution of the representative random variable $x$
 \begin{equation}
-    \dot{x} = x^{\alpha}-x^{\beta}\left( \mu N \langle x^{\gamma}\rangle + \sigma \sqrt{N} \eta\right) \, ,
+    \dot{x} = x^{\alpha}-a_sx^{\beta+\gamma}-x^{\beta}\left( \mu N \langle x^{\gamma}\rangle + \sigma \sqrt{N} \eta\right) \, ,
 \label{eq: dmft}
 \end{equation}
-where $\langle . \rangle$ stands for expectation value
+where $a_s$ is a random variable with the statistics of $a_{ii}$,
+$\langle . \rangle$ stands for expectation value
 and $\eta$ is a gaussian variable
 with zero mean and correlation 
 $\langle x^{\gamma}(t)x^{\gamma}(s)\rangle$. 
 The averages and correlations have to be computed self-consistently.
-The equilibrium solution can be written as
+If the system admits an equilibrium (i.e. is feasible), for 
+$t\to\infty$ each of the initial $N$ degrees 
+of freedom will reach a final value, 
+and the effective random variable describing their
+also become time-independent,
+$\lim_{t\to\infty}x(t)=x_*$ and we can write
 \begin{equation}
-    x^* = \left( \mu N \langle (x^*)^{\gamma}\rangle + \sigma \sqrt{N\langle(x^*)^{2\gamma}\rangle}\xi\right)^{1/(\alpha-\beta)} \, ,
-\end{equation}
+    x_*^{\alpha-\beta} - a_s x_*^{\gamma}= \left( \mu N \langle x_*^{\gamma}\rangle + \sigma \sqrt{N\langle x_*^{2\gamma}\rangle}\xi\right) \, ,
+\end{equation} 
 where $\xi$ is a standard normal random variable (i.e. $\xi\sim\mathcal{N}(0,1)$).
-The equilibrium probability distribution function for $x^*$, $P(x)$,
+The equation above can be solved for $x_*$ in if $(\alpha-\beta)/\gamma\in\mathbb{N}$,
+or in general, if we set $a_s=0$, which amounts to include
+all the self-interaction in the nonlinear produciton term
+$x_*^{\alpha}$.
+In this case the stationary solution is given by 
+\begin{equation}
+    x_* = \left( \mu N \langle x_*^{\gamma}\rangle + \sigma \sqrt{N\langle x_*^{2\gamma}\rangle}\xi\right)^{1/(\alpha-\beta)} \, .
+\end{equation}
+
+The equilibrium probability distribution function for $x_*$, $P(x_*)$,
 can be obtained as the pushforward of the distribition of $\xi$.
-The change of measure gives
-\begin{equation}
-    \left|\frac{d \xi}{d x}\right|=\frac{|\alpha-\beta|x^{\alpha-\beta-1}}{\sigma \sqrt{N\langle(x^*)^{2\gamma}\rangle}} \, ,
+The change of measure
+$\left|d \xi/d x_*\right|=|\alpha-\beta|x_*^{\alpha-\beta-1}/\sigma \sqrt{N\langle x_*^{2\gamma}\rangle}$,
+leads to
+\begin{equation}\label{eq: dist general}
+    P(x_*)=\frac{|\alpha-\beta|x_*^{\alpha-\beta-1}}{\sqrt{2\pi\sigma^2 N\langle x_*^{2\gamma}\rangle}}
+    \exp{\left\{-\frac{(x_*^{\alpha-\beta}-\mu N\langle x_*^{\gamma}\rangle)^2}{2\sigma^2N\langle x_*^{2\gamma}\rangle}\right\}} \, ,
 \end{equation}
-therefore we obtain
-\begin{equation}
-    P(x)=\frac{|\alpha-\beta|x^{\alpha-\beta-1}}{\sqrt{2\pi}\sigma \sqrt{N\langle(x^*)^{2\gamma}\rangle}}
-    \exp{\left\{-\frac{(x^{\alpha-\beta}-\mu N\langle(x^*)^{\gamma}\rangle)^2}{2\sigma^2N\langle(x^*)^{2\gamma}\rangle}\right\}} \, ,
-\end{equation}
-where the expectations have to be computed self-consistently.
+where the expectations have to be computed self-consistently, 
+taking also in account normalization constraint.
+
+Let us focus to the case $\alpha=1$, $\beta=1.5$ and $\gamma=1$, with
+$a_s=0$ in order to leverage the equilibrium solution in Eq.~\eqref{eq: dist general}.
+which is tested against simulations in Fig.~\ref{fig: cavity sol.}.
+
+\dots
+
+\subsection{Simulations}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=.45\textwidth]{figs/cavity.pdf}
+        \caption{...}
+        \label{fig: cavity sol.}
+    \end{figure}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=.45\textwidth]{figs/beta1_5-S50-N10.pdf}
+    \caption{...}
+    \label{fig: stability line + sims}
+\end{figure}
+
+\section{Conclusions}
+
 
 \end{document}
 %

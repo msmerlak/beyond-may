@@ -1,12 +1,5 @@
-using Pkg
-Pkg.add("DrWatson")
-
-using DrWatson
+using DrWatson, Glob, Revise
 @quickactivate
-
-Pkg.instantiate()
-
-using Glob, Revise
 foreach(includet, glob("*.jl", srcdir()))
 
 using ThreadsX
@@ -30,14 +23,45 @@ begin
     ϕ = ThreadsX.collect(stability!(p) for p in expand(P));
 
     sublinear = heatmap(
-        P[:μ], 
-        P[:σ],
-        reshape(ϕ, length(P[:μ]), length(P[:σ]))',
+        p[:μ], 
+        p[:σ],
+        reshape(ϕ, length(p[:μ]), length(p[:σ]))',
         dpi = 500,
         alpha = 1.,
         grid = false,
-        xlabel = L"\mu",
-        ylabel = L"\sigma",
-        title = L"\textrm{Stability \,\, in \,\, parameter \,\, space}"
+        xlabel = L"\mu N",
+        ylabel = L"\sigma \sqrt{N}",
+        c=cgrad(:Greys, rev=true),
+        ylims=[.0,.4],
+        xlims=[.0,1.2],
     )
-end
+#end
+
+#= critical line for gaussian approximation =#
+    μ_critical, σ_critical = critical_line_gauss(p, μ_range=(.01:.25:1.26))
+    plot!(μ_critical, σ_critical,
+    labels = false,
+    linewidth = 4,
+    linecolor = :red,
+    grid = false,
+    ylims=[.0,1.2],
+    xlims=[.0,1.2],
+    yticks = [0, 0.6, 1.2],
+    xticks = [0, 0.6, 1.2],
+    size = (600,400),
+    )
+
+#= critical line =#
+    μ_critical, σ_critical = critical_line(p, μ_range=(.01:.2:1.25),
+    n_max = 1e1)
+    plot!(μ_critical, σ_critical,
+    labels = false,
+    linewidth = 4,
+    linecolor = :green,
+    grid = false,
+    ylims=[.0,1.2],
+    xlims=[.0,1.2],
+    yticks = [0, 0.6, 1.2],
+    xticks = [0, 0.6, 1.2],
+    size = (600,400),
+    )
