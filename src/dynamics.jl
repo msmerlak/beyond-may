@@ -22,7 +22,7 @@ end
 
 ## solving
 
-MAX_TIME = 1e3
+MAX_TIME = 1e5
 MAX_ABUNDANCE = 1e3
 
 converged(ϵ = 1e-4) = TerminateSteadyState(ϵ)
@@ -59,8 +59,8 @@ function evolve!(p; trajectory=false)
     p[:converged] = sol.retcode == SciMLBase.ReturnCode.Terminated && maximum(p[:equilibrium]) < MAX_ABUNDANCE
 
     survivors = sol.u[end] .> p[:extinction_threshold]
-    
     p[:richness] = sum(survivors)
+
     q = p[:equilibrium]/sum(p[:equilibrium])
     p[:diversity] = 1/(p[:S] * sum(q.^2))
 
@@ -85,13 +85,12 @@ function add_interactions!(p)
     end
     
     A = rand(p[:rng], dist, (p[:S], p[:S]))
-    @show A
 
     if haskey(p, :symm) && p[:symm]
         A = (A + A')/2
     end
     
-    A[diagind(A)] .= p[:μₛ] 
+    A[diagind(A)] .= p[:scaled] ? p[:μₛ] / p[:S] : p[:μₛ]
     p[:A] = A
 end
 

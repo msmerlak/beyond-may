@@ -9,11 +9,11 @@ p = Dict{Symbol, Any}(
     :S => 100,
     :μ => 0.5,
     :μₛ => 0.5,
-    :σ => 9.,
-    :α => .7,
+    :σ => .05,
+    :α => .5,
     :β => 1.,
     :γ => 1.,
-    :extinction_threshold => 1e-2,
+    :extinction_threshold => 1e-4,
     :dist => "gamma",
     :N => 1,
     :seed => rand(UInt)
@@ -22,4 +22,8 @@ p = Dict{Symbol, Any}(
 evolve!(p; trajectory = true);
 plot(p[:trajectory], label = false)
 p[:converged]
-p[:A]
+p[:equilibrium]
+
+
+p[:N] = 10
+stability!(p)
