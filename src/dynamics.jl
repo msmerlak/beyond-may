@@ -1,23 +1,23 @@
+using DrWatson; @quickactivate
+include(srcdir("utils.jl"))
+
 using DifferentialEquations
 using Random, Distributions
 using LinearAlgebra
 
-#= dynamical system =#
+## dynamical system
+function F(x, p)
+    x .= ppart.(x)
+    pop = x.^p[:α]
+    comm = - x.^p[:β] .* (p[:A] * x.^p[:γ])
+    return pop + comm
+end
 
 function F!(f, x, p)
     x .= ppart.(x)
     pop = x.^p[:α]
-    comm = - x.^p[:β] .* contract(p[:A], x.^p[:γ])
-
+    comm = - x.^p[:β] .* (p[:A] * x.^p[:γ])
     f .= pop + comm
-end
-
-function F(x, p)
-    x .= ppart.(x)
-    pop = x.^p[:α]
-    comm = - x.^p[:β] .* contract(p[:A], x.^p[:γ])
-
-    return pop + comm
 end
 
 J(x, p) = ForwardDiff.jacobian(y -> F(y, p), x)
@@ -27,9 +27,8 @@ J(x, p) = ForwardDiff.jacobian(y -> F(y, p), x)
 MAX_TIME = 1e5
 MAX_ABUNDANCE = 1e5
 
-converged(ϵ = 1e-5) = TerminateSteadyState(ϵ)
-
-blowup() = DiscreteCallback((u, t, integrator) -> maximum(u) > MAX_ABUNDANCE, terminate!)
+converged(ϵ = 1e-4) = TerminateSteadyState(ϵ)
+blowup(max_abundance = MAX_ABUNDANCE) = DiscreteCallback((u, t, integrator) -> maximum(u) > max_abundance, terminate!)
 
 function evolve!(p; trajectory=false)
 
@@ -49,20 +48,19 @@ function evolve!(p; trajectory=false)
 
     pb = ODEProblem(
         ODEFunction(
-            (f, x, p, t) -> F!(f, x, p)
+            (f, x, p, t) -> F!(f, x, p) 
         ),
-        ones(p[:S]).*p[:x0], #initial condition
+        p[:x0], 
         (0.0, MAX_TIME),
         p
     )
 
     sol = solve(pb,
         callback=CallbackSet(converged(), blowup()),
-        save_on=trajectory #don't save whole trajectory, only endpoint
+        save_on=trajectory 
     )
-
-    p[:equilibrium] = sol.retcode == :Terminated ? sol.u[end] : NaN
-    p[:converged] = sol.retcode == :Terminated && maximum(p[:equilibrium]) < MAX_ABUNDANCE
+    p[:equilibrium] = sol.retcode == SciMLBase.ReturnCode.Terminated ? sol.u[end] : NaN
+    p[:converged] = sol.retcode == SciMLBase.ReturnCode.Terminated && maximum(p[:equilibrium]) < MAX_ABUNDANCE
 
     survivors = sol.u[end] .> p[:threshold]
 
@@ -83,18 +81,23 @@ function add_initial_condition!(p)
 end
 
 function add_interactions!(p)
-    # add a random interactions to p, the dict of parameters
     (m, s) = p[:scaled] ? (p[:μ] / p[:S], p[:σ] / sqrt(p[:S])) : (p[:μ], p[:σ])
-
     if p[:dist] == "normal"
-        dist = Normal(m, s)
+        dist = normal(m, s)
     elseif p[:dist] == "uniform"
         dist = Uniform(max(0.0, m - s), min(2m, m + s))
     elseif p[:dist] == "gamma"
-        dist = Gamma(m^2 / s^2, s^2 / m)
+        dist = gamma(m, s)
     end
+    
+    A = rand(p[:rng], dist, (p[:S], p[:S]))
+    @show A
 
-    A = rand(p[:rng], dist, (p[:S],p[:S]))
-    A[diagind(A)] = A[diagind(A)]*p[:μₛ]
+    if haskey(p, :symm) && p[:symm]
+        A = (A + A')/2
+    end
+    
+    A[diagind(A)] .= p[:μₛ] 
     p[:A] = A
 end
+

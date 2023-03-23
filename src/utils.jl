@@ -1,14 +1,7 @@
 ppart(x) = max(x, 0)
 
-using TensorOperations
-contract(A::Array{Float64, 2}, x::Vector) = @tensor y[i] := A[i, j] * x[j]
-contract(A::Array{Float64, 3}, x::Vector) = @tensor y[i] := A[i, j, k] * x[j] * x[k]
-contract(A::Array{Float64, 4}, x::Vector) = @tensor y[i] := A[i, j, k, l] * x[j] * x[k] * x[l]
-
-
-function offdiag(A::AbstractMatrix)
-    [A[ι] for ι in CartesianIndices(A) if ι[1] ≠ ι[2]]
-end 
+normal(m, s) = Normal(m, s)
+gamma(m, s) = Gamma(m^2 / s^2, s^2 / m)
 
 function expand(c::AbstractDict)
 

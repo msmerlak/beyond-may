@@ -21,8 +21,6 @@ p = Dict{Symbol, Any}(
     :seed => rand(UInt)
 );
 
-@time diversity!(p)
-
 evolve!(p; trajectory = true);
 
 p[:converged]
