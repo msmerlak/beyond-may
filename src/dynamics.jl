@@ -80,6 +80,8 @@ end
 
 function add_interactions!(p)
     (m, s) = p[:scaled] ? (p[:μ] / p[:S], p[:σ] / sqrt(p[:S])) : (p[:μ], p[:σ])
+
+
     if p[:dist] == "normal"
         dist = normal(m, s)
     elseif p[:dist] == "uniform"
@@ -93,7 +95,8 @@ function add_interactions!(p)
     if haskey(p, :symm) && p[:symm]
         A = (A + A')/2
     end
-    
+
+    !haskey(p, :μₛ) && (p[:μₛ] = p[:μ])
     A[diagind(A)] .= p[:scaled] ? p[:μₛ] / p[:S] : p[:μₛ]
     p[:A] = A
 end
