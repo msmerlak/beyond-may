@@ -1,3 +1,5 @@
+@show Threads.nthreads()
+
 using DrWatson
 @quickactivate
 
