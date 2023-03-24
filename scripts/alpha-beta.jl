@@ -8,6 +8,12 @@ using DrWatson; @quickactivate
 using Glob, Revise
 foreach(includet, glob("*.jl", srcdir()))
 
+using Plots, LaTeXStrings
+gr(label = false, grid = false)
+using DataFrames, Arrow
+Arrow.write(datadir("alpha-beta-$dist"), DataFrame(Σ, :auto))
+
+
 for dist in ("normal", "gamma")
     function σ_critical(α, β = 1)
 
@@ -35,12 +41,6 @@ for dist in ("normal", "gamma")
     A = .1:.05:2.
     B = .1:.05:2.
     Σ = [β > α ? σ_critical(α, β) : 0 for α in A, β in B]
-
-    using DataFrames, Arrow
-    Arrow.write(datadir("alpha-beta-$dist"), DataFrame(Σ, :auto))
-
-    using Plots, LaTeXStrings
-    gr(label = false, grid = false)
 
     heatmap(A, B, Σ', label = L"\sigma_c")
     xlabel!(L"\alpha")
