@@ -16,19 +16,15 @@ end
 ## in-place for use in ODEFunction
 function F!(f, x, p, t)
     x .= ppart.(x)
-    f .= x.^p[:α] - x.^p[:β] .* (p[:A] * x.^p[:γ])
-end
-
-function J!(j, x, p, t)
-    j .= (- x.^p[:β] .* p[:A]) .* (p[:γ]*x.^(p[:γ]-1))
-    j[diagind(j)] .= p[:α]*x.^(p[:α]-1) .- p[:β]*x.^(p[:β] - 1).*(p[:A] * x.^p[:γ]) .- p[:γ]*(x.^(p[:β] + p[:γ] - 1)).*diag(p[:A])
+    mul!(f, p[:A], p[:γ] == 1. ? x : x.^p[:γ])
+    @. f = x^p[:α] - x^p[:β] * f 
 end
 
 #= solving =#
 
-MAX_TIME = 1e5
-MAX_ABUNDANCE = 1e5
-TOL = 1e-4
+MAX_TIME = 1e2
+MAX_ABUNDANCE = 1e2
+TOL = 1e-2
 
 converged(ϵ = TOL) = TerminateSteadyState(ϵ)
 blowup(max_abundance = MAX_ABUNDANCE) = DiscreteCallback((u, t, integrator) -> maximum(u) > max_abundance, terminate!)
@@ -49,8 +45,7 @@ function evolve!(p; trajectory=false)
 
     pb = ODEProblem(
         ODEFunction(
-            F!;
-            jac = J!
+            F!
         ),
         p[:x0], 
         (0.0, MAX_TIME),

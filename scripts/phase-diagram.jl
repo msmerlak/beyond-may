@@ -65,3 +65,5 @@ begin
     xticks = [0, 0.6, 1.2],
     size = (600,400),
     )
+end
+savefig(plotsdir("mu-sigma"))
