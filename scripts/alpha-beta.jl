@@ -1,7 +1,9 @@
 @show Threads.nthreads()
 
-using DrWatson
-@quickactivate
+using Pkg
+Pkg.instantiate()
+
+using DrWatson; @quickactivate
 
 using Glob, Revise
 foreach(includet, glob("*.jl", srcdir()))
