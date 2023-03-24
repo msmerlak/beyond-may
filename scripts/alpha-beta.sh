@@ -7,6 +7,6 @@
 #SBATCH --qos=mesopsl1_def_long
 #SBATCH --account=smerlak
 #SBATCH --nodes=1
-#SBATCH --ntasks-per-node=24
+#SBATCH --ntasks-per-node=16
 
 julia --threads=auto /travail/msmerlak/general-stability/scripts/alpha-beta.jl > alpha-beta.out
