@@ -26,7 +26,7 @@ for dist in ("normal", "gamma")
             :γ => 1.,
             :extinction_threshold => 1e-4,
             :dist => dist,
-            :N => 2,
+            :N => 100,
         );
         
 
@@ -43,8 +43,8 @@ for dist in ("normal", "gamma")
     
     writedlm(datadir("alpha-beta-$dist.csv"), Σ, ',')
 
-    heatmap(A, B, Σ', label = L"\sigma_c")
+    p = heatmap(A, B, Σ', label = L"\sigma_c")
     xlabel!(L"\alpha")
     ylabel!(L"\beta")
-    savefig(plotsdir("alpha-beta-$dist"))
+    savefig(p, plotsdir("alpha-beta-$dist"))
 end
