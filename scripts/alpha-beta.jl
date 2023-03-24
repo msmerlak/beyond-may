@@ -6,6 +6,8 @@ foreach(includet, glob("*.jl", srcdir()))
 
 for dist in ("normal", "gamma")
     function σ_critical(α, β = 1)
+
+        @show (α, β)
         p = Dict{Symbol, Any}(
             :scaled => true,
             :S => 100,
@@ -17,6 +19,7 @@ for dist in ("normal", "gamma")
             :dist => dist,
             :N => 2,
         );
+        
 
         for σ in 0.0001:.01:5
             p[:σ] = σ
