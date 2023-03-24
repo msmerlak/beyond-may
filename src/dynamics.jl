@@ -13,19 +13,24 @@ function F(x, p)
     return pop + comm
 end
 
-function F!(f, x, p)
+## in-place for use in ODEFunction
+function F!(f, x, p, t)
     x .= ppart.(x)
-    pop = x.^p[:α]
-    comm = - x.^p[:β] .* (p[:A] * x.^p[:γ])
-    f .= pop + comm
+    f .= x.^p[:α] - x.^p[:β] .* (p[:A] * x.^p[:γ])
+end
+
+function J!(j, x, p, t)
+    j .= (- x.^p[:β] .* p[:A]) .* (p[:γ]*x.^(p[:γ]-1))
+    j[diagind(j)] .= p[:α]*x.^(p[:α]-1) .- p[:β]*x.^(p[:β] - 1).*(p[:A] * x.^p[:γ]) .- p[:γ]*(x.^(p[:β] + p[:γ] - 1)).*diag(p[:A])
 end
 
 #= solving =#
 
 MAX_TIME = 1e5
 MAX_ABUNDANCE = 1e5
+TOL = 1e-4
 
-converged(ϵ = 1e-4) = TerminateSteadyState(ϵ)
+converged(ϵ = TOL) = TerminateSteadyState(ϵ)
 blowup(max_abundance = MAX_ABUNDANCE) = DiscreteCallback((u, t, integrator) -> maximum(u) > max_abundance, terminate!)
 
 function evolve!(p; trajectory=false)
@@ -44,14 +49,16 @@ function evolve!(p; trajectory=false)
 
     pb = ODEProblem(
         ODEFunction(
-            (f, x, p, t) -> F!(f, x, p) 
+            F!;
+            jac = J!
         ),
         p[:x0], 
         (0.0, MAX_TIME),
         p
     )
 
-    sol = solve(pb,
+    sol = solve(pb;
+        reltol = TOL,
         callback=CallbackSet(converged(), blowup()),
         save_on=trajectory 
     )
