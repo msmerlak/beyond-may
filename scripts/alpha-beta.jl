@@ -11,7 +11,6 @@ foreach(includet, glob("*.jl", srcdir()))
 using Plots, LaTeXStrings
 gr(label = false, grid = false)
 using DataFrames, Arrow
-Arrow.write(datadir("alpha-beta-$dist"), DataFrame(Σ, :auto))
 
 
 for dist in ("normal", "gamma")
@@ -41,6 +40,9 @@ for dist in ("normal", "gamma")
     A = .1:.05:2.
     B = .1:.05:2.
     Σ = [β > α ? σ_critical(α, β) : 0 for α in A, β in B]
+    
+    Arrow.write(datadir("alpha-beta-$dist"), DataFrame(Σ, :auto))
+
 
     heatmap(A, B, Σ', label = L"\sigma_c")
     xlabel!(L"\alpha")
