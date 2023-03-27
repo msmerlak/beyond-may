@@ -34,7 +34,7 @@ function Cavity(p;
     rela = .01, #relax parameter for fixed point
     tol = 1e-9, #requested tolerance for numerical integrator
     n_max = 1e4, #upper bound for integration
-    n_min = p[:threshold], #lower bound for integration
+    n_min = p[:extinction_threshold], #lower bound for integration
     e1_init = (p[:scaled] ? 1/p[:μ] : 1/p[:μ]/p[:S]), #initial guess for e1_n
     e2_init = (p[:scaled] ? 1/p[:μ] : 1/p[:μ]/p[:S]) #initial guess for e1_n
     )
@@ -65,7 +65,7 @@ function σ_crit(p;
     e2_init = (p[:scaled] ? 1/p[:μ] : 1/p[:μ]/p[:S]), #initial guess for e1_n
     σc_init = (p[:scaled] ? .1*p[:μ] : .1*p[:μ]*p[:S]), #initial guess for σ_c
     n_max = 1e3, #upper bound for integration
-    n_min = p[:threshold], #lower bound for integration
+    n_min = p[:extinction_threshold], #lower bound for integration
     )
     @unpack μ, σ, α, β = p
     ϕ_n = ones(Iter+1) 
