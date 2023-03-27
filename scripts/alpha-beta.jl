@@ -33,7 +33,7 @@ for dist in ("normal", "gamma")
         for σ in 0.0001:.01:5
             p[:σ] = σ
             s = stability!(p)
-            s < .9 && return σ
+            s < .5 && return σ
         end
     end
 
