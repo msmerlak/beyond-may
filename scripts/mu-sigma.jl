@@ -1,5 +1,7 @@
-using DrWatson, Glob, Revise
+using DrWatson
 @quickactivate
+
+using Glob, Revise
 foreach(includet, glob("*.jl", srcdir()))
 
 using ThreadsX
