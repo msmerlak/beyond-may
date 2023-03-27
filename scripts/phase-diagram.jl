@@ -4,6 +4,7 @@ foreach(includet, glob("*.jl", srcdir()))
 
 using ThreadsX
 using Plots, LaTeXStrings
+using DelimitedFiles
 
 P = Dict{Symbol, Any}(
     :scaled => true,
@@ -21,11 +22,13 @@ P = Dict{Symbol, Any}(
 
 begin
     ϕ = ThreadsX.collect(stability!(p) for p in expand(P));
+    Φ = reshape(ϕ, length(P[:μ]), length(P[:σ]))'
+    writedlm(datadir("mu-sigma-gamma.csv"), Φ, ',')
 
     sublinear = heatmap(
-        p[:μ], 
-        p[:σ],
-        reshape(ϕ, length(p[:μ]), length(p[:σ]))',
+        P[:μ], 
+        P[:σ],
+        Φ,
         dpi = 500,
         alpha = 1.,
         grid = false,
@@ -38,7 +41,7 @@ begin
 #end
 
 #= critical line for gaussian approximation =#
-    μ_critical, σ_critical = critical_line_gauss(p, μ_range=(.01:.25:1.26))
+    μ_critical, σ_critical = critical_line_gauss(P, μ_range=(.01:.25:1.26))
     plot!(μ_critical, σ_critical,
     labels = false,
     linewidth = 4,
@@ -52,7 +55,7 @@ begin
     )
 
 #= critical line =#
-    μ_critical, σ_critical = critical_line(p, μ_range=(.01:.2:1.25),
+    μ_critical, σ_critical = critical_line(P, μ_range=(.01:.2:1.25),
     n_max = 1e1)
     plot!(μ_critical, σ_critical,
     labels = false,
@@ -66,4 +69,4 @@ begin
     size = (600,400),
     )
 end
-savefig(plotsdir("mu-sigma"))
+savefig(plotsdir("mu-sigma-normal"))
