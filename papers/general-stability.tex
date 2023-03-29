@@ -161,8 +161,6 @@ This expression can be considered the
 random interaction case equivalent of
 the expression in Eq.~\eqref{homogeneous-general} 
 which appears again in the denominator of the summand.
-It reduces indeed to the homogenous case for $\sigma\to 0$.
-\red{Discuss better.}
 
 There are straightforward results 
 that follows from this expression.
@@ -257,12 +255,17 @@ $\lim_{t\to\infty}x(t)=x_*$ and we can write
     x_*^{\alpha-\beta} - a_s x_*^{\gamma}= \left( \mu N \langle x_*^{\gamma}\rangle + \sigma \sqrt{N\langle x_*^{2\gamma}\rangle}\xi\right) \, ,
 \end{equation} 
 where $\xi$ is a standard normal random variable (i.e. $\xi\sim\mathcal{N}(0,1)$).
-The equation above can be solved for $x_*$ in if $(\alpha-\beta)/\gamma\in\mathbb{N}$,
-or in general, if we set $a_s=0$, which amounts to include
+The equation above can be solved for $x_*$ for specific values of
+$(\alpha-\beta)/\gamma$, or, in general, if we set $a_s=0$, which amounts to include
 all the self-interaction in the nonlinear produciton term
-$x_*^{\alpha}$.
+$x_*^{\alpha}$. In the following, in studying a system which
+follows in the 'anti-May' phase, we show that numerical results
+obtained for the case in which the diagonal part of the
+interaction matrix is non-vanishing and equal to the
+off-diagonal part are well approximated by the results obtained
+setting $a_s=0$.
 In this case the stationary solution is given by 
-\begin{equation}
+\begin{equation} \label{eq: cavity solution}
     x_* = \left( \mu N \langle x_*^{\gamma}\rangle + \sigma \sqrt{N\langle x_*^{2\gamma}\rangle}\xi\right)^{1/(\alpha-\beta)} \, .
 \end{equation}
 
@@ -275,41 +278,68 @@ leads to
     P(x_*)=\frac{|\alpha-\beta|x_*^{\alpha-\beta-1}}{\sqrt{2\pi\sigma^2 N\langle x_*^{2\gamma}\rangle}}
     \exp{\left\{-\frac{(x_*^{\alpha-\beta}-\mu N\langle x_*^{\gamma}\rangle)^2}{2\sigma^2N\langle x_*^{2\gamma}\rangle}\right\}} \, ,
 \end{equation}
-where the expectations have to be computed self-consistently, 
-taking also in account normalization constraint.
+where the expectations have to be computed self-consistently.
 
 Let us focus to the case $\alpha=1$, $\beta=1.5$ and $\gamma=1$, with
 $a_s=0$ in order to leverage the equilibrium solution in Eq.~\eqref{eq: dist general}.
-which is tested against simulations in Fig.~\ref{fig: cavity sol.}.
-
-\dots
-
-\subsection{Simulations}
+In this case the first and second moment to be self-consistently
+computed formally diverges. This is not truly porblematic in practice
+because we are dealing with large, but \emph{finite} populations.
+Following~[Cui2020,Us2023] and assuming
+$\sigma \sqrt{N\langle x_*^2\rangle}\ll \mu N \langle x_* \rangle$,
+we can Taylor expand to the first-order the cavity 
+solution~\eqref{eq: cavity solution} and obtain a
+gaussian approximation to Eq.~\eqref{eq: dist general}
+with moments $\langle x_*\rangle=(\mu N)^{-2/3}$ and
+$\langle x_*^2\rangle=(\mu N)^{-4/3}/(1-4(\mu N)^{-2}\sigma^2N)$.
+This is plotted against simulations in 
+Fig.~\ref{fig: cavity sol.}, alongside the exact solution~\eqref{eq: dist general} 
+where integration for the moments has been performed up to a maximum
+value above which no equilibirum value should be found for a given $N$.
+Simulations correspond to $a_s=\mu$, showing that the choice
+of vanishing self-interaction for the analytical results
+is suited to describe this case as well.
 
 \begin{figure}[h!]
     \centering
     \includegraphics[width=.45\textwidth]{figs/cavity.pdf}
-        \caption{...}
-        \label{fig: cavity sol.}
-    \end{figure}
+    \caption{...}
+    \label{fig: cavity sol.}
+\end{figure}
+ 
+\subsection{Simulations}
+
+Equipped with the equilibirum distribution, we can compute
+the critical value of heterogeneity 
+$\sigma_c$, for a given $N$ and $\mu$,
+defined by taking the equality in 
+Eq.~\eqref{eq: random-stability int}. 
+For $\sigma$ above this value the system becomes
+unstable. In Fig~\ref{fig: stability line + sims}
+the result is portrayed in the $\sigma \sqrt{N} - \mu N$ plane
+compared with results from simulations where stability is defined
+as stable, full coexistence of the system.
+Everything else left fixed, an increase in the number of
+degrees of freedom $N$ will move the system along a square-root
+trajectory, bringing it into the stable regime or keeping it
+in it if already stable. This confirms we are in the
+'anti-May' phase.
 
 \begin{figure}[h!]
-\centering
-\includegraphics[width=.45\textwidth]{figs/beta1_5-S50-N10-diversity.pdf}
+    \centering
+    \includegraphics[width=.45\textwidth]{figs/beta1_5-S50-N10-diversity.pdf}
     \caption{...}
     \label{fig: stability line + sims}
 \end{figure}
 
-\section{Conclusions}
-
 \begin{figure}[h!]
     \centering
     \includegraphics[width=.45\textwidth]{figs/alpha-beta.pdf}
-        \caption{...}
-        \label{fig: alpha-beta}
-    \end{figure}
+    \caption{...}
+    \label{fig: alpha-beta}
+\end{figure}
     
-    \section{Conclusions}
+\section{Conclusions}
 
 \end{document}
 %
