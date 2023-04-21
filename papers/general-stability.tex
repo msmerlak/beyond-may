@@ -1,4 +1,4 @@
-\documentclass[%
+\documentclass[
  reprint,
 %superscriptaddress,
 %groupedaddress,
@@ -24,6 +24,7 @@
 \usepackage{graphicx} 
 \usepackage{booktabs}
 \usepackage{caption}
+\usepackage{notes2bib}
 \newcommand{\red}{\textcolor{red}}
 
 \begin{document}
@@ -48,12 +49,47 @@ Fifty years ago, Robert May predicted that large, complex systems are unlikely t
 
 \section{Introduction}
 
-Few mathematical arguments have influenced biological thinking like May's prediction that large, complex systems cannot be stable. It is, on the face of it, a perplexing conclusion. On the one hand, May's argument is so simple and compelling that it hard not to conclude that it must hold universally. On the other, it is clear that at least some large, complex systems are stable---or else which stable patterns would biology be studying in the first place? If anything, the opposite relationship between complexity and stability seems to hold empirically: rich, strongly coupled ecosystems (eg. rainforests) tend to be  stable over time, while sparser ones (eg. arctic environments) often exhibit large fluctuations, exctinctions, and invasions. 
+Few mathematical arguments have influenced biological thinking like May's
+prediction that large, complex systems cannot be stable~\cite{May1972}. 
+It is, on the face of it, a perplexing conclusion. 
+On the one hand, May's argument is so simple and compelling
+that it hard not to conclude that it must hold universally,
+and beyond biology~\cite{Haldane2011,Moran2019}. 
+On the other, it is clear that at least some large, 
+complex systems are stable---or else which stable patterns 
+would ecology be studying in the first place? If anything, 
+the opposite relationship between complexity and stability 
+seems to hold empirically: rich, strongly coupled ecosystems 
+(eg. rainforests) tend to be  stable over time, while sparser ones 
+(eg. arctic environments) often exhibit large fluctuations, 
+exctinctions, and invasions~\cite{Loreau2022,McCann2000,Hutchinson1959,Odum1959,MacArthur1955}. 
 
-May's argument goes as follows. A system with $N$ populations $x_i$ is stable is one that can be characterized by an equilibrium point $x^*$. Near that equilibrium $x = x^* + \delta x$, the dynamics of the system will be described by linear equations $d(\delta x)/dt = A (\delta x)$, and stability of these equations requires that all eigenvalues of $A$ have negative real part. But if $A$ can be represented as $A = B - I$, where $B$ consists of random, independent interactions with zero mean and variance $\sigma^2$, and $-I$ corresponds to stabilizing self-interactions on some natural timescale, then the circular law of random matrix theory implies that all eigenvalues of $A$ will have negative real part only if $\sigma^2 N < 1$. This places a sharp constraint on both diversity $N$ and interaction strengh $\sigma$, often referred to as "complexity begets instability". (This argument generalizes to $\langle B_{ij}\rangle \neq 0$, to incomplete connectivity, or to correlated interactions.)
+May's argument goes as follows. A system with $N$ populations $x_i$ is stable 
+is one that can be characterized by an equilibrium point $x^*$. 
+Near that equilibrium $x = x^* + \delta x$, the 
+dynamics of the system will be described by linear 
+equations $d(\delta x)/dt = A (\delta x)$, and stability of 
+these equations requires that all eigenvalues of $A$ 
+have negative real part. But if $A$ can be represented as $A = B - I$, 
+where $B$ consists of random, independent interactions with zero 
+mean and variance $\sigma^2$, and $-I$ corresponds to 
+stabilizing self-interactions on some natural timescale, 
+then the circular law of random matrix theory implies that all 
+eigenvalues of $A$ will have negative real part only if $\sigma^2 N < 1$. 
+This places a sharp constraint on both diversity $N$ and interaction 
+strengh $\sigma$, often referred to as "complexity begets instability". 
+(This argument generalizes to $\langle B_{ij}\rangle \neq 0$, 
+to incomplete connectivity, or to correlated interactions.)
 
-In ecology, many authors have sought to ease the tension between May's prediction and empirical observation by invoking effects not captured by dynamical systems with random coefficients, such as spatial or food-web structure, time delays, etc. 
-Here, we show that May's argument is itself incomplete: random dynamical systems do not necessarily imply that stability decreases with diversity or interaction strength---the opposite behavior is also possible, without the need for special or additional structure. 
+In ecology, many authors have sought to ease the tension between May's 
+prediction and empirical observation by invoking effects not captured by 
+dynamical systems with random 
+coefficients~\cite{McCann2000,Chesson2000,Mougi2012,Rohr2014,Barabas2017,Grilli2017}. 
+Here, we show that May's argument is itself incomplete: 
+random dynamical systems do not necessarily imply that 
+stability decreases with diversity or interaction 
+strength---the opposite behavior is also possible, 
+without the need for special or additional structure. 
 
 \section{Results}
 
@@ -63,16 +99,19 @@ Consider the dynamical system in $N$ variables
 \begin{equation}\label{dynamics}
     \dot{x}_i = f(x_i) + \sum_{j}a_{ij}g(x_i)h(x_j) \, .
 \end{equation}
-Here $f(x_i)$ represents the contribution of a population $i$ to its own growth, while $g(x_i)$ and $h(x_j)$ capture the interaction of $i$ with other populations. 
+Here $f(x_i)$ represents the self-dynamics of a population $i$, while $g(x_i)$ and $h(x_j)$ capture the interaction of $i$ with other populations. 
 That interaction is weighted by a coefficient $a_{ij}$, such that $a_{ij} > 0$ (resp. $a_{ji} < 0$) implies a positive (resp. negative) effect of $j$ on the growth of $i$. 
 In the following we refer to $f(x_i)$ as the ``production function'' and $g(x_i)$ as the ``response function''. 
+This rather general setting has been used to study universality\cite{Barzel2013} and to construct 
+minimal models for complex dynamics\cite{Barzel2015} ranging from biological~\cite{Alon2006,Karlebach2008,Skinner2012} 
+to social~\cite{Pastor-Satorras2001,Hufnagel2004,Dodds2005} systems. 
 
 The classic generalized Lotka-Volterra (GLV) competition model corresponds to $f$, $g$, $h$ all linear. 
 However, it is natural both physically and biologically to consider more general functions, including power laws $f(x)\sim x^\alpha$, $g(x)\sim x^\beta$, $h(x) \sim x^\gamma$. 
 From a physical perspective, we can imagine populations $x_i$ forming three-dimensional clusters whose growth is limited to their two-dimensional surface, leading to a production function $f(x) \sim x^{2/3}$. 
-Biologically, the growth of organisms (populations of cells) has long been known to scale like $f(x) \sim x^k$ with $k\simeq 3/4$, which can be understood in terms of hydrodynamic constraints on vascular and pulmonary networks. 
-For reasons that are not currently understood, a similar pattern of growth appears to recur at the community level. 
-It is also common to model predator-prey interactions with a square root laws ($g(x) \sim h(x) \sim x^{1/2}$), for example. 
+Biologically, the growth of organisms (populations of cells) has long been known to scale like $f(x) \sim x^k$ with $k\simeq 3/4$~\cite{Brown2004}, which can be understood in terms of hydrodynamic constraints on vascular and pulmonary networks. 
+For reasons that are not currently understood, a similar pattern of growth appears to recur at the community level~\cite{Hatton2015,Hatton2023}. 
+It has recently been shown appropriate to model predator-prey interactions with a square root laws ($g(x) \sim h(x) \sim x^{1/2}$)~\cite{Barbier2021,Mazzarisi2023}, for example. 
 
 \subsection{Homogeneous interactions}
 
@@ -107,11 +146,11 @@ We can compute the Jacobian matrix at equilibrium
 \end{align}
 where we used $\sum_{j}a_{ij}g_*(x_i)h_*(x_j)=-f_*(x_i)/g_*(x_i)$.
 In order to investigates its spectral properties, 
-we follow Stone~[Stone2018] and use a
-result in random matrix theory~[Ahmadian2015]
-which generalize the classical `circular law'~[Circular].
+we follow Stone~\cite{Stone2018} and use a
+result in random matrix theory~\cite{Ahmadian2015}
+which generalize the classical `circular law'~\cite{Potters2020}.
 
-In Ref.~[Ahmadian2015] Ahmadian \emph{et al.} 
+In Ref.~\cite{Ahmadian2015} Ahmadian \emph{et al.} 
 consider matrices of the form $M + LSR$, where $M$,  
 $L$ and $R$ are deterministic matrices, and $S$ 
 is a random matrix with i.i.d. coefficients, 
@@ -134,7 +173,7 @@ and $S$ a random matrix as defined above.
 We can limit ourselves to consider 
 $a = (\mu_s-\mu)I + S$ by relying on 
 rank-one perturbation theory: we would only neglect outliers
-uninfluential for the linear stbaility properties of the system (see Ref.~[Stone2018]).
+uninfluential for the linear stbaility properties of the system (see Ref.~\cite{Stone2018}).
 The Jacobian in Eqs.~\eqref{eq: jac off-diag} and \eqref{eq: jac diag} assumes therefore the form $M + LJR$ with
 \begin{align}
     M & = \textrm{diag}\left(f_*'(\mathbf x) -
@@ -222,7 +261,7 @@ One approach is reported below,
 then we specialize to a specific choice of 
 the power laws exponents.
 
-Following, e.g., Ref.~[Roy2019] we can derive from 
+Following, e.g., Ref.~\cite{Roy2019} we can derive from 
 the evolution equation
 \begin{equation}
     \dot{x_i}=x_i^{\alpha} - x_i^{\beta}\sum_{j}a_{ij}x_j^{\gamma} \, ,
@@ -255,7 +294,7 @@ The equation above can be solved for $x_*$ for specific values of
 $(\alpha-\beta)/\gamma$, or, in general, if we set $a_s=0$, which amounts to include
 all the self-interaction in the nonlinear produciton term
 $x_*^{\alpha}$. In the following, for cases which
-falls in the 'anti-May' phase, we show that numerical results
+falls in the "anti-May" phase, we show that numerical results
 for non-vanishing diagonal part of the
 interaction matrix and equal to the
 off-diagonal part are well approximated by the results obtained
@@ -282,7 +321,7 @@ $a_s=0$ in order to leverage the equilibrium solution in Eq.~\eqref{eq: dist gen
 In this case the first and second moments, 
 to be self-consistently computed, formally diverges. This is not truly porblematic in practice
 because we are dealing with large, but \emph{finite} populations.
-Following~[Cui2020,Us2023] and assuming
+Following~\cite{Cui2020,Hatton2023} and assuming
 $\sigma \sqrt{N\langle x_*^2\rangle}\ll \mu N \langle x_* \rangle$,
 we can Taylor expand to the first-order in 
 $\sigma \sqrt{N\langle x_*^2\rangle}$ the cavity 
@@ -305,13 +344,13 @@ is suited to describe this case as well.
 \begin{figure}[h!]
     \centering
     \includegraphics[width=.45\textwidth]{figs/cavity.pdf}
-    \label{fig: cavity sol.}
     \caption{The equilibrium distribution for a realization
     of the system described by Eq.~\eqref{eq: full abg} 
     is accurately reproduced by the cavity solution in 
     Eq.\eqref{eq: dist general} and its gaussian approximation.
     For the simulation we used  $\alpha=1$, $\beta=1.5$,
     $\gamma=1$, $N=50$, $\mu=\mu_s=10^{-2}$, $\sigma=10^{-2}/2$.}
+    \label{fig: cavity sol.}
 \end{figure}
 
 Equipped with the equilibirum distribution, we can compute
@@ -323,12 +362,12 @@ For $\sigma$ above this value the system becomes
 unstable. In Fig.~\ref{fig: stability line + sims}
 the result is portrayed in the $(\sigma \sqrt{N},\mu N)$ plane,
 compared with results from simulations where stability is defined
-as stable, full coexistence of the system.
+as stable, full, coexistence of the system.
 Everything else left fixed, an increase in the number of
 degrees of freedom $N$ will move the system along a square-root
 trajectory, bringing it into the stable regime or keeping it
 in it if already stable. In other words, we are in the
-'anti-May' phase. The stability boundary for GLV, by contrast, is touched
+"anti-May" phase. The stability boundary for GLV, by contrast, is touched
 at $\sigma \sqrt{N} = \mu N/N + \mu_s$, which, for $N\to \infty$
 gives an horizontal line in the $(\sigma \sqrt{N},\mu N)$ plane,
 defined by $\sigma_c\sqrt{N} = \mu_s$.
@@ -336,8 +375,13 @@ defined by $\sigma_c\sqrt{N} = \mu_s$.
 \begin{figure}[h!]
     \centering
     \includegraphics[width=.45\textwidth]{figs/beta1_5-S50-N10-diversity.pdf}
-    \caption{... $\alpha=1$, $\beta=1.5$,
-    $\gamma=1$, $N=50$ and $10$ replicates.}
+    \caption{For a system in the "anti-May" phase an increase in $N$,
+    corresponding to moving along $\sqrt{N}$ in the $(\sigma \sqrt{N},\mu N)$ plane,
+    will be stabilizing. Here we show results from simulation of system~\eqref{eq: full abg},
+    where stability is defined as full stable coexistence, overleyed with the critical line
+    obtained through the cavity method starting from Eq.\eqref{eq: random-stability int} 
+    (see main text). The values of the parameters are $\alpha=1$, $\beta=1.5$,
+    $\gamma=1$, $N=50$ and $10$ replicates for the simulations.}
     \label{fig: stability line + sims}
 \end{figure}
 
@@ -347,7 +391,7 @@ at fixed $\mu N$ and $\gamma = 1$ (further details in caption),
 defined as the value above which
 full stable coexistence (i.e. 'stability'
 as defined for Fig.\ref{fig: stability line + sims}) 
-is less probable then $50\%$.
+is less probable than $50\%$.
 In these simulations we are using $\mu_s = \mu$, which result
 in unstable outcomes for $\beta<\alpha$ while
 a certain degree of heterogeneity in the interactions
@@ -358,18 +402,38 @@ instability is triggered does not imply that increasing $N$ will
 destabilize the system, because also $\mu N$ would change.
 Rather, for all the value of $\beta$ and $\alpha$ in the
 upper triangle, the picture is the same as the one depicted in 
-Fig.~\ref{fig: stability line + sims}: we are in 'anti-May'
+Fig.~\ref{fig: stability line + sims}: we are in "anti-May"
 phase.
 
 \begin{figure}[h!]
     \centering
     \includegraphics[width=.45\textwidth]{figs/alpha-beta.pdf}
-    \caption{...
-    $\mu=\mu_s=10^{-2}$, $N=100$ and $100$ replicates.}
+    \caption{The "May" and "anti-May" phases described for the
+    case of uniform interactions are robust for random interactions.
+    Here we simulated system~\eqref{eq: full abg} for a fixed value of
+    $\mu=\mu_s=10^{-2}$, $\gamma=1$, $N=100$ and $100$ replicates 
+    and evaluated $\sigma_c$, defined here as
+    the value above which full stable coexistence is less probable than 50\%,
+    at varying $\alpha$ and $\beta$. No amount of heterogeneity is allowed in the
+    lower triangle because we have $\mu=\mu_s$, while an increasing value of $\sigma_c$
+    is found as $\beta$ becomes bigger than $\alpha$.
+    We stress that the existence of a finite $\sigma_c\sqrt{N}$ above which
+    instability is triggered also in the upper triangle,
+    does not imply that increasing $N$ will
+    destabilize the system, because also $\mu N$ would change (see main text).
+    }
     \label{fig: alpha-beta}
 \end{figure}
     
+
+
 \section{Conclusions}
+
+\clearpage
+
+\bibliography{general-stability-bib}
+
+\bibliographystyle{unsrt}
 
 \end{document}
 %
