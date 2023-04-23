@@ -28,7 +28,8 @@
 
 \begin{document}
 
-\title{Beyond May: Complexity-stability relationships in high-dimensional dynamical systems}
+\title{Beyond May: Complexity-stability relationships \\
+in high-dimensional dynamical systems}
 
 \author{Onofrio Mazzarisi}
 \author{Matteo Smerlak}
@@ -47,11 +48,9 @@ Fifty years ago, Robert May predicted that large, complex systems are unlikely t
 
 \section{Introduction}
 
-Few mathematical arguments have influenced biological thinking like May's 1970 prediction that large, complex systems cannot be stable. It is, indeed, a perplexing prediction. On the one hand, the argument is so simple and compelling that it is hard not to conclude that it must hold universally. On the other, it is clear that at least some large, complex systems are stable---or else which stable patterns would biology be studying in the first place? If anything, the opposite relationship between complexity and stability seems to hold empirically: rich, strongly coupled ecosystems (eg. rainforests) tend to be  stable over time, while sparser ones (eg. arctic environments) often exhibit large fluctuations, exctinctions, and invasions. 
+Few mathematical arguments have influenced biological thinking like May's prediction that large, complex systems cannot be stable. It is, on the face of it, a perplexing conclusion. On the one hand, May's argument is so simple and compelling that it hard not to conclude that it must hold universally. On the other, it is clear that at least some large, complex systems are stable---or else which stable patterns would biology be studying in the first place? If anything, the opposite relationship between complexity and stability seems to hold empirically: rich, strongly coupled ecosystems (eg. rainforests) tend to be  stable over time, while sparser ones (eg. arctic environments) often exhibit large fluctuations, exctinctions, and invasions. 
 
-May's prediction is intriging. On the one hand, his argument is simple and compelling, suggesting general applicability. 
-On the other, it is clear that at least some large, complex systems are stable, else science would be impossible. 
-If anything, the opposite relationship between complexity and stability seems to hold empirically: rich, strongly coupled ecosystems (eg. rainforests) tend to be stable over time, while sparser ones (eg. arctic environments) often exhibit large fluctuations, exctinctions, and invasions. 
+May's argument goes as follows. A system with $N$ populations $x_i$ is stable is one that can be characterized by an equilibrium point $x^*$. Near that equilibrium $x = x^* + \delta x$, the dynamics of the system will be described by linear equations $d(\delta x)/dt = A (\delta x)$, and stability of these equations requires that all eigenvalues of $A$ have negative real part. But if $A$ can be represented as $A = B - I$, where $B$ consists of random, independent interactions with zero mean and variance $\sigma^2$, and $-I$ corresponds to stabilizing self-interactions on some natural timescale, then the circular law of random matrix theory implies that all eigenvalues of $A$ will have negative real part only if $\sigma^2 N < 1$. This places a sharp constraint on both diversity $N$ and interaction strengh $\sigma$, often referred to as "complexity begets instability". (This argument generalizes to $\langle B_{ij}\rangle \neq 0$, to incomplete connectivity, or to correlated interactions.)
 
 In ecology, many authors have sought to ease the tension between May's prediction and empirical observation by invoking effects not captured by dynamical systems with random coefficients, such as spatial or food-web structure, time delays, etc. 
 Here, we show that May's argument is itself incomplete: random dynamical systems do not necessarily imply that stability decreases with diversity or interaction strength---the opposite behavior is also possible, without the need for special or additional structure. 
@@ -77,14 +76,15 @@ It is also common to model predator-prey interactions with a square root laws ($
 
 \subsection{Homogeneous interactions}
 
-Under what condition is \eqref{dynamics} linearly stable? 
-We begin by considering the simple case where all self-interactions have the same strength $a_{ii} = a_{\textrm{s}}$, and similarly for cross-interactions $a_{ij} = a_{\textrm{c}}$ ($i\neq j$). 
-In that case, a straightforward computation shows that an equilibrium $x_*$ will be linearly stable if  
+Under what condition does \eqref{dynamics} admit a linearly stable equilibrium? We begin by considering the simple case where all self-interactions have the same strength $a_{ii} = a_{\textrm{s}}$, and similarly for cross-interactions $a_{ij} = a_{\textrm{c}}$ ($i\neq j$). Under these assumptions, a straightforward computation shows that an equilibrium $x_*$ will be linearly stable if  
 \begin{equation}\label{homogeneous-general}
-    \left(\frac{f'_*}{f_*} - \frac{g'_*}{g_*}\right) + (a_{\textrm{s}} - a_{\textrm{c}})\,\frac{g_*h'_*}{f_*} < 0 \, . 
+    \left(\frac{f'_*}{f_*} - \frac{g'_*}{g_*}\right) + (a_{\textrm{s}} - a_{\textrm{c}})\,\frac{g_*h'_*}{f_*} < 0. 
 \end{equation}
-Thus, the stability of a competitive equilibrium depends on the relative strength of self- and cross-interactions ($a_{\textrm{s}} - a_{\textrm{c}}$), but also on the relative convexity of the production and response functions ($f'_*/f_* - g'_*/g_*$). 
-With power laws, \eqref{homogeneous-general} evaluates to $(\alpha - \beta)(N-1) < \gamma(a_{\textrm{s}}/a_{\textrm{c}}- 1) - (\alpha - \beta)(a_{\textrm{s}}/a_{\textrm{c}})$, leading to three different regimes:
+Thus, the stability of a competitive equilibrium depends on the relative strength of self- and cross-interactions ($a_{\textrm{s}} - a_{\textrm{c}}$), but also on the relative convexity of the production and response functions ($f'_*/f_* - g'_*/g_*$). With power laws, \eqref{homogeneous-general} evaluates to 
+\begin{equation}
+    (\alpha - \beta)(N-1) < \gamma(a_{\textrm{s}}/a_{\textrm{c}}- 1) - (\alpha - \beta)(a_{\textrm{s}}/a_{\textrm{c}}),
+\end{equation}
+leading to three different regimes:
 \begin{itemize}
     \item If $\alpha = \beta$, stability requires $a_{\textrm{s}} > a_{\textrm{c}}$, i.e. self-interactions must be stronger than cross-interactions. This is the usual conclusion drawn from the Lotka-Volterra model. 
     \item If $\alpha > \beta$, stability places an upper bound on $N$: the more complex the system, the less likely to be stable. 
@@ -92,7 +92,7 @@ With power laws, \eqref{homogeneous-general} evaluates to $(\alpha - \beta)(N-1)
     \item If $\alpha < \beta$, stability places an lower bound on $N$: the more complex the system, the more likely to be stable. This is "anti-May" behavior.
 \end{itemize}
 
-\subsection{Random interactions}
+\subsection{Random interactions: general reults}
 
 Consider now Eq.~\eqref{dynamics} with i.i.d. random 
 interactions $a_{ij}$ with mean $\mu$ and standard 
@@ -118,9 +118,7 @@ is a random matrix with i.i.d. coefficients,
 zero mean and variance $\sigma^2$. They 
 show that in the complex plane the boundary of the 
 eigenspectrum of large matrices of this form is defined by
-\begin{equation}
-    \textrm{Tr}[(M_\zeta M_\zeta^\dagger)^{-1}]\geq \sigma^{-2} \, , 
-\end{equation}
+$\textrm{Tr}[(M_\zeta M_\zeta^\dagger)^{-1}]\geq \sigma^{-2}$ , 
 where $M_\zeta = L^{-1}(\zeta I - M)R^{-1}$ and $\zeta\in\mathbb{C}$. 
 If $L$, $R$ and $M$ are all diagonal $N\times N$ matrices, 
 this condition simplifies to
@@ -135,16 +133,15 @@ with $\mathbf{1}$ the rank-one matrix with all entries equal to $1$
 and $S$ a random matrix as defined above.
 We can limit ourselves to consider 
 $a = (\mu_s-\mu)I + S$ by relying on 
-rank-one perturbation theory, we would only neglect outliers
-uninfluential for the linear stbaility properties of the system by doing so
-(see Ref.~[Stone2018]).
+rank-one perturbation theory: we would only neglect outliers
+uninfluential for the linear stbaility properties of the system (see Ref.~[Stone2018]).
 The Jacobian in Eqs.~\eqref{eq: jac off-diag} and \eqref{eq: jac diag} assumes therefore the form $M + LJR$ with
 \begin{align}
     M & = \textrm{diag}\left(f_*'(\mathbf x) -
     \frac{g_*'(\mathbf x)f_*(\mathbf x)}{g_*(\mathbf x)}
     +(\mu_s-\mu)g_*(\mathbf x)h_*'(\mathbf x)\right) \ , \\
-    L &= \textrm{diag}(g_*(\mathbf x)) \ , \\
-    R &= \textrm{diag}(h_*'(\mathbf x)) \ .
+    L &= \textrm{diag}(g_*(\mathbf x)) \ , \qquad  
+    R = \textrm{diag}(h_*'(\mathbf x)) \ . \nonumber
 \end{align}
 The domain of the eigenvalues of $J^*$, defined by
 Eq.~\eqref{eq: domain}, 
@@ -158,22 +155,17 @@ hence linear stability requires
     < \sigma^{-2}. 
 \end{equation}
 This expression can be considered the
-random interaction case equivalent of
-the expression in Eq.~\eqref{homogeneous-general} 
+generalization to random interaction of
+the expression in Eq.~\eqref{homogeneous-general},
 which appears again in the denominator of the summand.
-It reduces indeed to the homogenous case for $\sigma\to 0$.
-\red{Discuss better.}
 
-There are straightforward results 
-that follows from this expression.
+There are straightforward results that follows.
 For generalized Lotka-Volterra (GLV) models,
 i.e. $f(x_i)=x_i$, $g(x_i)=x_i$ and $h(x_i)=x_i$,
 the expression in Eq.~\eqref{eq: random-stability}
-becomes independent on the equilibria and we easily 
+becomes independent on the equilibria and we 
 recover the linear stability condition
-\begin{equation}
-    \sigma\sqrt{N} < (\mu_s-\mu) \ .
-\end{equation}
+$\sigma\sqrt{N} < (\mu_s-\mu)$.
 Moreover we can define an equivalence class of models
 which share the same simple condition
 for linear stability defined by the equivalence relation
@@ -186,8 +178,8 @@ where $c$ is a constant,
 resulting in the condition $\sigma\sqrt{N} < (\mu_s-\mu) +c$.
 
 In the general case in which the dependence on the equilibria
-$\mathbf{x}_*$ does not cancel out, is not possible to
-obtain a clean complexity-stability relationship as before.
+$\mathbf{x}_*$ does not cancel out, it is not possible to
+obtain an explicit and simple complexity-stability relationship.
 We can make progress in the large $N$ limit by
 trasforming the sum in an integral 
 $\sum_{i=1}^N\to N\int dx_*P(x_*)$, where $P(x_*)$ 
@@ -205,6 +197,7 @@ This expression allows us to obtain insights on the stability properties of
 the system in the case in which we are able to compute or estimate 
 the probability distribution function $P(x_*)$.
 
+\subsection{Random interactions: power laws case}
 In order to investigate the different regimes
 of complexity-stability behaviour,
 let us specialize to the power laws case, with 
@@ -223,10 +216,11 @@ In order to explore the latter, we
 need to resort to Eq.~\eqref{eq: random-stability int} and therefore
 to compute the equilibrium probability distribution function
 for the system. This can be achieved in different ways,
-depending among other things on specific constraint that
-one can impose on the system. 
-One approach is reported below, then we specialize to a choice of
-the power laws exponens.
+depending, among other things, on specific constraints 
+imposed on the system. 
+One approach is reported below, 
+then we specialize to a specific choice of 
+the power laws exponents.
 
 Following, e.g., Ref.~[Roy2019] we can derive from 
 the evolution equation
@@ -247,25 +241,30 @@ and $\eta$ is a gaussian variable
 with zero mean and correlation 
 $\langle x^{\gamma}(t)x^{\gamma}(s)\rangle$. 
 The averages and correlations have to be computed self-consistently.
-If the system admits an equilibrium (i.e. is feasible), for 
+If the system admits an equilibrium, for 
 $t\to\infty$ each of the initial $N$ degrees 
-of freedom will reach a final value, 
-and the effective random variable describing their
+of freedom will reach a final finite value. 
+The effective random variable describing their statistics
 also become time-independent,
 $\lim_{t\to\infty}x(t)=x_*$ and we can write
 \begin{equation}
     x_*^{\alpha-\beta} - a_s x_*^{\gamma}= \left( \mu N \langle x_*^{\gamma}\rangle + \sigma \sqrt{N\langle x_*^{2\gamma}\rangle}\xi\right) \, ,
 \end{equation} 
 where $\xi$ is a standard normal random variable (i.e. $\xi\sim\mathcal{N}(0,1)$).
-The equation above can be solved for $x_*$ in if $(\alpha-\beta)/\gamma\in\mathbb{N}$,
-or in general, if we set $a_s=0$, which amounts to include
+The equation above can be solved for $x_*$ for specific values of
+$(\alpha-\beta)/\gamma$, or, in general, if we set $a_s=0$, which amounts to include
 all the self-interaction in the nonlinear produciton term
-$x_*^{\alpha}$.
+$x_*^{\alpha}$. In the following, for cases which
+falls in the 'anti-May' phase, we show that numerical results
+for non-vanishing diagonal part of the
+interaction matrix and equal to the
+off-diagonal part are well approximated by the results obtained
+setting $a_s=0$.
+
 In this case the stationary solution is given by 
-\begin{equation}
+\begin{equation} \label{eq: cavity solution}
     x_* = \left( \mu N \langle x_*^{\gamma}\rangle + \sigma \sqrt{N\langle x_*^{2\gamma}\rangle}\xi\right)^{1/(\alpha-\beta)} \, .
 \end{equation}
-
 The equilibrium probability distribution function for $x_*$, $P(x_*)$,
 can be obtained as the pushforward of the distribition of $\xi$.
 The change of measure
@@ -275,33 +274,102 @@ leads to
     P(x_*)=\frac{|\alpha-\beta|x_*^{\alpha-\beta-1}}{\sqrt{2\pi\sigma^2 N\langle x_*^{2\gamma}\rangle}}
     \exp{\left\{-\frac{(x_*^{\alpha-\beta}-\mu N\langle x_*^{\gamma}\rangle)^2}{2\sigma^2N\langle x_*^{2\gamma}\rangle}\right\}} \, ,
 \end{equation}
-where the expectations have to be computed self-consistently, 
-taking also in account normalization constraint.
+where the expectations have to be computed self-consistently.
 
-Let us focus to the case $\alpha=1$, $\beta=1.5$ and $\gamma=1$, with
+Let us focus on the specific choice 
+$\alpha=1$, $\beta=1.5$ and $\gamma=1$, with
 $a_s=0$ in order to leverage the equilibrium solution in Eq.~\eqref{eq: dist general}.
-which is tested against simulations in Fig.~\ref{fig: cavity sol.}.
+In this case the first and second moments, 
+to be self-consistently computed, formally diverges. This is not truly porblematic in practice
+because we are dealing with large, but \emph{finite} populations.
+Following~[Cui2020,Us2023] and assuming
+$\sigma \sqrt{N\langle x_*^2\rangle}\ll \mu N \langle x_* \rangle$,
+we can Taylor expand to the first-order in 
+$\sigma \sqrt{N\langle x_*^2\rangle}$ the cavity 
+solution~\eqref{eq: cavity solution} and 
+approximate to Eq.~\eqref{eq: dist general} with
+a gaussian distribuiton
+with moments $\langle x_*\rangle=(\mu N)^{-2/3}$ and
+$\langle x_*^2\rangle=(\mu N)^{-4/3}/(1-4(\mu N)^{-2}\sigma^2N)$.
 
-\dots
-
-\subsection{Simulations}
+The result is plotted against simulations in 
+Fig.~\ref{fig: cavity sol.}, alongside the exact 
+solution~\eqref{eq: dist general} 
+where integration for the moments has been performed up to a maximum
+value above which no equilibirum value should 
+be found, for a given $N$.
+Simulations correspond to $a_s=\mu$, showing that the choice
+of vanishing self-interaction for the analytical results
+is suited to describe this case as well.
 
 \begin{figure}[h!]
     \centering
     \includegraphics[width=.45\textwidth]{figs/cavity.pdf}
-        \caption{...}
-        \label{fig: cavity sol.}
-    \end{figure}
+    \label{fig: cavity sol.}
+    \caption{The equilibrium distribution for a realization
+    of the system described by Eq.~\eqref{eq: full abg} 
+    is accurately reproduced by the cavity solution in 
+    Eq.\eqref{eq: dist general} and its gaussian approximation.
+    For the simulation we used  $\alpha=1$, $\beta=1.5$,
+    $\gamma=1$, $N=50$, $\mu=\mu_s=10^{-2}$, $\sigma=10^{-2}/2$.}
+\end{figure}
+
+Equipped with the equilibirum distribution, we can compute
+the critical value of heterogeneity 
+$\sigma_c$, for a given $N$ and $\mu$,
+defined by taking the equality in 
+Eq.~\eqref{eq: random-stability int}. 
+For $\sigma$ above this value the system becomes
+unstable. In Fig.~\ref{fig: stability line + sims}
+the result is portrayed in the $(\sigma \sqrt{N},\mu N)$ plane,
+compared with results from simulations where stability is defined
+as stable, full coexistence of the system.
+Everything else left fixed, an increase in the number of
+degrees of freedom $N$ will move the system along a square-root
+trajectory, bringing it into the stable regime or keeping it
+in it if already stable. In other words, we are in the
+'anti-May' phase. The stability boundary for GLV, by contrast, is touched
+at $\sigma \sqrt{N} = \mu N/N + \mu_s$, which, for $N\to \infty$
+gives an horizontal line in the $(\sigma \sqrt{N},\mu N)$ plane,
+defined by $\sigma_c\sqrt{N} = \mu_s$.
 
 \begin{figure}[h!]
-\centering
-\includegraphics[width=.45\textwidth]{figs/beta1_5-S50-N10.pdf}
-    \caption{...}
+    \centering
+    \includegraphics[width=.45\textwidth]{figs/beta1_5-S50-N10-diversity.pdf}
+    \caption{... $\alpha=1$, $\beta=1.5$,
+    $\gamma=1$, $N=50$ and $10$ replicates.}
     \label{fig: stability line + sims}
 \end{figure}
 
-\section{Conclusions}
+Figure~\ref{fig: alpha-beta} portrays results of simulaitons 
+for $\sigma_c\sqrt{N}$ in the $(\alpha,\beta)$ plane, 
+at fixed $\mu N$ and $\gamma = 1$ (further details in caption), 
+defined as the value above which
+full stable coexistence (i.e. 'stability'
+as defined for Fig.\ref{fig: stability line + sims}) 
+is less probable then $50\%$.
+In these simulations we are using $\mu_s = \mu$, which result
+in unstable outcomes for $\beta<\alpha$ while
+a certain degree of heterogeneity in the interactions
+admits admits stability for $\beta>\alpha$, the higher
+the larger is the difference between $\beta$ and $\alpha$.
+Notice that the existence of a $\sigma_c\sqrt{N}$ above which
+instability is triggered does not imply that increasing $N$ will
+destabilize the system, because also $\mu N$ would change.
+Rather, for all the value of $\beta$ and $\alpha$ in the
+upper triangle, the picture is the same as the one depicted in 
+Fig.~\ref{fig: stability line + sims}: we are in 'anti-May'
+phase.
 
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=.45\textwidth]{figs/alpha-beta.pdf}
+    \caption{...
+    $\mu=\mu_s=10^{-2}$, $N=100$ and $100$ replicates.}
+    \label{fig: alpha-beta}
+\end{figure}
+    
+\section{Conclusions}
 
 \end{document}
 %
