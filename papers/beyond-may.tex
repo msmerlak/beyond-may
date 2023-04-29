@@ -29,19 +29,15 @@ Lawrence, KS 66045, USA}
 \affiliation{Capital Fund Management, 23 Rue de l'Université, 75007 Paris, France}
 
 
-\date{\today}% It is always \today, today,
-             %  but any date may be explicitly specified
+\date{\today}
 
 \begin{abstract}
-
-
+\input{abstract.tex}
 \end{abstract}
 \maketitle
 
-\section*{Introduction}
-
-
-\section*{Results}
+\paragraph*{\bf Introduction.}
+\input{intro.tex}
 
 \paragraph*{\bf Model.}
 \input{model.tex}
@@ -53,9 +49,8 @@ Lawrence, KS 66045, USA}
 \input{random-general.tex}
 \paragraph*{\bf Random interactions: power laws case.}
 \input{random-power.tex}
-    
 
-\section{Conclusion}
+\paragraph*{\bf Conclusion.}
 \input{conclusion.tex}
 
 \begin{acknowledgments}
@@ -64,7 +59,7 @@ We gratefully acknowledge multiple discussions with Ian Hatton, Matthieu Barbier
 
 \clearpage
 
-\bibliography{general-stability}
+\bibliography{beyond-may}
 \bibliographystyle{unsrt}
 
 \end{document}
