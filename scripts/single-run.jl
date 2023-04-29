@@ -18,14 +18,6 @@ p = Dict{Symbol,Any}(
     :seed => rand(UInt)
 );
 
-evolve!(p; trajectory=true);
-plot(p[:trajectory], label=false)
-p[:converged]
-p[:equilibrium]
-
-
-p[:converged]
-
 #= trajectories =#
 plot(
     p[:trajectory],
