@@ -1,0 +1,70 @@
+\documentclass[
+ prl,
+ twocolumn,
+ amsmath,
+ amssymb,
+ aps,
+]{revtex4-2}
+
+\usepackage{colortbl}
+\usepackage{graphicx} 
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{notes2bib}
+\newcommand{\red}{\textcolor{red}}
+\usepackage[justification=raggedright]{caption}
+
+\begin{document}
+
+\title{Beyond May: Complexity-stability relationships \\
+in disordered dynamical systems}
+
+\author{Onofrio Mazzarisi}
+\affiliation{Department of Ecology and Evolutionary Biology, University of Kansas, Haworth Hall, 
+1200 Sunnyside Avenue
+Lawrence, KS 66045, USA}
+
+\author{Matteo Smerlak}
+\affiliation{Laboratoire Biophysique et Evolution, ESPCI ParisTech, 10 rue Vauquelin, 75005 Paris, France}
+\affiliation{Capital Fund Management, 23 Rue de l'Université, 75007 Paris, France}
+
+
+\date{\today}% It is always \today, today,
+             %  but any date may be explicitly specified
+
+\begin{abstract}
+
+
+\end{abstract}
+\maketitle
+
+\section*{Introduction}
+
+
+\section*{Results}
+
+\paragraph*{\bf Model.}
+\input{model.tex}
+
+\paragraph*{\bf Homogeneous interactions.}
+\input{homogeneous.tex}
+
+\paragraph*{\bf Random interactions: general reults.}
+\input{random-general.tex}
+\paragraph*{\bf Random interactions: power laws case.}
+\input{random-power.tex}
+    
+
+\section{Conclusion}
+\input{conclusion.tex}
+
+\begin{acknowledgments}
+We gratefully acknowledge multiple discussions with Ian Hatton, Matthieu Barbier and Ada Altieri on ecological power laws and the diversity-stability debate. 
+\end{acknowledgments}
+
+\clearpage
+
+\bibliography{general-stability}
+\bibliographystyle{unsrt}
+
+\end{document}
