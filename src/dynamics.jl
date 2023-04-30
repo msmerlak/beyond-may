@@ -4,7 +4,6 @@ include(srcdir("utils.jl"))
 using DifferentialEquations
 using Random, Distributions
 using LinearAlgebra
-<<<<<<< HEAD
 
 ## dynamical system
 function F(x, p)
@@ -34,38 +33,6 @@ function evolve!(p; trajectory=false)
     if !haskey(p, :seed)
         p[:seed] = 1234
     end
-=======
-
-## dynamical system
-function F(x, p)
-    x .= ppart.(x)
-    pop = x.^p[:α]
-    comm = - x.^p[:β] .* (p[:A] * x.^p[:γ])
-    return pop + comm
-end
-
-function F!(f, x, p)
-    x .= ppart.(x)
-    pop = x.^p[:α]
-    comm = - x.^p[:β] .* (p[:A] * x.^p[:γ])
-    f .= pop + comm
-end
-
-#= solving =#
-
-MAX_TIME = 1e5
-MAX_ABUNDANCE = 1e3
-
-converged(ϵ = 1e-4) = TerminateSteadyState(ϵ)
-blowup(max_abundance = MAX_ABUNDANCE) = DiscreteCallback((u, t, integrator) -> maximum(u) > max_abundance, terminate!)
-
-function evolve!(p; trajectory=false)
-
-    if !haskey(p, :seed)
-        p[:seed] = rand(UInt32)
-    end
-
->>>>>>> onofrio
     if !haskey(p, :rng)
         p[:rng] = MersenneTwister(p[:seed])
     end
@@ -78,11 +45,7 @@ function evolve!(p; trajectory=false)
 
     pb = ODEProblem(
         ODEFunction(
-<<<<<<< HEAD
             F!
-=======
-            (f, x, p, t) -> F!(f, x, p) 
->>>>>>> onofrio
         ),
         p[:x0], 
         (0.0, MAX_TIME),
@@ -110,11 +73,7 @@ function evolve!(p; trajectory=false)
 end
 
 function add_initial_condition!(p)
-<<<<<<< HEAD
     p[:x0] = rand(p[:rng], Uniform(1, 10), p[:S])
-=======
-    p[:b0] = rand(p[:rng], Uniform(2, 10), p[:S])
->>>>>>> onofrio
 end
 
 function add_interactions!(p)
