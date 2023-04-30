@@ -1,23 +1,24 @@
 
-Under what condition does \eqref{dynamics} admit a linearly stable equilibrium? 
-We begin by considering the simple case where all self-interactions have the same strength $a_{ii} = a_{\textrm{s}}$, and similarly for cross-interactions $a_{ij} = a_{\textrm{c}}$ ($i\neq j$).
-Under these assumptions, a straightforward computation shows that a homogeneous equilibrium $\mathbf x_*$ will be linearly stable if  
-\begin{equation}\label{homogeneous-general}
-   \frac{f'(x^*)}{f(x^*)} - \frac{g'(x^*)}{g(x^*)} + (a_{\textrm{s}} - a_{\textrm{c}})\,\frac{g(x^*)h'(x^*)}{f(x^*)} < 0.
-\end{equation}
-Thus, stability of an equilibrium depends on the relative strength of self- and cross-interactions ($a_{\textrm{s}} - a_{\textrm{c}}$), but also on the relative growth rate of the production and response functions near that equilibrium ($f'_*/f_* - g'_*/g_*$).
-With power laws, \eqref{homogeneous-general} evaluates to 
+Under what condition does \eqref{dynamics} admit a (linearly) stable equilibrium? 
+We begin with the simple case where all self-interactions have the same strength $A_{ii} = \mu_s$, and similarly for cross-interactions $A_{ij} = \mu$ ($i\neq j$).
+Defining 
 \begin{equation}
-    (\alpha - \beta)(N-1) < \gamma(a_{\textrm{s}}/a_{\textrm{c}}- 1) - (\alpha - \beta)(a_{\textrm{s}}/a_{\textrm{c}}),
+    \psi(x) \equiv (\mu - \mu_s) -  \left(\frac{f'(x)}{f(x)} - \frac{g'(x)}{g(x)}\right)\frac{f(x)}{g(x)h'(x)},
+    \label{eq: psi}
+\end{equation}
+we find that stability of the homogeneous equilibrium $x_i^* = x^*$ requires $\psi(x^*) > 0$. This condition involves the relative strength of diagonal and off-diagonal interactions ($\mu_s - \mu$), but also on the relative growth rate of the production and response functions near the equilibrium ($f'_*/f_* - g'_*/g_*$).
+
+With power laws, the condition $\psi(x^*)<0$ evaluates to 
+\begin{equation}
+    (\alpha - \beta)(N-1) < \gamma(\mu_s/\mu- 1) - (\alpha - \beta)(\mu_s/\mu),
 \end{equation}
 leading to three different regimes:
 \begin{itemize}
-    \item If $\alpha = \beta$, stability requires $a_{\textrm{s}} > a_{\textrm{c}}$, i.e.
+    \item If $\alpha = \beta$, stability requires $\mu_s > \mu$, i.e.
     self-interactions must be stronger than cross-interactions.
     This is the usual conclusion drawn from the Lotka-Volterra model.
     \item If $\alpha > \beta$, stability places an upper bound on $N$: the more complex the system, the less likely to be stable.
-    We can call this "May" behavior.
+    We can call this ``May" behavior.
     \item If $\alpha < \beta$, stability places an lower bound on $N$: the more complex the system, the more likely to be stable.
-    This is "anti-May" behavior.
+    This is ``anti-May" behavior.
 \end{itemize}
-

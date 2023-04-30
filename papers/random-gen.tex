@@ -1,4 +1,3 @@
-
 Consider now Eq.~\eqref{dynamics} with i.i.d. random interactions $a_{ij}$ drawn from a distribution with mean $\mu$ and standard deviation $\sigma$; we assume the diagonal elements $a_{ii}$ have a mean value $\mu_s$ (possibly different from $\mu$) but the same standard deviation $\sigma$.
  
 We compute the Jacobian matrix at equilibrium
@@ -25,9 +24,9 @@ with $\mathbf{1}$ the matrix with all entries equal to $1$ and $S$ a random matr
 Using rank-one perturbation theory, we can show that the $\mathbf{1}$ term does not impact stability properties and can be neglected \cite{Stone2018}.
 The Jacobian in Eqs.~\eqref{eq: jac off-diag} and \eqref{eq: jac diag} thus takes the form $M + LJR$ with diagonal matrices
 \begin{equation}
-    M = f(\mathbf x^*)\psi(\mathbf x^*),\quad L = g(\mathbf x^*), \quad R = h'(\mathbf x^*),
+    M_i = f(x_i^*)\psi(x_i^*),\quad L = g(x_i^*), \quad R = h'(x_i^*).
 \end{equation}
-where $\psi(x)$ is the function defined by the LHS of \eqref{homogeneous-general}. \red{Assuming all $M_i < 0$}, the domain \eqref{eq: domain} containing the eigenvalues of $J^*$ first touches the right half-plane at $\zeta = 0$, 
+\red{Assuming all $M_i < 0$}, the domain \eqref{eq: domain} containing the eigenvalues of $J^*$ first touches the right half-plane at $\zeta = 0$, 
 hence linear stability requires
 \begin{equation}
     \sum_{i=1}^N \left(\frac{g(x_i^*)h'(x_i^*)}{f(x_i^*)\psi(x_i^*)}\right)^2
@@ -36,8 +35,7 @@ hence linear stability requires
 \end{equation}
 This expression generalizes \eqref{homogeneous-general} to random interactions. 
 
-Straightforward results follow from condition \eqref{eq: random-stability}.
-For GLV models, i.e. $f(x_i)=x_i$, $g(x_i)=x_i$ and $h(x_i)=x_i$, \eqref{eq: random-stability} is independent of the equilibria $x^*$ and we recover the linear stability condition
+For GLV models, i.e. $f(x_i)=x_i$, $g(x_i)=x_i$ and $h(x_i)=x_i$, \eqref{eq: random-stability} is independent of the equilibria $x^*$, and we recover the linear stability condition
 $\sigma\sqrt{N} < (\mu_s-\mu)$.
 More generally, any model satisfying
 \begin{equation}\label{eq: equiv class glv}
@@ -48,8 +46,8 @@ More generally, any model satisfying
 for some constant $c$ has the same simple linear stability condition as GLV models, namely $\sigma\sqrt{N} < (\mu_s-\mu) +c$.
 
 When the dependence on $\mathbf{x}_*$ does not cancel out, it is not possible to obtain an explicit complexity-stability relationship. 
-However, introducing the distribution of equilibrium $P(x^*)$ with corresponding equilibrium average $\langle\cdot\rangle$, we can write the stability condition as
+However, introducing the distribution of equilibrium $P(x^*)$ and replacing sums with integrals in the large $N$ limit, we can write the stability condition as
 \begin{equation}\label{eq: random-stability int}
-    N\Big\langle\frac{gh'}{f\psi}\Big\rangle < \sigma^{-2} \ .
+    N\int dx^* frac{g(x^*)h'(x^*)}{f(x^*)\psi(x^*)} < \sigma^{-2} \ .
 \end{equation}
 We now discuss how $P(x_*)$ can be estimated from the statistics of interactions, focusing on the power-law case.

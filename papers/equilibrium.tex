@@ -1,0 +1,101 @@
+Henceforth we assume $f(x_i)=x_i^{\alpha}$, $g(x_i)=-x_i^{\beta}$, $h(x_i)=x_i^{\gamma}$. 
+(Any coefficients can be reabsorbed in the statistics of $A$ and by a rescaling of time. 
+We factor out a minus sign in order to connect more directly with competition models.)
+
+
+\begin{figure}[t!]
+    \includegraphics[width=.45\textwidth]{figs/cavity.pdf}
+    \caption{The equilibrium distribution with power-law self- and cross-interactions is accurately reproduced by 
+    Eq.\eqref{eq: dist general} and its Gaussian approximation.
+    For simulations (in green) we used $\alpha=1$, $\beta=1.5$,
+    $\gamma=1$, $N=50$, $\mu=\mu_s=10^{-2}$, $\sigma=5\cdot 10^{-3}$.}
+    \label{fig: cavity sol.}
+\end{figure}
+
+
+Following e.g. Ref.~\cite{Roy2019}, we can derive from the evolution equation \eqref{dynamics} a dynamical mean field theory (DMFT) 
+which describes the ensemble of $N\gg 1$ variables
+by means of a single, self-consistent representative stochastic trajectory
+\begin{equation}
+    \dot{x} = x^{\alpha}-A_sx^{\beta+\gamma}-x^{\beta}\big( \mu N \langle x^{\gamma}\rangle + \sigma \sqrt{N} \eta\big) \, ,
+\label{eq: dmft}
+\end{equation}
+where $A_s$ is a random variable with the statistics of $A_{ii}$ and $\eta$ is a Gaussian noise with zero mean and correlation $\langle x^{\gamma}(t)x^{\gamma}(s)\rangle$. 
+
+
+\begin{figure}[t!]
+    \includegraphics[width=.45\textwidth]{figs/alpha-beta.pdf}
+    \caption{The ``May" and ``anti-May" phases described in the
+    case of uniform interactions are robust with respect to random interactions.
+    Here we simulated system~\eqref{eq: full abg} for a fixed value of
+    $\mu=\mu_s=10^{-2}$, $\gamma=1$, $N=100$ and $100$ replicates 
+    and evaluated $\sigma_c$, defined here as
+    the value above which full stable coexistence is less probable than 50\%,
+    at varying $\alpha$ and $\beta$.
+    No amount of heterogeneity is allowed in the lower triangle because we have $\mu=\mu_s$, while an increasing value of $\sigma_c$
+    is found as $\beta$ becomes bigger than $\alpha$.
+    We stress that the existence of a finite $\sigma_c\sqrt{N}$ above which instability is triggered also in the upper triangle,
+    does not imply that increasing $N$ will destabilize the system, because $\mu N$ would also change.
+    }
+    \label{fig: alpha-beta}
+\end{figure}
+    
+
+At equilibrium, we can write
+\begin{equation}
+    x_*^{\alpha-\beta} - A_s x_*^{\gamma}= \big( \mu N \langle x_*^{\gamma}\rangle + \sigma \sqrt{N\langle x_*^{2\gamma}\rangle}\xi\big) \, ,
+\end{equation} 
+where $\xi$ is now a standard normal random variable.
+The equation above can be solved for $x_*$ for specific values of
+$(\alpha-\beta)/\gamma$, or if $A_s=0$.
+(In the following we show that neglecting $A_s$ even when it is not zero does not affect noticeably the quality of the approximation.) In this case the stationary solution is given by 
+\begin{equation} \label{eq: cavity solution}
+    x_* = \left( \mu N \langle x_*^{\gamma}\rangle + \sigma \sqrt{N\langle x_*^{2\gamma}\rangle}\xi\right)^{1/(\alpha-\beta)} \, .
+\end{equation}
+The equilibrium distribution $P(x_*)$ can then be obtained as the pushforward of the distribution of $\xi$: 
+\begin{equation}\label{eq: dist general}
+    P(x_*)=\frac{|\alpha-\beta|x_*^{\alpha-\beta-1}}{\sqrt{2\pi\sigma^2 N\langle x_*^{2\gamma}\rangle}}
+    \exp{\left\{-\frac{(x_*^{\alpha-\beta}-\mu N\langle x_*^{\gamma}\rangle)^2}{2\sigma^2N\langle x_*^{2\gamma}\rangle}\right\}} \, ,
+\end{equation}
+where the expectation values must be computed self-consistently.
+
+Let us focus on the choice 
+$\alpha=1$, $\beta=3/2$ and $\gamma=1$, with
+$A_s=0$. 
+In this case the first and second moments formally diverge.
+This is not truly problematic because we are dealing with large, but \emph{finite} populations.
+Following~\cite{Cui2020,Hatton2023} and assuming
+$\sigma \sqrt{N\langle x_*^2\rangle}\ll \mu N \langle x_* \rangle$,
+we can expand the  
+solution \eqref{eq: cavity solution} to first order in 
+$\sigma \sqrt{N\langle x_*^2\rangle}$, and 
+approximate \eqref{eq: dist general} with
+a Gaussian distribution with moments $\langle x_*\rangle=(\mu N)^{-2/3}$ and $\langle x_*^2\rangle=(\mu N)^{-4/3}/(1-4(\mu N)^{-2}\sigma^2N)$. 
+
+The result is plotted against simulations in 
+Fig.~\ref{fig: cavity sol.}. We show both the exact 
+solution~\eqref{eq: dist general} 
+(where integration for the moments has been performed up to a maximum
+value above which no equilibrium value should 
+be found) and the Gaussian approximation.
+Simulations correspond to $A_s=\mu$, showing that neglecting the $A_s$ term in analytical expressions does not introduce a significant error. 
+
+Equipped with the equilibrium distribution $P(x^*)$, we can compute the maximal heterogeneity 
+$\sigma_c$, for a given $N$ and $\mu$, for which the linear stability condition $N\langle (\sigma/\psi(x^*))^2\rangle < 1$ holds. In Fig.~\ref{fig: stability line + sims} the result in portrayed in the $(\sigma \sqrt{N},\mu N)$ plane,
+compared with results from simulations (where stability is defined
+as stable, full, coexistence of the system).
+Everything else fixed, an increase in the number of
+degrees of freedom $N$ will move the system along a square-root
+trajectory in that plane, eventually entering the stable region where $\sigma_c > \sigma$. 
+In other words, we are in the
+``anti-May" phase.
+(For comparison the stability boundary for GLV is a horizontal line in the $(\sigma \sqrt{N},\mu N)$ plane, defined by $\sigma_c\sqrt{N} = \mu_s$ \cite{bunin2017ecological}.)
+
+
+Figure~\ref{fig: alpha-beta} shows results of simulations 
+for $\sigma_c\sqrt{N}$ in the $(\alpha,\beta)$ plane, 
+at fixed $\mu N$ and $\gamma = 1$, 
+defined as the value above which
+full stable coexistence is less probable than $50\%$.
+(In these simulations we use $\mu_s = \mu$, which would never be stable in the GLV model.) This plot illustrates the transition between a ``May" phase for $\alpha \geq \beta$ (where stability decreases with $N$, $\mu$, and $\sigma$) and an ``anti-May" phase for $\alpha < \beta$, even in the presence of heterogeneous interactions. 
+

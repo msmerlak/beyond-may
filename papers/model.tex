@@ -1,12 +1,13 @@
 
 Consider the dynamical system in $N$ variables
 \begin{equation}\label{dynamics}
-    \dot{x}_i = f(x_i) + \sum_{j}a_{ij}g(x_i)h(x_j) \, .
+    \dot{x}_i = f(x_i) + \sum_{j}A_{ij}g(x_i)h(x_j) \, .
 \end{equation}
-Here $f(x_i)$ represents the self-interaction of a population $i$, while $g(x_i)$ and $h(x_j)$ capture the cross-interaction of $i$ with other populations. That interaction is weighted by a coefficient $a_{ij}$, such that $a_{ij} > 0$ (resp.
-$a_{ji} < 0$) implies a positive (resp.
-negative) effect of $j$ on the growth of $i$.
-In the following we refer to $f(x_i)$ as the ``production function'' and $g(x_i)$ as the ``response function''.
+Here $f(x_i)$ represents the self-interaction of a population $i$, while $g(x_i)$ and $h(x_j)$ capture the cross-interaction of $i$ with other populations. That interaction is weighted by a coefficient $A_{ij}$, such that $A_{ij} > 0$ (resp.
+$A_{ji} < 0$) implies a positive (resp.
+negative) effect of $j$ on the growth of $i$. 
+We all assume all of $f$, $g$ and $h$ are increasing functions, and refer to $f$ as the ``production function'' and $g$ as the ``response function''.
+
 This rather general setting has been used to study universality in network dynamics \cite{Barzel2013} and to construct minimal models for complex dynamics \cite{Barzel2015}, with applications ranging from biological~\cite{Alon2006,Karlebach2008,Skinner2012} 
 to social~\cite{Pastor-Satorras2001,Hufnagel2004,Dodds2005} systems.
 
@@ -15,4 +16,4 @@ However, it is natural both physically and biologically to consider more general
 From a physical perspective, we can imagine populations $x_i$ forming three-dimensional clusters whose growth is limited to their two-dimensional surface, leading to a production function $f(x) \sim x^{2/3}$.
 Biologically, the growth of organisms (populations of cells) has long been known to scale like $f(x) \sim x^k$ with $k\simeq 3/4$~\cite{Brown2004}, which can be understood in terms of hydrodynamic constraints on vascular and pulmonary networks.
 For reasons that are not currently understood, a similar pattern of growth appears to recur at the community level~\cite{Hatton2015,Hatton2023}.
-From a different perspective, it has been suggested recently that predator-prey interactions can be modelled with a square root law ($g(x) \sim h(x) \sim x^{1/2}$)~\cite{Barbier2021,Mazzarisi2023}.
+In a different direction, it has been recently suggested that predator-prey interactions can be modelled with a square root law ($g(x) \sim h(x) \sim x^{1/2}$)~\cite{Barbier2021,Mazzarisi2023}.
