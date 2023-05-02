@@ -1,19 +1,18 @@
-Henceforth we assume $f(x_i)=x_i^{\alpha}$, $g(x_i)=-x_i^{\beta}$, $h(x_i)=x_i^{\gamma}$. 
+\emph{Random interactions: equilibrium distribution.---}Henceforth we assume $f(x_i)=x_i^{\alpha}$, $g(x_i)=-x_i^{\beta}$, $h(x_i)=x_i^{\gamma}$. 
 (Any coefficients can be reabsorbed in the statistics of $A$ and by a rescaling of time. 
 We factor out a minus sign in order to connect more directly with competition models.)
 
-
 \begin{figure}[t!]
-    \includegraphics[width=.45\textwidth]{figs/cavity.pdf}
-    \caption{The equilibrium distribution with power-law self- and cross-interactions is accurately reproduced by 
-    Eq.\eqref{eq: dist general} and its Gaussian approximation.
-    For simulations (in green) we used $\alpha=1$, $\beta=1.5$,
-    $\gamma=1$, $N=50$, $\mu=\mu_s=10^{-2}$, $\sigma=5\cdot 10^{-3}$.}
-    \label{fig: cavity sol.}
+    \includegraphics[width=.45\textwidth]{figs/beta1_5-S50-N10-diversity.pdf}
+    \caption{For a system in the ``anti-May" phase, an increase in $N$,
+    corresponding to moving along $\sqrt{N}$ in the $(\sigma \sqrt{N},\mu N)$ plane, will be stabilizing rather than destabilizing.
+    Here we show results from the numerical resolution of the dynamical system~\eqref{dynamics}. Stability is defined as full stable coexistence. The red line is computed obtained using DMFT and the generalized stability condition $N\langle (\sigma/\psi)^2\rangle < 1$.
+    Parameters values are $\alpha=1$, $\beta=3/2$,
+    $\gamma=1$, $N=50$ and $10$ replicates for the simulations.}
+    \label{fig: stability line + sims}
 \end{figure}
 
-
-Following e.g. Ref.~\cite{Roy2019}, we can derive from the evolution equation \eqref{dynamics} a dynamical mean field theory (DMFT) 
+Following e.g. Ref.~\cite{Roy2019}, we can derive from the evolution equation~\eqref{dynamics} a dynamical mean field theory (DMFT) 
 which describes the ensemble of $N\gg 1$ variables
 by means of a single, self-consistent representative stochastic trajectory
 \begin{equation}
@@ -27,7 +26,7 @@ where $A_s$ is a random variable with the statistics of $A_{ii}$ and $\eta$ is a
     \includegraphics[width=.45\textwidth]{figs/alpha-beta.pdf}
     \caption{The ``May" and ``anti-May" phases described in the
     case of uniform interactions are robust with respect to random interactions.
-    Here we simulated system~\eqref{eq: full abg} for a fixed value of
+    Here we simulated system~\eqref{dynamics} in the power law case for a fixed value of
     $\mu=\mu_s=10^{-2}$, $\gamma=1$, $N=100$ and $100$ replicates 
     and evaluated $\sigma_c$, defined here as
     the value above which full stable coexistence is less probable than 50\%,
@@ -67,9 +66,9 @@ This is not truly problematic because we are dealing with large, but \emph{finit
 Following~\cite{Cui2020,Hatton2023} and assuming
 $\sigma \sqrt{N\langle x_*^2\rangle}\ll \mu N \langle x_* \rangle$,
 we can expand the  
-solution \eqref{eq: cavity solution} to first order in 
+solution~\eqref{eq: cavity solution} to first order in 
 $\sigma \sqrt{N\langle x_*^2\rangle}$, and 
-approximate \eqref{eq: dist general} with
+approximate~\eqref{eq: dist general} with
 a Gaussian distribution with moments $\langle x_*\rangle=(\mu N)^{-2/3}$ and $\langle x_*^2\rangle=(\mu N)^{-4/3}/(1-4(\mu N)^{-2}\sigma^2N)$. 
 
 The result is plotted against simulations in 
