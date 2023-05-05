@@ -4,10 +4,10 @@ We assume the diagonal elements $A_{ii}$ have a mean value $\mu_s$ (possibly dif
  
 We compute the Jacobian matrix at equilibrium
 \begin{align}
-    J_{ij}^* & = A_{ij}g(x_i^*)h'(x_j^*) \qquad \qquad \textrm{for} \ i\neq j \label{eq: jac off-diag}\\
-    J_{ii}^* & = f'(x_i^*) - g'(x_i^*)f(x_i^*)/g(x_i^*) + A_{ii}g(x_i^*)h'(x_j^*) \ , \label{eq: jac diag}
+    J_{ij}^* & = - A_{ij}g(x_i^*)h'(x_j^*) \qquad \qquad \textrm{for} \ i\neq j \label{eq: jac off-diag}\\
+    J_{ii}^* & = f'(x_i^*) - g'(x_i^*)f(x_i^*)/g(x_i^*) - A_{ii}g(x_i^*)h'(x_j^*) \ , \label{eq: jac diag}
 \end{align}
-where we used $\sum_{j}A_{ij}h(x_j^*)=-f(x_i^*)/g(x_i^*)$.
+where we used $\sum_{j}A_{ij}h(x_j^*)=f(x_i^*)/g(x_i^*)$.
 In order to investigate the spectral properties of $J^*$, 
 we follow Stone~\cite{Stone2018} in using a recent generalization of the circular law in random matrix theory~\cite{Ahmadian2015}.
 
@@ -23,10 +23,9 @@ To use this result, we decompose the interaction matrix as $A = \mu\mathbf{1} + 
 with $\mathbf{1}$ the matrix with all entries equal to $1$ and $S$ a random matrix as defined above.
 Up to the rank-one perturbation $\mu\mathbf{1}$ which does not affect stability properties \cite{Stone2018}, we can write the Jacobian~\eqref{eq: jac off-diag} as $J = M + LSR$ with diagonal matrices
 \begin{equation}
-    M_i = g(x_i^*)h'(x_i^*)\psi(x_i^*),\quad L = g(x_i^*), \quad R = h'(x_i^*),
+    M_i = - g(x_i^*)h'(x_i^*)\psi(x_i^*),\quad L = g(x_i^*), \quad R = h'(x_i^*),
 \end{equation}
 where $\psi(x)$ is the function defined in~\eqref{eq: psi}. 
-
 \begin{figure}[t!]
     \includegraphics[width=.45\textwidth]{figs/cavity.pdf}
     \caption{The equilibrium distribution with power-law self- and cross-interactions is accurately reproduced by 
@@ -35,11 +34,10 @@ where $\psi(x)$ is the function defined in~\eqref{eq: psi}.
     $\gamma=1$, $N=50$, $\mu=\mu_s=10^{-2}$, $\sigma=5\cdot 10^{-3}$.}
     \label{fig: cavity sol.}
 \end{figure}
-
 Stability of the equilibrium requires that $\mathcal{D}$ be entirely contained in the left half-plane (all eigenvalues have negative real part). For this, it is no longer sufficient that $\psi(x_i^*) > 0$ for each $i$: we must also have that $0\notin \mathcal{D}$, hence from~\eqref{eq: domain}:
 \begin{equation}
     \sum_{i=1}^N \Big(\frac{\sigma}{\psi(x_i^*)}\Big)^{2}
     < 1.
     \label{eq: random-stability}
 \end{equation}
-In the GLV model, $\psi(x) = \mu-\mu_s$ (independently of $x$) and we recover the classical condition $\sigma\sqrt{N} < (\mu_s-\mu)$ \footnote{In fact, the same condition holds when $f$ and $g$ are power laws with the same exponent.}. In general, the dependence on equilibrium values $x_i^*$ (which, in turn, can depend on $N$) does not cancel out, and one must gain information about the distribution of equilibrium values $P(x_i^*)$ to assess the stability condition~\eqref{eq: random-stability}.
+In the GLV model, $\psi(x) = \mu_s - \mu$ (independently of $x$) and we recover the classical condition $\sigma\sqrt{N} < (\mu_s-\mu)$ \footnote{In fact, the same condition holds when $f$ and $g$ are power laws with the same exponent.}. In general, the dependence on equilibrium values $x_i^*$ (which, in turn, can depend on $N$) does not cancel out, and one must gain information about the distribution of equilibrium values $P(x_i^*)$ to assess the stability condition~\eqref{eq: random-stability}.

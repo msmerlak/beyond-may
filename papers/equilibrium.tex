@@ -1,17 +1,14 @@
-\emph{Random interactions: equilibrium distribution.---}Henceforth we assume $f(x_i)=x_i^{\alpha}$, $g(x_i)=-x_i^{\beta}$, $h(x_i)=x_i^{\gamma}$. 
-(Any coefficients can be reabsorbed in the statistics of $A$ and by a rescaling of time. 
-We factor out a minus sign in order to connect more directly with competition models.)
-
+\emph{Random interactions: equilibrium distribution.---}Henceforth we assume $f(x_i)=x_i^{\alpha}$, $g(x_i)=x_i^{\beta}$, $h(x_i)=x_i^{\gamma}$. 
+(Any coefficients can be reabsorbed in the statistics of $A$ and by a rescaling of time.)
 \begin{figure}[t!]
-    \includegraphics[width=.45\textwidth]{figs/beta1_5-S50-N10-diversity.pdf}
+    \includegraphics[width=.45\textwidth]{figs/beta1_5-S50-N10-diversity-increase.pdf}
     \caption{For a system in the ``anti-May" phase, an increase in $N$,
-    corresponding to moving along $\sqrt{N}$ in the $(\sigma \sqrt{N},\mu N)$ plane, will be stabilizing rather than destabilizing.
+    corresponding to moving along $\sqrt{N}$ in the $(\sigma \sqrt{N},\mu N)$ plane (green dashed line), will be stabilizing rather than destabilizing.
     Here we show results from the numerical resolution of the dynamical system~\eqref{dynamics}. Stability is defined as full stable coexistence. The red line is computed obtained using DMFT and the generalized stability condition $N\langle (\sigma/\psi)^2\rangle < 1$.
     Parameters values are $\alpha=1$, $\beta=3/2$,
-    $\gamma=1$, $N=50$ and $10$ replicates for the simulations.}
+    $\gamma=1$, $N=50$ and $10$ replicates for the simulations. For the line representing the increase in $N$ we fixed $\mu=0.1$ and $\sigma=0.75$.}
     \label{fig: stability line + sims}
 \end{figure}
-
 Following e.g. Ref.~\cite{Roy2019}, we can derive from the evolution equation~\eqref{dynamics} a dynamical mean field theory (DMFT) 
 which describes the ensemble of $N\gg 1$ variables
 by means of a single, self-consistent representative stochastic trajectory
@@ -20,8 +17,6 @@ by means of a single, self-consistent representative stochastic trajectory
 \label{eq: dmft}
 \end{equation}
 where $A_s$ is a random variable with the statistics of $A_{ii}$ and $\eta$ is a Gaussian noise with zero mean and correlation $\langle x^{\gamma}(t)x^{\gamma}(s)\rangle$. 
-
-
 \begin{figure}[t!]
     \includegraphics[width=.45\textwidth]{figs/alpha-beta.pdf}
     \caption{The ``May" and ``anti-May" phases described in the
@@ -38,8 +33,6 @@ where $A_s$ is a random variable with the statistics of $A_{ii}$ and $\eta$ is a
     }
     \label{fig: alpha-beta}
 \end{figure}
-    
-
 At equilibrium, we can write
 \begin{equation}
     x_*^{\alpha-\beta} - A_s x_*^{\gamma}= \big( \mu N \langle x_*^{\gamma}\rangle + \sigma \sqrt{N\langle x_*^{2\gamma}\rangle}\xi\big) \, ,
@@ -58,43 +51,21 @@ The equilibrium distribution $P(x_*)$ can then be obtained as the pushforward of
 \end{equation}
 where the expectation values must be computed self-consistently.
 
-Let us focus on the choice 
-$\alpha=1$, $\beta=3/2$ and $\gamma=1$, with
-$A_s=0$. 
+Let us focus on the choice $\alpha=1$, $\beta=3/2$ and $\gamma=1$, with $A_s=0$.  
 In this case the first and second moments formally diverge.
 This is not truly problematic because we are dealing with large, but \emph{finite} populations.
-Following~\cite{Cui2020,Hatton2023} and assuming
-$\sigma \sqrt{N\langle x_*^2\rangle}\ll \mu N \langle x_* \rangle$,
-we can expand the  
-solution~\eqref{eq: cavity solution} to first order in 
-$\sigma \sqrt{N\langle x_*^2\rangle}$, and 
-approximate~\eqref{eq: dist general} with
-a Gaussian distribution with moments $\langle x_*\rangle=(\mu N)^{-2/3}$ and $\langle x_*^2\rangle=(\mu N)^{-4/3}/(1-4(\mu N)^{-2}\sigma^2N)$. 
+Following~\cite{Cui2020,Hatton2023} and assuming $\sigma \sqrt{N\langle x_*^2\rangle}\ll \mu N \langle x_* \rangle$, we can expand the solution~\eqref{eq: cavity solution} to first order in $\sigma \sqrt{N\langle x_*^2\rangle}$, and approximate~\eqref{eq: dist general} with a Gaussian distribution with moments $\langle x_*\rangle=(\mu N)^{-2/3}$ and $\langle x_*^2\rangle=(\mu N)^{-4/3}/(1-4(\mu N)^{-2}\sigma^2N)$. 
 
-The result is plotted against simulations in 
-Fig.~\ref{fig: cavity sol.}. We show both the exact 
-solution~\eqref{eq: dist general} 
-(where integration for the moments has been performed up to a maximum
-value above which no equilibrium value should 
-be found) and the Gaussian approximation.
+The result is plotted against simulations in Fig.~\ref{fig: cavity sol.}. We show both the exact solution~\eqref{eq: dist general} (where integration for the moments has been performed up to a maximum value above which no equilibrium value should be found) and the Gaussian approximation.
 Simulations correspond to $A_s=\mu$, showing that neglecting the $A_s$ term in analytical expressions does not introduce a significant error. 
 
-Equipped with the equilibrium distribution $P(x^*)$, we can compute the maximal heterogeneity 
-$\sigma_c$, for a given $N$ and $\mu$, for which the linear stability condition $N\langle (\sigma/\psi(x^*))^2\rangle < 1$ holds. In Fig.~\ref{fig: stability line + sims} the result in portrayed in the $(\sigma \sqrt{N},\mu N)$ plane,
-compared with results from simulations (where stability is defined
-as stable, full, coexistence of the system).
-Everything else fixed, an increase in the number of
-degrees of freedom $N$ will move the system along a square-root
-trajectory in that plane, eventually entering the stable region where $\sigma_c > \sigma$. 
-In other words, we are in the
-``anti-May" phase.
-(For comparison the stability boundary for GLV is a horizontal line in the $(\sigma \sqrt{N},\mu N)$ plane, defined by $\sigma_c\sqrt{N} = \mu_s$ \cite{bunin2017ecological}.)
+Equipped with the equilibrium distribution $P(x^*)$, we can compute the maximal heterogeneity $\sigma_c$, for a given $N$ and $\mu$, for which the linear stability condition $N\langle (\sigma/\psi(x^*))^2\rangle < 1$ holds. 
+A convenient way to test the complexity-stability properties of the system, consists in studying how this condition compart the $(\sigma \sqrt{N},\mu N)$ plan, conventionally used to summarize the properties of large random dynamical systems~\cite{bunin2017ecological}, in stable and unstable parameter regions. 
+Everything else fixed, an increase in the number of degrees of freedom $N$ will move the system along a square-root trajectory in that plane and we can test if this has stabilizing effects on the system or if the opposite is true.
+In Fig.~\ref{fig: stability line + sims} the linear stability condition $N\langle (\sigma/\psi(x^*))^2\rangle < 1$ is portrayed in the $(\sigma \sqrt{N},\mu N)$ plane, compared with results from simulations (where stability is defined as stable, full, coexistence of the system).
+An increase in the number of degrees of freedom $N$ will eventually bring the system in the stable region, or preserve stability if already stable. 
+In other words, we are in the ``anti-May" phase.
+(For comparison the stability boundary for GLV is a horizontal line in the $(\sigma \sqrt{N},\mu N)$ plane, defined by $\sigma_c\sqrt{N} = \mu_s$~\cite{bunin2017ecological}.)
 
-
-Figure~\ref{fig: alpha-beta} shows results of simulations 
-for $\sigma_c\sqrt{N}$ in the $(\alpha,\beta)$ plane, 
-at fixed $\mu N$ and $\gamma = 1$, 
-defined as the value above which
-full stable coexistence is less probable than $50\%$.
-(In these simulations we use $\mu_s = \mu$, which would never be stable in the GLV model.) This plot illustrates the transition between a ``May" phase for $\alpha \geq \beta$ (where stability decreases with $N$, $\mu$, and $\sigma$) and an ``anti-May" phase for $\alpha < \beta$, even in the presence of heterogeneous interactions. 
-
+We conclude by testing the robustness of our findings in the case of heterogeneous interactions in the paradigmatic case of power laws. Fig.~\ref{fig: alpha-beta} shows results of simulations for $\sigma_c\sqrt{N}$ in the $(\alpha,\beta)$ plane, at fixed $\mu N$ and $\gamma = 1$, defined as the value above which full stable coexistence is less probable than $50\%$.
+(In these simulations we use $\mu_s = \mu$, which would never be stable in the GLV model.) This plot illustrates the transition between a ``May" phase for $\alpha \geq \beta$ (where stability decreases with $N$, $\mu$, and $\sigma$) and an ``anti-May" phase for $\alpha < \beta$, even in the presence of heterogeneous interactions.
