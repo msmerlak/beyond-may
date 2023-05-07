@@ -1,15 +1,14 @@
 \emph{Model.---}Consider the dynamical system in $N$ variables
 \begin{equation}\label{dynamics}
-    \dot{x}_i = f(x_i) + \sum_{j}A_{ij}g(x_i)h(x_j) \, .
+    \dot{x}_i = f(x_i) - \sum_{j}A_{ij}g(x_i)h(x_j) \, .
 \end{equation}
 Here $f(x_i)$ represents the self-interaction of a population $i$, while $g(x_i)$ and $h(x_j)$ capture the cross-interaction of $i$ with other populations. That interaction is weighted by a coefficient $A_{ij}$, such that $A_{ij} > 0$ (resp.
-$A_{ji} < 0$) implies a positive (resp.
-negative) effect of $j$ on the growth of $i$. 
-We assume all of $f$, $g$ and $h$ are increasing functions, and refer to $f$ as the ``production function'' and $g$ as the ``response function''.
+$A_{ji} < 0$) implies a negative (resp.
+positive) effect of $j$ on the growth of $i$. Non-zero diagonal elements $A_{ii}$ accounts for additional self-interaction with the same shape as cross-ones. 
+We refer to $f$ as the ``production function'' and $g$ as the ``response function''.
 
 This rather general setting has been used to study universality in network dynamics \cite{Barzel2013} and to construct minimal models for complex dynamics \cite{Barzel2015}, with applications ranging from biological~\cite{Alon2006,Karlebach2008} 
 to social~\cite{Pastor-Satorras2001,Hufnagel2004,Dodds2005} systems.
-
 The classic generalized Lotka-Volterra (GLV) competition model studied recently by Bunin and collaborators \cite{bunin2017ecological, biroli2018marginally} corresponds to $f$, $g$, $h$ all linear. 
 However, it is natural both physically and biologically to consider more general functions, including power laws $f(x)\sim x^\alpha$, $g(x)\sim x^\beta$, $h(x) \sim x^\gamma$.
 From a physical perspective, we can imagine populations $x_i$ forming three-dimensional clusters whose growth is limited to their two-dimensional surface, leading to a production function $f(x) \sim x^{2/3}$.
