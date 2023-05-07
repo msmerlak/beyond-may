@@ -49,23 +49,27 @@ The equilibrium distribution $P(x_*)$ can then be obtained as the pushforward of
     P(x_*)=\frac{|\alpha-\beta|x_*^{\alpha-\beta-1}}{\sqrt{2\pi\sigma^2 N\langle x_*^{2\gamma}\rangle}}
     \exp{\left\{-\frac{(x_*^{\alpha-\beta}-\mu N\langle x_*^{\gamma}\rangle)^2}{2\sigma^2N\langle x_*^{2\gamma}\rangle}\right\}} \, ,
 \end{equation}
-where the expectation values must be computed self-consistently.
+where the expectation values must be computed self-consistently. 
+
+Equipped with the equilibrium distribution $P(x^*)$, we can compute, for given $N$ and $\mu$, the maximal heterogeneity $\sigma_c$ consistent with the linear stability condition $N\langle (\sigma/\psi(x^*))^2\rangle < 1$ holds. 
 
 Let us focus on the choice $\alpha=1$, $\beta=3/2$ and $\gamma=1$, with $A_s=0$.  
 In this case the first and second moments formally diverge.
 This is not truly problematic because we are dealing with large, but \emph{finite} populations.
 Following~\cite{Cui2020,Hatton2023} and assuming $\sigma \sqrt{N\langle x_*^2\rangle}\ll \mu N \langle x_* \rangle$, we can expand the solution~\eqref{eq: cavity solution} to first order in $\sigma \sqrt{N\langle x_*^2\rangle}$, and approximate~\eqref{eq: dist general} with a Gaussian distribution with moments $\langle x_*\rangle=(\mu N)^{-2/3}$ and $\langle x_*^2\rangle=(\mu N)^{-4/3}/(1-4(\mu N)^{-2}\sigma^2N)$. 
 
-The result is plotted against simulations in Fig.~\ref{fig: cavity sol.}. We show both the exact solution~\eqref{eq: dist general} (where integration for the moments has been performed up to a maximum value above which no equilibrium value should be found) and the Gaussian approximation.
-Simulations correspond to $A_s=\mu$, showing that neglecting the $A_s$ term in analytical expressions does not introduce a significant error. 
+The result is plotted against simulations in Fig.~\ref{fig: cavity sol.}. We show both the exact solution~\eqref{eq: dist general} (where integration for the moments has been performed up to a maximum value above which no equilibrium value should be found) and the Gaussian approximation. Simulations correspond to $A_s=\mu$, showing that neglecting the $A_s$ term in analytical expressions does not introduce a significant error. 
 
-Equipped with the equilibrium distribution $P(x^*)$, we can compute the maximal heterogeneity $\sigma_c$, for a given $N$ and $\mu$, for which the linear stability condition $N\langle (\sigma/\psi(x^*))^2\rangle < 1$ holds. 
-A convenient way to test the complexity-stability properties of the system, consists in studying how this condition compart the $(\sigma \sqrt{N},\mu N)$ plan, conventionally used to summarize the properties of large random dynamical systems~\cite{bunin2017ecological}, in stable and unstable parameter regions. 
-Everything else fixed, an increase in the number of degrees of freedom $N$ will move the system along a square-root trajectory in that plane and we can test if this has stabilizing effects on the system or if the opposite is true.
-In Fig.~\ref{fig: stability line + sims} the linear stability condition $N\langle (\sigma/\psi(x^*))^2\rangle < 1$ is portrayed in the $(\sigma \sqrt{N},\mu N)$ plane, compared with results from simulations (where stability is defined as stable, full, coexistence of the system).
-An increase in the number of degrees of freedom $N$ will eventually bring the system in the stable region, or preserve stability if already stable. 
-In other words, we are in the ``anti-May" phase.
-(For comparison the stability boundary for GLV is a horizontal line in the $(\sigma \sqrt{N},\mu N)$ plane, defined by $\sigma_c\sqrt{N} = \mu_s$~\cite{bunin2017ecological}.)
 
-We conclude by testing the robustness of our findings in the case of heterogeneous interactions in the paradigmatic case of power laws. Fig.~\ref{fig: alpha-beta} shows results of simulations for $\sigma_c\sqrt{N}$ in the $(\alpha,\beta)$ plane, at fixed $\mu N$ and $\gamma = 1$, defined as the value above which full stable coexistence is less probable than $50\%$.
-(In these simulations we use $\mu_s = \mu$, which would never be stable in the GLV model.) This plot illustrates the transition between a ``May" phase for $\alpha \geq \beta$ (where stability decreases with $N$, $\mu$, and $\sigma$) and an ``anti-May" phase for $\alpha < \beta$, even in the presence of heterogeneous interactions.
+The properties of large random dynamical systems is often portrayed in often portrayed in the $(\sigma \sqrt{N},\mu N)$ plane \cite{bunin2017ecological}. Everything else fixed, an increase of the number of degrees of freedom $N$ moves the system along a square-root trajectory in that plane. In the GLV model, the boundary between the stable and unstable parameter regions is the horizontal line $\sigma_c\sqrt{N} = \mu_s$ \cite{bunin2017ecological}, hence stability is never possible at large $N$. 
+
+In Fig.~\ref{fig: stability line + sims} we plot the stability condition $N\langle (\sigma/\psi(x^*))^2\rangle < 1$ for $\alpha = 1$, $\beta = 3/2$ derived from \eqref{eq: dist general} (solid line) together with results from simulations (shading). Here, because the boundary between the stable and unstable phases is a straight line with positive slope, increasing $N$ will eventually bring the system in the stable region. This behavior corresponds to the ``anti-May" phase defined previously. 
+
+
+
+
+
+
+
+
+Finally, Fig.~\ref{fig: alpha-beta} shows results of simulations for $\sigma_c\sqrt{N}$ in the $(\alpha,\beta)$ plane, at fixed $\mu N$ and $\gamma = 1$. (Numerically, we define $\sigma_c\sqrt{N}$ as the value of $\sigma$ above which full stable coexistence has a probability lower than $50\%$.) In these simulations we use $\mu_s = \mu$, which would never be stable in the GLV model. Fig.~\ref{fig: alpha-beta} illustrates the transition between a ``May" phase for $\alpha \geq \beta$ and an ``anti-May" phase for $\alpha < \beta$, showing that our analytical results are robust to heterogeneous interactions.
