@@ -6,7 +6,7 @@
     corresponding to moving along $\sqrt{N}$ in the $(\sigma \sqrt{N},\mu N)$ plane (green dashed line), will be stabilizing rather than destabilizing.
     Here we show results from the numerical resolution of the dynamical system~\eqref{dynamics}. Stability is defined as full stable coexistence. The red line is computed obtained using DMFT and the generalized stability condition $N\langle (\sigma/\psi)^2\rangle < 1$.
     Parameters values are $\alpha=1$, $\beta=3/2$,
-    $\gamma=1$, $N=50$ and $10$ replicates for the simulations. For the line representing the increase in $N$ we fixed $\mu=0.1$ and $\sigma=0.75$.}
+    $\gamma=1$, $N=50$ and $10$ replicates for the simulations. The green line was plotted for $\mu=0.1$ and $\sigma=0.75$.}
     \label{fig: stability line + sims}
 \end{figure}
 Following e.g. Ref.~\cite{Roy2019}, we can derive from the evolution equation~\eqref{dynamics} a dynamical mean field theory (DMFT) 
@@ -19,15 +19,15 @@ by means of a single, self-consistent representative stochastic trajectory
 where $A_s$ is a random variable with the statistics of $A_{ii}$ and $\eta$ is a Gaussian noise with zero mean and correlation $\langle x^{\gamma}(t)x^{\gamma}(s)\rangle$. 
 \begin{figure}[t!]
     \includegraphics[width=.45\textwidth]{figs/alpha-beta.pdf}
-    \caption{The ``May" and ``anti-May" phases described in the
-    case of uniform interactions are robust with respect to random interactions.
+    \caption{The ``May" and ``anti-May" phases derived in the
+    case of uniform interactions ($\sigma = 0$) are robust with respect to random interactions ($\sigma > 0$).
     Here we simulated system~\eqref{dynamics} in the power law case for a fixed value of
-    $\mu=\mu_s=10^{-2}$, $\gamma=1$, $N=100$ and $100$ replicates 
-    and evaluated $\sigma_c$, defined here as
+    $\mu=\mu_s=10^{-2}$, $\gamma=1$, $N=100$ and $100$ replicates,  
+    and we evaluated $\sigma_c$, defined here as
     the value above which full stable coexistence is less probable than 50\%,
     at varying $\alpha$ and $\beta$.
-    No amount of heterogeneity is allowed in the lower triangle because we have $\mu=\mu_s$, while an increasing value of $\sigma_c$
-    is found as $\beta$ becomes bigger than $\alpha$.
+    No amount of heterogeneity is allowed in the bottom right triangle because we have $\mu=\mu_s$, while an increasing value of $\sigma_c$
+    is found as $\beta$ becomes larger than $\alpha$.
     We stress that the existence of a finite $\sigma_c\sqrt{N}$ above which instability is triggered also in the upper triangle,
     does not imply that increasing $N$ will destabilize the system, because $\mu N$ would also change.
     }
@@ -51,7 +51,7 @@ The equilibrium distribution $P(x_*)$ can then be obtained as the pushforward of
 \end{equation}
 where the expectation values must be computed self-consistently. 
 
-Equipped with the equilibrium distribution $P(x^*)$, we can compute, for given $N$ and $\mu$, the maximal heterogeneity $\sigma_c$ consistent with the linear stability condition $N\langle (\sigma/\psi(x^*))^2\rangle < 1$ holds. 
+Equipped with the equilibrium distribution $P(x^*)$, we can compute, for given $N$ and $\mu$, the maximal heterogeneity $\sigma_c$ compatible with the linear stability condition $N\langle (\sigma/\psi(x^*))^2\rangle < 1$. 
 
 Let us focus on the choice $\alpha=1$, $\beta=3/2$ and $\gamma=1$, with $A_s=0$.  
 In this case the first and second moments formally diverge.
@@ -61,13 +61,9 @@ Following~\cite{Cui2020,Hatton2023} and assuming $\sigma \sqrt{N\langle x_*^2\ra
 The result is plotted against simulations in Fig.~\ref{fig: cavity sol.}. We show both the exact solution~\eqref{eq: dist general} (where integration for the moments has been performed up to a maximum value above which no equilibrium value should be found) and the Gaussian approximation. Simulations correspond to $A_s=\mu$, showing that neglecting the $A_s$ term in analytical expressions does not introduce a significant error. 
 
 
-The properties of large random dynamical systems is often portrayed in often portrayed in the $(\sigma \sqrt{N},\mu N)$ plane \cite{bunin2017ecological}. Everything else fixed, an increase of the number of degrees of freedom $N$ moves the system along a square-root trajectory in that plane. In the GLV model, the boundary between the stable and unstable parameter regions is the horizontal line $\sigma_c\sqrt{N} = \mu_s$ \cite{bunin2017ecological}, hence stability is never possible at large $N$. 
+The properties of large random dynamical systems is often portrayed in the $(\sigma \sqrt{N},\mu N)$ plane \cite{bunin2017ecological}. Everything else being fixed, an increase of the number of degrees of freedom $N$ moves the system along a square-root trajectory in that plane. In the GLV model, the boundary between the stable and unstable parameter regions is the horizontal line $\sigma_c\sqrt{N} = \mu_s$ \cite{bunin2017ecological}, hence stability is never possible at large $N$. 
 
 In Fig.~\ref{fig: stability line + sims} we plot the stability condition $N\langle (\sigma/\psi(x^*))^2\rangle < 1$ for $\alpha = 1$, $\beta = 3/2$ derived from \eqref{eq: dist general} (solid line) together with results from simulations (shading). Here, because the boundary between the stable and unstable phases is a straight line with positive slope, increasing $N$ will eventually bring the system in the stable region. This behavior corresponds to the ``anti-May" phase defined previously. 
-
-
-
-
 
 
 
