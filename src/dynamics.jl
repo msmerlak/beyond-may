@@ -22,14 +22,15 @@ end
 
 #= solving =#
 
-MAX_TIME = 1e2
-MAX_ABUNDANCE = 1e2
-TOL = 1e-2
-
-converged(ϵ = TOL) = TerminateSteadyState(ϵ)
-blowup(max_abundance = MAX_ABUNDANCE) = DiscreteCallback((u, t, integrator) -> maximum(u) > max_abundance, terminate!)
-
 function evolve!(p; trajectory=false)
+
+    MAX_TIME = 1e3
+    MAX_ABUNDANCE = 1e2
+    TOL = 1e-8
+
+    converged(ϵ = TOL) = TerminateSteadyState(ϵ)
+    blowup(max_abundance = MAX_ABUNDANCE) = DiscreteCallback((u, t, integrator) -> maximum(u) > max_abundance, terminate!)
+
     if !haskey(p, :seed)
         p[:seed] = 1234
     end

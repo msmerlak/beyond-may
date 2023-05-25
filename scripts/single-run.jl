@@ -5,18 +5,23 @@ foreach(includet, glob("*.jl", srcdir()))
 using Plots, LaTeXStrings
 
 p = Dict{Symbol,Any}(
-    :scaled => true,
+    :scaled => false,
     :S => 100,
     :μ => 0.5,
-    :σ => 0.05,
-    :α => 0.5,
+    :μₛ => 0.0,
+    :σ => 0.15,
+    :α => 1.5,
     :β => 1.0,
     :γ => 1.0,
-    :extinction_threshold => 1e-4,
+    :extinction_threshold => 1e-5,
     :dist => "gamma",
     :N => 1,
     :seed => rand(UInt)
 );
+
+evolve!(p; trajectory=true)
+
+p[:trajectory].t
 
 #= trajectories =#
 plot(
