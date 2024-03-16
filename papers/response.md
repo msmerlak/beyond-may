@@ -143,10 +143,6 @@ findings
 
 - Try to pitch the paper from a slightly different point of view, more "honest" and aware of what we already did in the Science and putting more stress on what is new/clearer in this letter.
 
-## Overall
-
-- Try to pitch the paper from a slightly different point of view, more "honest" and aware of what we already did in the Science and putting more stress on what is new/clearer in this letter.
-
 ## Reviewer 1
 
 ### Major comments
@@ -289,3 +285,4 @@ We are thankful for the critical reveiw overall. We extended the discussion and 
 ---
 
 # Letter to editor
+
