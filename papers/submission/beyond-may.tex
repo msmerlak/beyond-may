@@ -139,10 +139,11 @@ They show that eigenvalues of large matrices of this form are contained in the c
 To use this result, we decompose the interaction matrix as $A = \mu\mathbf{1} + (\mu_s-\mu)I + S$,
 with $\mathbf{1}$ the matrix with all entries equal to $1$ and $S$ a random matrix as defined above.
 Up to the rank-one perturbation $\mu\mathbf{1}$ which does not affect stability properties \cite{Stone2018}, we can write the Jacobian~\eqref{eq: jac off-diag} as $J = M + LSR$ with diagonal matrices
-\begin{equation}
-    M_i = - g(x_i^*)h'(x_i^*)\psi(x_i^*),\quad L = g(x_i^*), \quad R = h'(x_i^*),
-\end{equation}
-where $\psi(x)$ is the function defined in~\eqref{eq: psi}. 
+\begin{align}
+    M_{ij} = - g(x_i^*)&h'(x_i^*)\psi(x_i^*)\delta_{ij}, \nonumber \\ 
+    L_{ij} = g(x_i^*)\delta_{ij}, & \quad R_{ij} = h'(x_i^*)\delta_{ij}, 
+\end{align}
+where $\delta_{ij}$ is the Kronecker delta and $\psi(x)$ is the function defined in~\eqref{eq: psi}.
 \begin{figure}[t!]
     \includegraphics[width=.45\textwidth]{cavity.pdf}
     \caption{The equilibrium distribution with power-law self- and cross-interactions is accurately reproduced by 
