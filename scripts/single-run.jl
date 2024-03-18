@@ -1,34 +1,38 @@
 using DrWatson, Glob, Revise
 @quickactivate
-foreach(includet, glob("*.jl", srcdir()))
+foreach(include, glob("*.jl", srcdir()))
 
 using Plots, LaTeXStrings
 
+pippo = rand(Uniform(1.1,1.5),10)
+pippo[1] = 1.
+
 p = Dict{Symbol,Any}(
     :scaled => false,
-    :S => 100,
-    :μ => 0.5,
-    :μₛ => 0.0,
-    :σ => 0.15,
-    :α => 1.5,
-    :β => 1.0,
+    :S => 10,
+    :μ => 0.75,
+    :μₛ => .75,
+    :σ => 0.,#15,
+    :α => 1.0,
+    :β => pippo,
     :γ => 1.0,
-    :extinction_threshold => 1e-5,
-    :dist => "gamma",
+    :x0 => .1*ones(10),
+    :extinction_threshold => 1e-6,
+    :dist => "normal",
     :N => 1,
     :seed => rand(UInt)
 );
 
 evolve!(p; trajectory=true)
 
-p[:trajectory].t
+p[:trajectory].u[end]
 
 #= trajectories =#
 plot(
     p[:trajectory],
     ylabel=L"x_i(t)",
     xlabel=L"t",
-    yscale=:log,
+    #yscale=:log,
     linewidth=1,
     legend=false,
     grid=false,

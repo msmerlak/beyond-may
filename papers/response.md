@@ -143,6 +143,8 @@ findings
 
 - Try to pitch the paper from a slightly different point of view, more "honest" and aware of what we already did in the Science and putting more stress on what is new/clearer in this letter.
 
+- Should we remove "Beyond May" from the title?
+
 ## Reviewer 1
 
 ### Major comments
@@ -161,7 +163,7 @@ findings
 - Point to Science for ecological justifications and in general to answer the first point.
 - Point to Science paper for feasibility adding some discussion on this in the main text maybe.
 - Maybe adjust something in the text to be more clear that the derivation of the results was obtained with rescaling and then we look at the non rescaled value of $\mu$ and $\sigma$.
-- Answer to the reviewer that in this kinf of conceptual work we are not necessarily interested in the realistic form of the SAD, indeed usual GLV papers have the Gaussian SAD prediction. In any case the model can still give non gaussian distribution in the case in which we use random growth rates etc... To conclude, the gaussian approximation is used only to more clearly present the results about complexity-stability but it is not necessary.
+- Answer to the reviewer that in this kind of conceptual work we are not necessarily interested in the realistic form of the SAD, indeed usual GLV papers have the Gaussian SAD prediction. In any case the model can still give non gaussian distribution in the case in which we use random growth rates etc... To conclude, the gaussian approximation is used only to more clearly present the results about complexity-stability but it is not necessary.
 
 ### Minor comments
 
