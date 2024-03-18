@@ -64,7 +64,7 @@ This places a sharp constraint on both diversity $N$ and interaction strength $\
 
 Many authors have sought to ease the tension between May's prediction and empirical observation by invoking effects not captured by dynamical systems with random coefficients~\cite{McCann2000,Chesson2000,Mougi2012,Rohr2014,Barabas2017,Grilli2017}. 
 In this letter, we use recent results in the physics of disordered systems \cite{Ahmadian2015, Roy2019} to show that May's argument itself is incomplete: in random dynamical systems, stability does not necessarily decrease with dimensionality and interaction strength---the opposite behavior is also possible, without the need for special or additional structure.
-For an in-depth discussion of the ecological implications of our result, see \cite{Hatton2023}.
+For an in-depth discussion of the ecological implications of our result, see \cite{Hatton2024}.
 
 %Model
 \paragraph*{}
@@ -84,7 +84,7 @@ The classic generalized Lotka-Volterra (GLV) competition model studied recently 
 However, it is natural both physically and biologically to consider more general functions, including power laws $f(x)\sim x^\alpha$, $g(x)\sim x^\beta$, $h(x) \sim x^\gamma$.
 From a physical perspective, we can imagine populations $x_i$ forming three-dimensional clusters whose growth is limited to their two-dimensional surface, leading to a production function $f(x) \sim x^{2/3}$.
 Biologically, the growth of organisms (populations of cells) has long been known to scale like $f(x) \sim x^k$ with $k\simeq 3/4$~\cite{Brown2004}, which can be understood in terms of hydrodynamic constraints on vascular and pulmonary networks.
-For reasons that are not currently understood, a similar pattern of growth appears to recur at the level of ecological communities~\cite{Hatton2015,Hatton2023}.
+For reasons that are not currently understood, a similar pattern of growth appears to recur at the level of ecological communities~\cite{Hatton2015,Hatton2024}.
 In a different direction, it has been recently suggested that predator-prey interactions can be modelled with a square root law, i.e. $g(x) \sim h(x) \sim x^{1/2}$~\cite{Barbier2021,Mazzarisi2023}.
 
 %Homogeneous interactions
@@ -219,7 +219,7 @@ Equipped with the equilibrium distribution $P(x^*)$, we can compute, for given $
 Let us focus on the choice $\alpha=1$, $\beta=3/2$ and $\gamma=1$, with $A_s=0$.  
 In this case the first and second moments formally diverge.
 This is not truly problematic because we are dealing with large, but \emph{finite} populations.
-Following~\cite{Cui2020,Hatton2023} and assuming $\sigma \sqrt{N\langle x_*^2\rangle}\ll \mu N \langle x_* \rangle$, we can expand the solution~\eqref{eq: cavity solution} to first order in $\sigma \sqrt{N\langle x_*^2\rangle}$, and approximate~\eqref{eq: dist general} with a Gaussian distribution with moments $\langle x_*\rangle=(\mu N)^{-2/3}$ and $\langle x_*^2\rangle=(\mu N)^{-4/3}/(1-4(\mu N)^{-2}\sigma^2N)$. 
+Following~\cite{Cui2020,Hatton2024} and assuming $\sigma \sqrt{N\langle x_*^2\rangle}\ll \mu N \langle x_* \rangle$, we can expand the solution~\eqref{eq: cavity solution} to first order in $\sigma \sqrt{N\langle x_*^2\rangle}$, and approximate~\eqref{eq: dist general} with a Gaussian distribution with moments $\langle x_*\rangle=(\mu N)^{-2/3}$ and $\langle x_*^2\rangle=(\mu N)^{-4/3}/(1-4(\mu N)^{-2}\sigma^2N)$. 
 
 The result is plotted against simulations in Fig.~\ref{fig: cavity sol.}. We show both the exact solution~\eqref{eq: dist general} (where integration for the moments has been performed up to a maximum value above which no equilibrium value should be found) and the Gaussian approximation. Simulations correspond to $A_s=\mu$, showing that neglecting the $A_s$ term in analytical expressions does not introduce a significant error. 
 
@@ -247,8 +247,7 @@ The Julia code used for simulations is available at \url{www.github.com/msmerlak
 
 \begin{acknowledgments}
 We thank Ian Hatton, Matthieu Barbier and Ada Altieri for productive discussions on ecological power laws and the diversity-stability debate, and Vadim Karatayev and Daniel Reuman for feedback on the manuscript.
-Funding for this work was provided by the Alexander von Humboldt Foundation in the framework of the Sofja Kovalevskaja Award endowed by the German Federal Ministry of Education and Research.
-O.M. was partly supported by NSF BIO OCE grant 2023473.
+Funding for this work was provided by the Alexander von Humboldt Foundation in the framework of the Sofja Kovalevskaja Award endowed by the German Federal Ministry of Education and Research, by the Trieste Laboratory on Quantitative Sustainability - TLQS and by NSF BIO OCE grant 2023473.
 \end{acknowledgments}
 
 \medskip
