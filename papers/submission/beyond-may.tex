@@ -168,19 +168,17 @@ In the GLV model, $\psi(x) = \mu_s - \tilde{\mu}/N$ (independently of $x$) and f
     \includegraphics[width=.45\textwidth]{beta1_5-S50-N10-diversity-increase.pdf}
     \caption{For a system in the ``anti-May" phase, an increase in $N$,
     corresponding to moving along $\sqrt{N}$ in the $(\sigma \sqrt{N},\mu N)$ plane (green dashed line), will be stabilizing rather than destabilizing.
-    Here we show results from the numerical resolution of the dynamical system~\eqref{dynamics}. Stability is defined as full stable coexistence. The red line is computed using DMFT and the generalized stability condition $N\langle (\sigma/\psi)^2\rangle < 1$.
+    Here we show results from the numerical resolution of the dynamical system~\eqref{dynamics}. Stability is defined as full stable coexistence. The red line is computed using the cavity solution and the generalized stability condition $N\langle (\sigma/\psi)^2\rangle < 1$.
     Parameters values are $\alpha=1$, $\beta=3/2$,
-    $\gamma=1$, $N=50$ and $10$ replicates for the simulations. The green line was plotted for $\mu=0.1$ and $\sigma=0.75$.}
+    $\gamma=1$, $N=50$ and $10$ replicates for the simulations. The green line is plotted for $\mu=0.1$ and $\sigma=0.75$.}
     \label{fig: stability line + sims}
 \end{figure}
-Following e.g. Ref.~\cite{Roy2019}, we can derive from the evolution equation~\eqref{dynamics} a dynamical mean field theory (DMFT) 
-which describes the ensemble of $N\gg 1$ variables
-by means of a single, self-consistent representative stochastic trajectory
+Following e.g. Ref.~\cite{Roy2019}, we can derive from Eq.~\eqref{dynamics} a cavity solution which describes the ensemble of the stationary value of $N\gg 1$ variables by means of a single representative radnom variable $x_*$
 \begin{equation}
-    \dot{x} = x^{\alpha}-A_sx^{\beta+\gamma}-x^{\beta}\big( \tilde{\mu} \langle x^{\gamma}\rangle + \tilde{\sigma} \eta\big) \, ,
+    0 = x_*^{\alpha}-A_sx_*^{\beta+\gamma}-x_*^{\beta}\big( \tilde{\mu} \langle x_*^{\gamma}\rangle + \tilde{\sigma} \sqrt{\langle x_*^{2\gamma}\rangle}\xi\big) \, ,
 \label{eq: dmft}
 \end{equation}
-where $A_s$ is a random variable with the statistics of $A_{ii}$ and $\eta$ is a Gaussian noise with zero mean and correlation $\langle x^{\gamma}(t)x^{\gamma}(s)\rangle$. 
+where $A_s$ is a random variable with the statistics of $A_{ii}$ and $\xi$ is a standard normal random variable. 
 \begin{figure}[t!]
     \includegraphics[width=.45\textwidth]{alpha-beta.pdf}
     \caption{The ``May" and ``anti-May" phases derived in the
@@ -197,11 +195,6 @@ where $A_s$ is a random variable with the statistics of $A_{ii}$ and $\eta$ is a
     }
     \label{fig: alpha-beta}
 \end{figure}
-At equilibrium, we can write
-\begin{equation}
-    x_*^{\alpha-\beta} - A_s x_*^{\gamma}= \big( \tilde{\mu} \langle x_*^{\gamma}\rangle + \tilde{\sigma} \sqrt{\langle x_*^{2\gamma}\rangle}\xi\big) \, ,
-\end{equation} 
-where $\xi$ is now a standard normal random variable.
 The equation above can be solved for $x_*$ for specific values of
 $(\alpha-\beta)/\gamma$, or if $A_s=0$.
 (In the following we show that neglecting $A_s$, when it is of the order of $\mu$, does not affect noticeably the quality of the approximation.) In this case the stationary solution is given by 
