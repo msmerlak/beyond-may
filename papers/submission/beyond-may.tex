@@ -19,7 +19,7 @@
 
 \begin{document}
 
-\title{Beyond May: Complexity-stability relationships \\
+\title{Complexity-stability relationships
 in disordered dynamical systems}
 
 \author{Onofrio Mazzarisi}
@@ -35,11 +35,11 @@ in disordered dynamical systems}
 
 \begin{abstract}
     Robert May famously used random matrix theory to predict that large, complex systems cannot admit stable fixed points. 
-    However, this general conclusion is not supported by empirical observation: from cells to biomes, biological systems are large, complex---and, by and large, stable.
+    However, this general conclusion is not always supported by empirical observation: from cells to biomes, biological systems are large, complex and, often, stable.
     In this paper, we revisit May's argument in the light of recent developments in both ecology and random matrix theory. 
     Using a non-linear generalization of the Lotka-Volterra model, we show that there are in fact two kinds of complexity-stability relationships in disordered dynamical systems: 
     if self-interactions grow faster with density than cross-interactions, complexity is destabilizing; but if cross-interactions grow faster than self-interactions, complexity is stabilizing.
-    Our result shows that May's principle that "complexity begets instability" is not a general property of complex systems; instead, it is a property of a subclass of weakly cross-regulated disordered systems.
+    Our result shows that May's principle that "complexity begets instability" is not a general property of complex systems.
 \end{abstract}
 
 \maketitle
@@ -116,8 +116,8 @@ leading to three different regimes:
 %Random interactions: stability condition
 \paragraph*{}
 \emph{Random interactions: stability condition.---}We now consider the case of random interactions.
-Specifically, we assume that interaction coefficients $A_{ij}$ are drawn independently from a distribution with mean $\mu$ and standard deviation $\sigma$;
-We assume the diagonal elements $A_{ii}$ have a mean value $\mu_s$ (possibly different from $\mu$) but the same standard deviation $\sigma$. 
+Specifically, we assume that interaction coefficients $A_{ij}$ are drawn independently from a distribution with scaled mean $\mu=\tilde{\mu}/N$ and standard deviation $\sigma=\tilde{\sigma}/\sqrt{N}$~\cite{bunin2017ecological}.
+We assume the diagonal elements $A_{ii}$ have a mean value $\mu_s$ (possibly different from $\mu$) and standard deviation $\sigma$. 
  
 We compute the Jacobian matrix at equilibrium
 \begin{align}
@@ -158,7 +158,7 @@ Stability of the equilibrium requires that $\mathcal{D}$ be entirely contained i
     < 1.
     \label{eq: random-stability}
 \end{equation}
-In the GLV model, $\psi(x) = \mu_s - \mu$ (independently of $x$) and we recover the classical condition $\sigma\sqrt{N} < (\mu_s-\mu)$ \footnote{In fact, the same condition holds when $f$ and $g$ are power laws with the same exponent.}. In general, however, the dependence on equilibrium values $x_i^*$ (which in turn depend on $N$) does not cancel out, and one must gain information about the distribution of equilibrium values $P(x_i^*)$ to assess the stability condition~\eqref{eq: random-stability}.
+In the GLV model, $\psi(x) = \mu_s - \tilde{\mu}/N$ (independently of $x$) and for large $N$ we recover the classical condition $\tilde{\sigma} = \sigma\sqrt{N} < \mu_s$ \footnote{In fact, the same condition holds when $f$ and $g$ are power laws with the same exponent.}. In general, however, the dependence on equilibrium values $x_i^*$ (which in turn depend on $N$) does not cancel out, and one must gain information about the distribution of equilibrium values $P(x_i^*)$ to assess the stability condition~\eqref{eq: random-stability}.
 
 %Random interactions: equilibrium distribution
 \paragraph*{}
@@ -168,19 +168,17 @@ In the GLV model, $\psi(x) = \mu_s - \mu$ (independently of $x$) and we recover 
     \includegraphics[width=.45\textwidth]{beta1_5-S50-N10-diversity-increase.pdf}
     \caption{For a system in the ``anti-May" phase, an increase in $N$,
     corresponding to moving along $\sqrt{N}$ in the $(\sigma \sqrt{N},\mu N)$ plane (green dashed line), will be stabilizing rather than destabilizing.
-    Here we show results from the numerical resolution of the dynamical system~\eqref{dynamics}. Stability is defined as full stable coexistence. The red line is computed obtained using DMFT and the generalized stability condition $N\langle (\sigma/\psi)^2\rangle < 1$.
+    Here we show results from the numerical resolution of the dynamical system~\eqref{dynamics}. Stability is defined as full stable coexistence. The red line is computed using the cavity solution and the generalized stability condition $N\langle (\sigma/\psi)^2\rangle < 1$.
     Parameters values are $\alpha=1$, $\beta=3/2$,
-    $\gamma=1$, $N=50$ and $10$ replicates for the simulations. The green line was plotted for $\mu=0.1$ and $\sigma=0.75$.}
+    $\gamma=1$, $N=50$ and $10$ replicates for the simulations. The green line is plotted for $\mu=0.1$ and $\sigma=0.75$.}
     \label{fig: stability line + sims}
 \end{figure}
-Following e.g. Ref.~\cite{Roy2019}, we can derive from the evolution equation~\eqref{dynamics} a dynamical mean field theory (DMFT) 
-which describes the ensemble of $N\gg 1$ variables
-by means of a single, self-consistent representative stochastic trajectory
+Following e.g. Ref.~\cite{Roy2019}, we can derive from Eq.~\eqref{dynamics} a cavity solution which describes the ensemble of the stationary value of $N\gg 1$ variables by means of a single representative radnom variable $x_*$
 \begin{equation}
-    \dot{x} = x^{\alpha}-A_sx^{\beta+\gamma}-x^{\beta}\big( \mu N \langle x^{\gamma}\rangle + \sigma \sqrt{N} \eta\big) \, ,
+    0 = x_*^{\alpha}-A_sx_*^{\beta+\gamma}-x_*^{\beta}\big( \tilde{\mu} \langle x_*^{\gamma}\rangle + \tilde{\sigma} \sqrt{\langle x_*^{2\gamma}\rangle}\xi\big) \, ,
 \label{eq: dmft}
 \end{equation}
-where $A_s$ is a random variable with the statistics of $A_{ii}$ and $\eta$ is a Gaussian noise with zero mean and correlation $\langle x^{\gamma}(t)x^{\gamma}(s)\rangle$. 
+where $A_s$ is a random variable with the statistics of $A_{ii}$ and $\xi$ is a standard normal random variable. 
 \begin{figure}[t!]
     \includegraphics[width=.45\textwidth]{alpha-beta.pdf}
     \caption{The ``May" and ``anti-May" phases derived in the
@@ -190,53 +188,53 @@ where $A_s$ is a random variable with the statistics of $A_{ii}$ and $\eta$ is a
     and we evaluated $\sigma_c$, defined here as
     the value above which full stable coexistence is less probable than 50\%,
     at varying $\alpha$ and $\beta$.
-    No amount of heterogeneity is allowed in the bottom right triangle because we have $\mu=\mu_s$, while an increasing value of $\sigma_c$
+    No amount of heterogeneity is allowed in the bottom right triangle because we have set $\mu=\mu_s$, while an increasing value of $\sigma_c$
     is found as $\beta$ becomes larger than $\alpha$.
     We stress that the existence of a finite $\sigma_c\sqrt{N}$ above which instability is triggered also in the upper triangle,
-    does not imply that increasing $N$ will destabilize the system, because $\mu N$ would also change.
+    does not imply that increasing $N$, at fixed $\mu$ and $\sigma$, will destabilize the system, because $\tilde{\mu}=\mu N$ would also change.
     }
     \label{fig: alpha-beta}
 \end{figure}
-At equilibrium, we can write
-\begin{equation}
-    x_*^{\alpha-\beta} - A_s x_*^{\gamma}= \big( \mu N \langle x_*^{\gamma}\rangle + \sigma \sqrt{N\langle x_*^{2\gamma}\rangle}\xi\big) \, ,
-\end{equation} 
-where $\xi$ is now a standard normal random variable.
 The equation above can be solved for $x_*$ for specific values of
 $(\alpha-\beta)/\gamma$, or if $A_s=0$.
-(In the following we show that neglecting $A_s$ even when it is not zero does not affect noticeably the quality of the approximation.) In this case the stationary solution is given by 
+(In the following we show that neglecting $A_s$, when it is of the order of $\mu$, does not affect noticeably the quality of the approximation.) In this case the stationary solution is given by 
 \begin{equation} \label{eq: cavity solution}
-    x_* = \left( \mu N \langle x_*^{\gamma}\rangle + \sigma \sqrt{N\langle x_*^{2\gamma}\rangle}\xi\right)^{1/(\alpha-\beta)} \, .
+    x_* = \left( \tilde{\mu} \langle x_*^{\gamma}\rangle + \tilde{\sigma} \sqrt{\langle x_*^{2\gamma}\rangle}\xi\right)^{1/(\alpha-\beta)} \, .
 \end{equation}
 The equilibrium distribution $P(x_*)$ can then be obtained as the pushforward of the distribution of $\xi$: 
 \begin{equation}\label{eq: dist general}
-    P(x_*)=\frac{|\alpha-\beta|x_*^{\alpha-\beta-1}}{\sqrt{2\pi\sigma^2 N\langle x_*^{2\gamma}\rangle}}
-    \exp{\left\{-\frac{(x_*^{\alpha-\beta}-\mu N\langle x_*^{\gamma}\rangle)^2}{2\sigma^2N\langle x_*^{2\gamma}\rangle}\right\}} \, ,
+    P(x_*)=\frac{|\alpha-\beta|x_*^{\alpha-\beta-1}}{\sqrt{2\pi\tilde{\sigma}^2 \langle x_*^{2\gamma}\rangle}}
+    \exp{\left\{-\frac{(x_*^{\alpha-\beta}- \tilde{\mu} \langle x_*^{\gamma}\rangle)^2}{2\tilde{\sigma}^2\langle x_*^{2\gamma}\rangle}\right\}} \, ,
 \end{equation}
 where the expectation values must be computed self-consistently. 
 
 Equipped with the equilibrium distribution $P(x^*)$, we can compute, for given $N$ and $\mu$, the maximal heterogeneity $\sigma_c$ compatible with the linear stability condition $N\langle (\sigma/\psi(x^*))^2\rangle < 1$. 
 
 Let us focus on the choice $\alpha=1$, $\beta=3/2$ and $\gamma=1$, with $A_s=0$.  
-In this case the first and second moments formally diverge.
+In this case, the first and second moments formally diverge.
 This is not truly problematic because we are dealing with large, but \emph{finite} populations.
-Following~\cite{Cui2020,Hatton2024} and assuming $\sigma \sqrt{N\langle x_*^2\rangle}\ll \mu N \langle x_* \rangle$, we can expand the solution~\eqref{eq: cavity solution} to first order in $\sigma \sqrt{N\langle x_*^2\rangle}$, and approximate~\eqref{eq: dist general} with a Gaussian distribution with moments $\langle x_*\rangle=(\mu N)^{-2/3}$ and $\langle x_*^2\rangle=(\mu N)^{-4/3}/(1-4(\mu N)^{-2}\sigma^2N)$. 
+Following~\cite{Cui2020,Hatton2024} and assuming $\tilde{\sigma} \sqrt{\langle x_*^2\rangle}\ll \tilde{\mu}  \langle x_* \rangle$, we can expand the solution~\eqref{eq: cavity solution} to first order in $\tilde{\sigma} \sqrt{\langle x_*^2\rangle}$, and approximate~\eqref{eq: dist general} with a Gaussian distribution with moments $\langle x_*\rangle=\tilde{\mu}^{-2/3}$ and $\langle x_*^2\rangle=\tilde{\mu}^{-4/3}/(1-4\tilde{\mu}^{-2}\tilde{\sigma}^2)$. 
 
 The result is plotted against simulations in Fig.~\ref{fig: cavity sol.}. We show both the exact solution~\eqref{eq: dist general} (where integration for the moments has been performed up to a maximum value above which no equilibrium value should be found) and the Gaussian approximation. Simulations correspond to $A_s=\mu$, showing that neglecting the $A_s$ term in analytical expressions does not introduce a significant error. 
 
 
-The properties of large random dynamical systems is often portrayed in the $(\sigma \sqrt{N},\mu N)$ plane \cite{bunin2017ecological}. Everything else being fixed, an increase of the number of degrees of freedom $N$ moves the system along a square-root trajectory in that plane. In the GLV model, the boundary between the stable and unstable parameter regions is the horizontal line $\sigma_c\sqrt{N} = \mu_s$ \cite{bunin2017ecological}, hence stability is never possible at large $N$. 
+The properties of large random dynamical systems are often portrayed in the $(\sigma \sqrt{N},\mu N)$ plane \cite{bunin2017ecological}. If we keep the mean $\mu$ and standard deviation $\sigma$ of interactions fixed, an increase in the number of degrees of freedom $N$ moves the system along a square-root trajectory in that plane. In the GLV model, the boundary between the stable and unstable parameter regions is the horizontal line $\sigma_c\sqrt{N} = \mu_s$ \cite{bunin2017ecological}, hence stability is never possible at large $N$. 
 
 In Fig.~\ref{fig: stability line + sims} we plot the stability condition $N\langle (\sigma/\psi(x^*))^2\rangle < 1$ for $\alpha = 1$, $\beta = 3/2$ derived from \eqref{eq: dist general} (solid line) together with results from simulations (shading). Here, because the boundary between the stable and unstable phases is a straight line with positive slope, increasing $N$ will eventually bring the system in the stable region. This behavior corresponds to the ``anti-May" phase defined previously. 
 
-Finally, Fig.~\ref{fig: alpha-beta} shows results of simulations for $\sigma_c\sqrt{N}$ in the $(\alpha,\beta)$ plane, at fixed $\mu N$ and $\gamma = 1$. (Numerically, we define $\sigma_c\sqrt{N}$ as the value of $\sigma$ above which full stable coexistence has a probability lower than $50\%$.) In these simulations we use $\mu_s = \mu$, which would never be stable in the GLV model. Fig.~\ref{fig: alpha-beta} illustrates the transition between a ``May" phase for $\alpha \geq \beta$ and an ``anti-May" phase for $\alpha < \beta$, showing that our analytical results are robust to heterogeneous interactions.
+Finally, Fig.~\ref{fig: alpha-beta} shows results of simulations for $\sigma_c\sqrt{N}$ in the $(\alpha,\beta)$ plane, at fixed $\tilde{\mu}=\mu N$ and $\gamma = 1$. (Numerically, we define $\sigma_c\sqrt{N}$ as the value of $\sigma$ above which full stable coexistence has a probability lower than $50\%$.) In these simulations, we use $\mu_s = \mu$, which would never be stable in the GLV model. Fig.~\ref{fig: alpha-beta} illustrates the transition between a ``May" phase for $\alpha \geq \beta$ and an ``anti-May" phase for $\alpha < \beta$, showing that our analytical results are robust to heterogeneous interactions.
 
 %Conclusion
 \paragraph*{}
-\emph{Discussion.---}The relationship between complexity and stability in high-dimensional dynamical systems has been a longstanding puzzle, in ecology and in other fields. 
-In this letter, we have showed that the condition $\sigma\sqrt{N}< \mu_s - \mu$ (popularized by May's slogan ``complexity begets instability") does not provide a complete picture of the relationship between complexity and stability. 
+\emph{Discussion.---}The relationship between complexity and stability in high-dimensional dynamical systems has been a longstanding puzzle, in ecology and other fields. 
+In this letter, we have shown that the condition $\sigma\sqrt{N}< \mu_s$ does not provide a complete picture of the relationship between complexity and stability. 
 In particular, we have seen that the generalized Lotka-Volterra model, often cited in support of May's general prediction, exemplifies a special cancellation in the more general stability condition $N\langle (\sigma/\psi)^2\rangle < 1$.
-In models where self-interactions grow faster than cross-interactions, the opposite behavior is observed: stability becomes \emph{more} likely with increasing diversity $N$.
+In models where self-interactions grow faster than cross-interactions~\cite{Hatton2024,samadder2024interconnection}, the opposite behavior is observed: stability becomes \emph{more} likely with increasing diversity $N$.
+
+A modification of our model~\eqref{dynamics} of general ecological relevance describing the case in which per capita growth rates depend only on the sum of the other densities (weighted by interactions) is $\dot{x_i}/x_i=1-F(\sum_jA_{ij}x_j)$, where $F$ is an arbitrary function.
+General models of this kind are used, for example, to study the growth of a clonal population in the presence of a limiting factor~\cite{mazzolini2023universality}.
+All the models in this class are destabilized by diversity.
+The Jacobian matrix at equilibrium is $J_{ij}^*=-A_{ij}x_i^*F'(\sum_jA_{ij}x_j^*) \quad \forall i,j$ leading to the same simplification of the stability condition~\eqref{eq: random-stability} possible for GLV.
 
 Future work can look at the case where two-body interactions are not separable, or include higher order interaction to generalize the results in Ref. \cite{Gibbs2022} based on the GLV model. 
 
@@ -247,7 +245,7 @@ The Julia code used for simulations is available at \url{www.github.com/msmerlak
 \medskip
 
 \begin{acknowledgments}
-We thank Ian Hatton, Matthieu Barbier and Ada Altieri for productive discussions on ecological power laws and the diversity-stability debate, and Vadim Karatayev and Daniel Reuman for feedback on the manuscript.
+We thank Ian Hatton, Matthieu Barbier and Ada Altieri for productive discussions on ecological power laws and the diversity-stability debate, and Jacopo Grilli, Vadim Karatayev and Daniel Reuman for feedback on the manuscript.
 Funding for this work was provided by the Alexander von Humboldt Foundation in the framework of the Sofja Kovalevskaja Award endowed by the German Federal Ministry of Education and Research, by the Trieste Laboratory on Quantitative Sustainability - TLQS and by NSF BIO OCE grant 2023473.
 \end{acknowledgments}
 

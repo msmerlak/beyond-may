@@ -4,19 +4,19 @@ foreach(include, glob("*.jl", srcdir()))
 
 using Plots, LaTeXStrings
 
-pippo = rand(Uniform(1.1,1.5),10)
-pippo[1] = 1.
+pippo = rand(Uniform(1.1,1.5),100)
+pippo[3] = 1.
 
 p = Dict{Symbol,Any}(
     :scaled => false,
-    :S => 10,
+    :S => 100,
     :μ => 0.75,
-    :μₛ => .75,
-    :σ => 0.,#15,
+    :μₛ => 1.,
+    :σ => 0.15,
     :α => 1.0,
     :β => pippo,
     :γ => 1.0,
-    :x0 => .1*ones(10),
+    :x0 => .1*ones(100),
     :extinction_threshold => 1e-6,
     :dist => "normal",
     :N => 1,
