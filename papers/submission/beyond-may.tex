@@ -146,10 +146,9 @@ Up to the rank-one perturbation $\mu\mathbf{1}$ which does not affect stability 
 where $\delta_{ij}$ is the Kronecker delta and $\psi(x)$ is the function defined in~\eqref{eq: psi}.
 \begin{figure}[t!]
     \includegraphics[width=.45\textwidth]{cavity.pdf}
-    \caption{The equilibrium distribution with power-law self- and cross-interactions is accurately reproduced by 
-    Eq.~\eqref{eq: dist general} and its Gaussian approximation.
+    \caption{The equilibrium distribution for the case of power-law self- and cross-interactions is accurately reproduced by Eq.~\eqref{eq: dist general}.
     For simulations (in green) we used $\alpha=1$, $\beta=3/2$,
-    $\gamma=1$, $N=50$, $\mu=\mu_s=10^{-2}$, $\sigma=5\cdot 10^{-3}$.}
+    $\gamma=1$, $N=100$, $\mu=\mu_s=\sigma=10^{-2}$.}
     \label{fig: cavity sol.}
 \end{figure}
 Stability of the equilibrium requires that $\mathcal{D}$ be entirely contained in the left half-plane (all eigenvalues have negative real part). For this to hold, it is no longer sufficient that $\psi(x_i^*) > 0$ for each $i$: we must also have that $0\notin \mathcal{D}$, hence from~\eqref{eq: domain}:
@@ -208,14 +207,17 @@ The equilibrium distribution $P(x_*)$ can then be obtained as the pushforward of
 \end{equation}
 where the expectation values must be computed self-consistently. 
 
-Equipped with the equilibrium distribution $P(x^*)$, we can compute, for given $N$ and $\mu$, the maximal heterogeneity $\sigma_c$ compatible with the linear stability condition $N\langle (\sigma/\psi(x^*))^2\rangle < 1$. 
+Equipped with the equilibrium distribution $P(x_*)$, we can compute, for given $N$ and $\mu$, the maximal heterogeneity $\sigma_c$ compatible with the linear stability condition $N\langle (\sigma/\psi(x_*))^2\rangle < 1$. 
 
 Let us focus on the choice $\alpha=1$, $\beta=3/2$ and $\gamma=1$, with $A_s=0$.  
 In this case, the first and second moments formally diverge.
 This is not truly problematic because we are dealing with large, but \emph{finite} populations.
+
+Consider the sample mean $\bar{x}_{N}\equiv\sum_{i}^N x_i /N$, it diverges for $N\to\infty$. For finite $N$ we have $\bar{x}_N\neq\langle x_*\rangle=\infty$. What we really have is the convergence of $\bar{x}_N \approx \int_0^{\Lambda}dx_*x_*P(x_*)$ where the cut-off $\Lambda$ dependence on $N$ is such that $1-\int_0^{\Lambda}dx_*P(x_*)=1/N$. In orther words such that there is less 1 variable with density above $\Lambda$.
+
 Following~\cite{Cui2020,Hatton2024} and assuming $\tilde{\sigma} \sqrt{\langle x_*^2\rangle}\ll \tilde{\mu}  \langle x_* \rangle$, we can expand the solution~\eqref{eq: cavity solution} to first order in $\tilde{\sigma} \sqrt{\langle x_*^2\rangle}$, and approximate~\eqref{eq: dist general} with a Gaussian distribution with moments $\langle x_*\rangle=\tilde{\mu}^{-2/3}$ and $\langle x_*^2\rangle=\tilde{\mu}^{-4/3}/(1-4\tilde{\mu}^{-2}\tilde{\sigma}^2)$. 
 
-The result is plotted against simulations in Fig.~\ref{fig: cavity sol.}. We show both the exact solution~\eqref{eq: dist general} (where integration for the moments has been performed up to a maximum value above which no equilibrium value should be found) and the Gaussian approximation. Simulations correspond to $A_s=\mu$, showing that neglecting the $A_s$ term in analytical expressions does not introduce a significant error. 
+The result is plotted against simulations in Fig.~\ref{fig: cavity sol.}. We show both the exact solution~\eqref{eq: dist general} (where integration for the moments has been performed up to a cut-off above which no equilibrium value should be found) and the Gaussian approximation. Simulations correspond to $A_s=\mu$, showing that neglecting the $A_s$ term in analytical expressions does not introduce a significant error. 
 
 
 The properties of large random dynamical systems are often portrayed in the $(\sigma \sqrt{N},\mu N)$ plane \cite{bunin2017ecological}. If we keep the mean $\mu$ and standard deviation $\sigma$ of interactions fixed, an increase in the number of degrees of freedom $N$ moves the system along a square-root trajectory in that plane. In the GLV model, the boundary between the stable and unstable parameter regions is the horizontal line $\sigma_c\sqrt{N} = \mu_s$ \cite{bunin2017ecological}, hence stability is never possible at large $N$. 
