@@ -153,7 +153,7 @@ findings
 
 ### Minor comments
 
-- Add Kronecker delta to Eq. (7).
+- Add Kronecker delta to Eq. (7). 
 - Address the concern of the reviewer in the SM by studying Eq. (11) through the definition of the Gaussian variable $y=x^{\alpha-\beta}$.
 
 ## Reviewer 2
