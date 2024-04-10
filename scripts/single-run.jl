@@ -17,7 +17,7 @@ p = Dict{Symbol,Any}(
     :extinction_threshold => 1e-6,
     :dist => "gamma",
     :N => 1,
-    :seed => 7#rand(UInt)
+    :seed => rand(UInt)
 );
 
 evolve!(p; trajectory=true)
@@ -44,18 +44,6 @@ stephist(p_eq,
     label=false,
     grid=false,
     fill=true,
-    #bins = minimum(p_eq):.005:maximum(p_eq),
-)
-
-#= cavity solution with gaussian approximation =#
-X = [x for x in 0.9*minimum(p_eq):0.0001:1.1*maximum(p_eq)]
-plot!(X, [pdf(P_gauss(p), x) for x in X],
-    labels=false, #"cavity - gaussian",
-    linewidth=2,
-    alpha=1,
-    linecolor=:black,
-    linestyle=:dash,
-    grid=false
 )
 
 a, b, c, Λ = Cavity_Λ(p)
@@ -70,9 +58,19 @@ grid = false,
 size = (600,200),
 )
 
-(100*exp(-p[:μ]^2*100^2*1.04^2/(2*p[:σ]^2*100*1.42))/(sqrt(2*pi*p[:σ]^2*100*1.42)))^(2)
 
 p[:converged]
+
+#= cavity solution with gaussian approximation =#
+X = [x for x in 0.9*minimum(p_eq):0.0001:1.1*maximum(p_eq)]
+plot!(X, [pdf(P_gauss(p), x) for x in X],
+    labels=false, #"cavity - gaussian",
+    linewidth=2,
+    alpha=1,
+    linecolor=:black,
+    linestyle=:dash,
+    grid=false
+)
 
 #= trajectories =#
 plot(
