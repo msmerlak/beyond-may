@@ -145,7 +145,7 @@ findings
 
 - Should we remove "Beyond May" from the title?
 
-## Reviewer 1
+## Referee A
 
 ### Major comments
 
@@ -153,10 +153,10 @@ findings
 
 ### Minor comments
 
-- Add Kronecker delta to Eq. (7).
+- Add Kronecker delta to Eq. (7). 
 - Address the concern of the reviewer in the SM by studying Eq. (11) through the definition of the Gaussian variable $y=x^{\alpha-\beta}$.
 
-## Reviewer 2
+## Referee B
 
 ### Major comments
 
@@ -166,7 +166,6 @@ findings
 - Answer to the reviewer that in this kind of conceptual work we are not necessarily interested in the realistic form of the SAD, indeed usual GLV papers have the Gaussian SAD prediction. In any case the model can still give non gaussian distribution in the case in which we use random growth rates etc... To conclude, the gaussian approximation is used only to more clearly present the results about complexity-stability but it is not necessary.
 
 ### Minor comments
-
 - Just engage with the reviewer discussing mutualism etc, but not change anything necessarily.
 - We stick to $N$, we don't want to relate to ecological literature, but more to complex systems. Moreover May used $N$ in his paper.
 - Just answer something about all the changes that we made.
@@ -175,13 +174,96 @@ findings
 
 # Response to reviewer
 
-## Reviewer 1
+## Referee A
 
-## Reviewer 2
+- *The claim is probably true, but unfortunately it does not describe a generic situation, because it is very hard to imagine that the exponents alpha, beta, gamma used in the model are identical for all populations. Perhaps the model would be more interesting if it included a spectrum of different exponents, described, for example, by a probabilistic law.*
 
-We thank the Reveiwer...
+...
 
+- *The way of writing the matrix elements in Equations (7) is somewhat confusing. For clarity, the Kronecker delta can be used on the right side of these equations.*
 
+We thank the referee for this comment, we modified Equations (7) accoridngly.
+
+- *The mean field equations depend on the expected values of <x_^\gamma> and <x_^{2\gamma}>. The self-consistency condition requires that the probability distribution (12) has exactly the same expected values. This should be discussed in detail.*
+
+We agree with the referee that the discussion about the expected values and self-consistency conditions needed more clarifications. 
+
+In some cases, for example $\alpha=1, \beta=3, \gamma=1$, both expectations converge to finite values and we can safely compute the self-consistency equations. However in potential case of interests, and in the example case $\alpha=1, \beta=3/2, \gamma=1$ we consider resulting in a distribution with a power-law tail with exponent $-3/2$, the moments diverge. We now modified the discussion removing the gaussian approximation and considering the introduction of a cut-off. The idea behind this cut-off can be described by the example below.
+
+Consider, as an example which allows for a complete analytical treatment, the case of a power law distribution 
+$$
+P(x)=\frac{x^{-\alpha}}{\mathcal{Z}} ,
+$$
+defined from 1 to $\infty$ and with 
+$$
+\mathcal{Z}=\int_1^{\infty}x^{-\alpha}.
+$$
+
+Consider the case $\alpha=3/2$. The distribution is normalized with $\mathcal{Z}=2$, but the mean diverges. However, we would like to be able to describe the behaviour of the sample mean 
+$$
+\bar{x}_N\equiv\frac{1}{N}\sum_{i=1}^Nx_i,
+$$
+where the $x_i$ are extracted from $P(x)$.
+For this purpose, we can define the quantity
+$$
+\langle x\rangle_{\Lambda}\equiv\int_1^{\Lambda}dxP(x)x,
+$$
+with the cut-off $\Lambda$ defined such that $\int_1^{\infty}dxP(x)=1/N$, i.e., such that there is statistically less than 1 variable with value above $\Lambda$ out of $N$ extracted variables. For the case $\alpha=3/2$ we have 
+$$
+\frac{1}{2}\int_{\Lambda}^{\infty}dxx^{-3/2}=\Lambda^{-1/2},
+$$
+and therefore $\Lambda=N^2$. We have for the mean
+$$
+\langle x\rangle_{\Lambda}=\frac{1}{2}\int_1^{N^2}dxx^{-1/2} = N-1.
+$$
+The result is plotted below, alongside sample mean for extractions of $N=10,$ $10^2,$ $10^3,$ $10^4,$ $10^5,$ $10^6$.
+
+![](../plots/cut-off-justification.png)
+
+## Referee B
+
+We thank the referee...
+
+- *Modelling Framework Justification:*
+    
+     *The rationale behind the proposed generalization of the GLV model is claimed to be "natural" based on physical and biological grounds, specifically using power laws. Nevertheless, the literature extensively demonstrates species abundance growth being well-described by logistic equations or oscillatory predator-prey equations, that indeed are linear (except for the carrying capacity term). The justifications provided are weak, with the provided examples failing to convincingly represent the complex dynamics of natural systems, such as forest biomass distribution. If we think to a forest there are various heights of trees, and in general the biomass in not uniformly distributed, and thus also the growth is not necessary constrained by the surface. The sublinear scaling of the “production function”, f, if this is really the right conclusion based on the references of the manuscript, must be the result of a cooperative behavior of the interacting system and as such it should not appear as hand-added like the authors do. Furthermore, in reference 27 the sublinear scaling with k=3/4 refers to the scaling of the single individual growth rather than to a community.*
+
+...
+
+- *Feasibility Condition Neglected:*
+
+    *The authors do not seem to consider the condition for the feasibility of the fixed points (x\* >= 0), which is critical. This oversight, especially evident in Equations 11 and 12, i.e., Eq. 12 or its Gaussian approximation are normalized from 0 or from -infty to infty? I think this is a very relevant issue calling into question the appropriateness of the results.*
+
+...
+
+- *Lack of Proper Scaling:*
+    
+    *There is no proper scaling of the interactions, so the thermodynamic limit is not well defined. And this is not discussed or compared with other models in the literature applying similar disputable choice (see E Mallmin, A Traulsen, S De Monte - arXiv preprint arXiv:2306.11031, 2023). Relatedly, the comparison with GLV with quenched disorder (e.g. “The properties of large random dynamical systems is often portrayed in the ( sigma sqrt(N) , mu N ) plane [25] is not appropriate as such model scales the interactions strengths with the system size.*
+
+...
+
+- *Gaussian Approximation:*
+
+    *The justification for employing a Gaussian approximation is unclear, given that Equation 12 should be solved self-consistently. Ecologically, Gaussian species abundance distributions (SADs) are not meaningful due to the prevalence of heavy-tailed SADs in natural ecosystems.*
+
+We thank the referee for this comment, we now removed the Gaussian approximation in the discussion and clarified how to treat the case in which self-consistently computing the moment in Equation (12) can be problematic, as explained in the answers to referee A.
+
+- *Homogenous Case and Stability:*
+     *The manuscript concludes that stability requires stronger self-interactions than cross-interactions when alpha equals beta. While this is true that self-interactions promote stability also for the Lotka-Volterra model, any negative mean species interaction (indicating mutualism) in the homogeneous case leads to instability, irrespective of system size. Thus, comparing this to the GLV model seems a stretch.*
+
+...
+
+- *Notation:*
+
+     *Using S instead of N for species richness would align better with ecological conventions.*
+
+...
+
+- *Discussion Quality:*
+
+    *Given the issues raised, the discussion section of the manuscript needs substantial improvement to convincingly argue the paper's contributions to the field. In light of these concerns, before the authors submit their manuscript elsewhere, I recommend to undertake significant revisions to address the weaknesses in their modelling framework, the rationale behind their approach, and the ecological implications of their findings*
+
+...
 
 ---
 
