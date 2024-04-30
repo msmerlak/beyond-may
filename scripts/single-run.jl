@@ -4,6 +4,10 @@ foreach(include, glob("*.jl", srcdir()))
 
 using Plots, LaTeXStrings
 
+#= Unstructured =#
+
+stab = Float64[]
+
 σₑ=.075:.001:.2
 for (i,_) in enumerate(σₑ)
 
@@ -34,7 +38,23 @@ xlabel = L"\sigma_e",
 ylabel = L"\textrm{Probability \ of \ stability}",
 )
 
-stab = Float64[]
+#= --- =#
+
+p = Dict{Symbol,Any}(
+    :scaled => false,
+    :S => 100,
+    :μ => .01,
+    :μₛ => .01,
+    :σ => .01,
+    :α => 1.,
+    :β => 1.5,
+    :γ => 1.,
+    #:x0 => 1.,
+    :extinction_threshold => 1e-6,
+    :dist => "gamma",
+    :N => 100,
+    :seed => rand(UInt)
+    );
 
 evolve!(p; trajectory=true)
 
