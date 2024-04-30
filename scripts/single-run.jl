@@ -4,23 +4,60 @@ foreach(include, glob("*.jl", srcdir()))
 
 using Plots, LaTeXStrings
 
+#= Unstructured =#
+
+stab = Float64[]
+
+σₑ=.075:.001:.2
+for (i,_) in enumerate(σₑ)
+
+    p = Dict{Symbol,Any}(
+    :scaled => false,
+    :S => 100,
+    :μ => .01,
+    :μₛ => .01,
+    :σ => .01,
+    :α => rand(Normal(1., σₑ[i]),100),
+    :β => rand(Normal(1.5,σₑ[i]),100),
+    :γ => rand(Normal(1., σₑ[i]),100),
+    :x0 => 1. *ones(100),
+    :extinction_threshold => 1e-6,
+    :dist => "gamma",
+    :N => 100,
+    :seed => rand(UInt)
+    );
+
+    push!(stab, stability!(p))
+
+end
+
+plot(σₑ, stab,
+lw = 2,
+legend = false,
+xlabel = L"\sigma_e",
+ylabel = L"\textrm{Probability \ of \ stability}",
+)
+
+#= --- =#
+
 p = Dict{Symbol,Any}(
     :scaled => false,
     :S => 100,
     :μ => .01,
     :μₛ => .01,
     :σ => .01,
-    :α => 1.0,
+    :α => 1.,
     :β => 1.5,
-    :γ => 1.0,
-    :x0 => 1. *ones(100),
+    :γ => 1.,
+    #:x0 => 1.,
     :extinction_threshold => 1e-6,
     :dist => "gamma",
-    :N => 1,
+    :N => 100,
     :seed => rand(UInt)
-);
+    );
 
 evolve!(p; trajectory=true)
+
 
 #= trajectories =#
 plot(
