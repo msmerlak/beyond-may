@@ -119,7 +119,7 @@ We assume the diagonal elements $A_{ii}$ have a mean value $\mu_s$ (possibly dif
 We compute the Jacobian matrix at equilibrium
 \begin{align}
     J_{ij}^* & = - A_{ij}g(x_i^*)h'(x_j^*) \qquad \qquad \textrm{for} \ i\neq j \label{eq: jac off-diag}\\
-    J_{ii}^* & = f'(x_i^*) - g'(x_i^*)f(x_i^*)/g(x_i^*) - A_{ii}g(x_i^*)h'(x_j^*) \ , \label{eq: jac diag}
+    J_{ii}^* & = f'(x_i^*) - g'(x_i^*)f(x_i^*)/g(x_i^*) - A_{ii}g(x_i^*)h'(x_i^*) \ , \label{eq: jac diag}
 \end{align}
 where we used $\sum_{j}A_{ij}h(x_j^*)=f(x_i^*)/g(x_i^*)$.
 In order to investigate the spectral properties of $J^*$, 
@@ -169,7 +169,7 @@ In the GLV model, $\psi(x) = \mu_s - \tilde{\mu}/N$ (independently of $x$) and f
     $\gamma=1$, $N=50$ and $10$ replicates for the simulations. The green line is plotted for $\mu=0.1$ and $\sigma=0.75$.}
     \label{fig: stability line + sims}
 \end{figure}
-Following e.g. Ref.~\cite{Roy2019}, we can derive from Eq.~\eqref{dynamics} a cavity solution which describes the ensemble of the stationary value of $N\gg 1$ variables by means of a single representative radnom variable $x_*$
+Following e.g. Ref.~\cite{Roy2019}, we can derive from Eq.~\eqref{dynamics} a cavity solution which describes the ensemble of the stationary value of $N\gg 1$ variables by means of a single representative random variable $x_*$
 \begin{equation}
     0 = x_*^{\alpha}-A_sx_*^{\beta+\gamma}-x_*^{\beta}\big( \tilde{\mu} \langle x_*^{\gamma}\rangle + \tilde{\sigma} \sqrt{\langle x_*^{2\gamma}\rangle}\xi\big) \, ,
 \label{eq: dmft}
@@ -202,7 +202,7 @@ The equilibrium distribution $P(x_*)$ can then be obtained as the pushforward of
     P(x_*)=\frac{|\alpha-\beta|x_*^{\alpha-\beta-1}}{\sqrt{2\pi\tilde{\sigma}^2 \langle x_*^{2\gamma}\rangle}}
     \exp{\left\{-\frac{(x_*^{\alpha-\beta}- \tilde{\mu} \langle x_*^{\gamma}\rangle)^2}{2\tilde{\sigma}^2\langle x_*^{2\gamma}\rangle}\right\}} \, ,
 \end{equation}
-defined from $0$  to $\infty$, and where the expectation values must be computed self-consistently (see~\cite{Hatton2024} for a discussion on feasibility for systems described by this kind of distributions). 
+defined from $0$  to $\infty$, and where the expectation values must be computed self-consistently. XXX feasibility XXX
 
 Equipped with the equilibrium distribution $P(x_*)$, we can compute, for given $N$ and $\mu$, the maximal heterogeneity $\sigma_c$ compatible with the linear stability condition $N\langle (\sigma/\psi(x_*))^2\rangle < 1$.
 
@@ -226,7 +226,7 @@ Finally, Fig.~\ref{fig: alpha-beta} shows results of simulations for $\sigma_c\s
 \emph{Discussion.---}The relationship between complexity and stability in high-dimensional dynamical systems has been a longstanding puzzle, in ecology and other fields. 
 In this letter, we have shown that the condition $\sigma\sqrt{N}< \mu_s$ does not provide a complete picture of the relationship between complexity and stability. 
 In particular, we have seen that the competitive Lotka-Volterra model, often cited in support of May's general prediction, exemplifies a special cancellation in the more general stability condition $N\langle (\sigma/\psi)^2\rangle < 1$.
-In models where self-interactions grow faster than cross-interactions~\cite{Hatton2024,samadder2024interconnection}, the opposite behavior is observed: stability becomes \emph{more} likely with increasing diversity $N$.
+In models where self-interactions grow slower than cross-interactions~\cite{Hatton2024,samadder2024interconnection}, the opposite behavior is observed: stability becomes \emph{more} likely with increasing diversity $N$.
 
 A modification of our model~\eqref{dynamics} of general ecological relevance describing the case in which per capita growth rates depend only on the sum of the other densities (weighted by interaction strength) is $\dot{x_i}/x_i=1-F(\sum_jA_{ij}x_j)$, where $F$ is an arbitrary function.
 General models of this kind are used, for example, to study the growth of a clonal population in the presence of a limiting factor~\cite{mazzolini2023universality}.
