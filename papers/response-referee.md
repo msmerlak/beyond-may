@@ -32,7 +32,7 @@ P(x)=\frac{x^{-\alpha}}{\mathcal{Z}} ,
 $$
 defined from 1 to $\infty$ and with 
 $$
-\mathcal{Z}=\int_1^{\infty}x^{-\alpha}.
+\mathcal{Z}=\int_1^{\infty}dxx^{-\alpha}.
 $$
 
 Consider the case $\alpha=3/2$. The distribution is normalized with $\mathcal{Z}=2$, but the mean diverges. However, we would like to be able to describe the behaviour of the sample mean 
@@ -44,7 +44,7 @@ For this purpose, we can define the quantity
 $$
 \langle x\rangle_{\Lambda}\equiv\int_1^{\Lambda}dxP(x)x,
 $$
-with the cut-off $\Lambda$ defined such that $\int_1^{\infty}dxP(x)=1/N$, i.e., such that there is statistically less than 1 variable with value above $\Lambda$ out of $N$ extracted variables. For the case $\alpha=3/2$ we have 
+with the cut-off $\Lambda$ defined such that $\int_{\Lambda}^{\infty}dxP(x)=1/N$, i.e., such that there is statistically less than 1 variable with value above $\Lambda$ out of $N$ extracted variables. For the case $\alpha=3/2$ we have 
 $$
 \frac{1}{2}\int_{\Lambda}^{\infty}dxx^{-3/2}=\Lambda^{-1/2},
 $$
@@ -76,7 +76,7 @@ Finally, we are aware of the fact that reference [27] refers to the scaling of s
 
     *The authors do not seem to consider the condition for the feasibility of the fixed points (x\* >= 0), which is critical. This oversight, especially evident in Equations 11 and 12, i.e., Eq. 12 or its Gaussian approximation are normalized from 0 or from -infty to infty? I think this is a very relevant issue calling into question the appropriateness of the results.*
 
-We thank the referee for highlighting this oversight.
+We thank the referee for raising this point.
 We have now specified that the distribution in Eq.(11) is defined form zero to infinity and we point to reference [17] where a discussion on feasibility for systems described by this kind of distribution is present.
 
 - *Lack of Proper Scaling:*
