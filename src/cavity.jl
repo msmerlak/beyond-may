@@ -13,7 +13,7 @@ function P_n(n, e1_n, e2_n, p)
     μ = (p[:scaled] ? μ/S : μ)
     σ = (p[:scaled] ? σ/S : σ)
     x = max(n,1e-20)
-    return abs(α-β)*x^(α-β-1)/(sqrt(2*π*S*((σ^2+μ^2)*e2_n-μ^2*e1_n^2)))*exp(-(x^(α-β)-S*μ*e1_n)^2/(2*S*((σ^2+μ^2)*e2_n-μ^2*e1_n^2)))
+    return abs(α-β)*x^(α-β-1)/(sqrt(2*π*S*((σ^2)*e2_n)))*exp(-(x^(α-β)-S*μ*e1_n)^2/(2*S*((σ^2)*e2_n)))
 end
 
 #= cavity calculation for fraction of positive equilibriums 
@@ -58,7 +58,7 @@ function Cavity(p;
     Iter = 2000, #number of iteration
     rela = .01, #relax parameter for fixed point
     tol = 1e-9, #requested tolerance for numerical integrator
-    Λ = p[:S]^(p[:β]-p[:α]), #Cut-off for integration
+    Λ = .001*p[:S]^(p[:β]-p[:α]), #Cut-off for integration
     n_min = p[:extinction_threshold], #lower bound for integration
     e1_init = (p[:scaled] ? 1/p[:μ] : 1/p[:μ]/p[:S]), #initial guess for e1_n
     e2_init = (p[:scaled] ? 1/p[:μ] : 1/p[:μ]/p[:S]) #initial guess for e1_n
