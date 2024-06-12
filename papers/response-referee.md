@@ -58,7 +58,7 @@ The result is plotted below, alongside the sample mean for extractions of $N=10,
 
 ## Referee B
 
-We thank the referee for the thorough and critical review. We address each of the comments below point by point. We believe the results of our paper are now more transparent thanks to the work needed to address the weaknesses hihglighted by the referee. 
+We thank the referee for the thorough and critical review. We address each of the comments below point by point. We believe the results of our paper are now more transparent thanks to the work needed to address the points raised by the referee.
 
 - *Modelling Framework Justification:*
     
@@ -78,7 +78,7 @@ Finally, we are aware of the fact that reference [27] refers to the scaling of s
 
 We thank the referee for raising this point.
 We have now specified that the distribution in Eq.(11) is defined from zero to infinity and that in the specific case we analyze the system is always feasible. This happens because, given that $\alpha<\beta$, at low enough density each degree of freedom effectively decouples from the others and only feels self-interactions and therefore never crosses zero.
-We also now point to reference [17] where a discussion on the feasibility of ecological systems described by this kind of distributions when a realistic lower threshold beyond which a species can be considered extinct is present.
+We also now point to reference [17] where a discussion on the feasibility of ecological systems described by this kind of distribution when a realistic lower threshold beyond which a species can be considered extinct is present.
 
 - *Lack of Proper Scaling:*
     
@@ -101,7 +101,7 @@ We thank the referee for this important comment, we now removed the Gaussian app
 - *Homogenous Case and Stability:*
      *The manuscript concludes that stability requires stronger self-interactions than cross-interactions when alpha equals beta. While this is true that self-interactions promote stability also for the Lotka-Volterra model, any negative mean species interaction (indicating mutualism) in the homogeneous case leads to instability, irrespective of system size. Thus, comparing this to the GLV model seems a stretch.*
 
-We are grateful to the referee for this comment, it helps to clarify the scope of our work. We have now specified everywhere in the manuscript, including Abstract, Introduction and Discussion, that we compare out results to the *competitive* Lotka-Volterra model and in general that our results are relevant for predominantly competitive systems.
+We are grateful to the referee for this comment, it helps to clarify the scope of our work. We have now specified everywhere in the manuscript, including Abstract, Introduction and Discussion, that we compare our results to the *competitive* Lotka-Volterra model and in general that our results are relevant for predominantly competitive systems.
 
 - *Notation:*
 
