@@ -35,10 +35,9 @@
 \begin{abstract}
     Robert May famously used random matrix theory to predict that large, complex systems cannot admit stable fixed points. 
     However, this general conclusion is not always supported by empirical observation: from cells to biomes, biological systems are large, complex and, often, stable.
-    In this paper, we revisit May's argument in the light of recent developments in both ecology and random matrix theory. 
-    Using a non-linear generalization of the competitive Lotka-Volterra model, we show that there are in fact two kinds of complexity-stability relationships in disordered dynamical systems dominated by competition:
+    In this paper, we revisit May's argument in light of recent developments in both ecology and random matrix theory. 
+    Using a non-linear generalization of the competitive Lotka-Volterra model, we show that there are, in fact, two kinds of complexity-stability relationships in disordered dynamical systems:
     if self-interactions grow faster with density than cross-interactions, complexity is destabilizing; but if cross-interactions grow faster than self-interactions, complexity is stabilizing.
-    Our result shows that May's principle that "complexity begets instability" is not a general property of complex systems.
 \end{abstract}
 
 \maketitle
@@ -113,7 +112,7 @@ leading to three different regimes:
 %Random interactions: stability condition
 \paragraph*{}
 \emph{Random interactions: stability condition.---}We now consider the case of random interactions.
-Specifically, we assume that interaction coefficients $A_{ij}$ are drawn independently from a distribution with scaled mean $\mu=\tilde{\mu}/N$ and standard deviation $\sigma=\tilde{\sigma}/\sqrt{N}$~\cite{bunin2017ecological}.
+Specifically, we assume that interaction coefficients $A_{ij}$ are drawn independently from a distribution with mean $\mu$ and standard deviation $\sigma$.
 We assume the diagonal elements $A_{ii}$ have a mean value $\mu_s$ (possibly different from $\mu$) and standard deviation $\sigma$. 
  
 We compute the Jacobian matrix at equilibrium
@@ -154,7 +153,7 @@ Stability of the equilibrium requires that $\mathcal{D}$ be entirely contained i
     < 1.
     \label{eq: random-stability}
 \end{equation}
-In the GLV model, $\psi(x) = \mu_s - \tilde{\mu}/N$ (independently of $x$) and for large $N$ we recover the classical condition $\tilde{\sigma} = \sigma\sqrt{N} < \mu_s$ \footnote{In fact, the same condition holds when $f$ and $g$ are power laws with the same exponent.}. In general, however, the dependence on equilibrium values $x_i^*$ (which in turn depend on $N$) does not cancel out, and one must gain information about the distribution of equilibrium values $P(x_i^*)$ to assess the stability condition~\eqref{eq: random-stability}.
+In the GLV model, $\psi(x) = \mu_s - \mu$ (independently of $x$) and we recover the classical condition $\sigma\sqrt{N} < \mu_s - \mu$ \footnote{In fact, the same condition holds when $f$ and $g$ are power laws with the same exponent.}. In general, however, the dependence on equilibrium values $x_i^*$ (which in turn depends on $N$) does not cancel out, and one must gain information about the distribution of equilibrium values $P(x_i^*)$ to assess the stability condition~\eqref{eq: random-stability}.
 
 %Random interactions: equilibrium distribution
 \paragraph*{}
@@ -169,9 +168,9 @@ In the GLV model, $\psi(x) = \mu_s - \tilde{\mu}/N$ (independently of $x$) and f
     $\gamma=1$, $N=50$ and $10$ replicates for the simulations. The green line is plotted for $\mu=0.1$ and $\sigma=0.75$.}
     \label{fig: stability line + sims}
 \end{figure}
-Following e.g. Ref.~\cite{Roy2019}, we can derive from Eq.~\eqref{dynamics} a cavity solution which describes the ensemble of the stationary value of $N\gg 1$ variables by means of a single representative random variable $x_*$
+Following e.g. Ref.~\cite{Roy2019}, we can derive from Eq.~\eqref{dynamics} a cavity solution that describes the ensemble of the stationary solutions of the system by means of a single representative random variable $x_*$
 \begin{equation}
-    0 = x_*^{\alpha}-A_sx_*^{\beta+\gamma}-x_*^{\beta}\big( \tilde{\mu} \langle x_*^{\gamma}\rangle + \tilde{\sigma} \sqrt{\langle x_*^{2\gamma}\rangle}\xi\big) \, ,
+    0 = x_*^{\alpha}-A_sx_*^{\beta+\gamma}-x_*^{\beta}\big( \mu N \langle x_*^{\gamma}\rangle + \sigma\sqrt{N} \sqrt{\langle x_*^{2\gamma}\rangle}\xi\big) \, ,
 \label{eq: dmft}
 \end{equation}
 where $A_s$ is a random variable with the statistics of $A_{ii}$ and $\xi$ is a standard normal random variable. 
@@ -187,39 +186,40 @@ where $A_s$ is a random variable with the statistics of $A_{ii}$ and $\xi$ is a 
     No amount of heterogeneity is allowed in the bottom right triangle because we have set $\mu=\mu_s$, while an increasing value of $\sigma_c$
     is found as $\beta$ becomes larger than $\alpha$.
     We stress that the existence of a finite $\sigma_c\sqrt{N}$ above which instability is triggered also in the upper triangle,
-    does not imply that increasing $N$, at fixed $\mu$ and $\sigma$, will destabilize the system, because $\tilde{\mu}=\mu N$ would also change.
+    does not imply that increasing $N$, at fixed $\mu$ and $\sigma$, will destabilize the system, because $\mu N$ would also change.
     }
     \label{fig: alpha-beta}
 \end{figure}
+We are interested in the case in which the number of degrees of freedom $N$ is the only parameter changing in the system and the strength and heterogeneity of the interactions are fixed~\cite{kessler2015generalized,fried2016communities}. This choice reflects a strong-interaction regime and has been employed, for example, to study ecological scenarios with large differences in species abundance and chaotic turnover~\cite{mallmin2024chaotic}. As we show below, the cavity approximation does a good job at describing the effects of heterogeneity in the interactions as long as $\sigma \sqrt{N}$ is not negligible relative to $\mu N$, at which point we recover the homogeneous case.
+
 The equation above can be solved for $x_*$ for specific values of
 $(\alpha-\beta)/\gamma$, or if $A_s=0$.
 (In the following we show that neglecting $A_s$, when it is of the order of $\mu$, does not affect noticeably the quality of the approximation.) In this case the stationary solution is given by 
 \begin{equation} \label{eq: cavity solution}
-    x_* = \left( \tilde{\mu} \langle x_*^{\gamma}\rangle + \tilde{\sigma} \sqrt{\langle x_*^{2\gamma}\rangle}\xi\right)^{1/(\alpha-\beta)} \, .
+    x_* = \left( \mu N \langle x_*^{\gamma}\rangle + \sigma \sqrt{N} \sqrt{\langle x_*^{2\gamma}\rangle}\xi\right)^{1/(\alpha-\beta)} \, .
 \end{equation}
 The equilibrium distribution $P(x_*)$ can then be obtained as the pushforward of the distribution of $\xi$: 
 \begin{equation}\label{eq: dist general}
-    P(x_*)=\frac{|\alpha-\beta|x_*^{\alpha-\beta-1}}{\sqrt{2\pi\tilde{\sigma}^2 \langle x_*^{2\gamma}\rangle}}
-    \exp{\left\{-\frac{(x_*^{\alpha-\beta}- \tilde{\mu} \langle x_*^{\gamma}\rangle)^2}{2\tilde{\sigma}^2\langle x_*^{2\gamma}\rangle}\right\}} \, ,
+    P(x_*)=\frac{|\alpha-\beta|x_*^{\alpha-\beta-1}}{\sqrt{2\pi\sigma^2N \langle x_*^{2\gamma}\rangle}}
+    \exp{\left\{-\frac{(x_*^{\alpha-\beta}- \mu N \langle x_*^{\gamma}\rangle)^2}{2\sigma^2N\langle x_*^{2\gamma}\rangle}\right\}} \, ,
 \end{equation}
-defined from $0$  to $\infty$, and where the expectation values must be computed self-consistently. XXX feasibility XXX
+defined from $0$  to $\infty$, and where the expectation values must be computed self-consistently.
 
 Equipped with the equilibrium distribution $P(x_*)$, we can compute, for given $N$ and $\mu$, the maximal heterogeneity $\sigma_c$ compatible with the linear stability condition $N\langle (\sigma/\psi(x_*))^2\rangle < 1$.
 
 Let us focus on the choice $\alpha=1$, $\beta=3/2$ and $\gamma=1$, with $A_s=0$.  
-In this case, the distribution can be normalized but the first and second moments formally diverge. It is not uncommon, for example in ecology, to find empirical species abundance distributions characterized by heavy-tails, potentially with diverging moments.
-This is problem can be overcome considering that we are dealing with large, but \emph{finite}, populations. 
+In this case the system is always feasible (see Ref.~\cite{Hatton2024} for a discussion on the inclusion of extinction thresholds at low density in an ecological setting) and the distribution can be normalized. However, the first and second moments formally diverge.
+This is problem can be overcome considering that we are dealing with a large, but \emph{finite}, number of degrees of freedom. 
 We are therefore interested in predicting the sample mean and variance for a given $N$. Consider the sample mean $\bar{x}_{N}\equiv\sum_{i}^N x_i /N$. We can approximate it with $\bar{x}_N \approx \langle x_* \rangle_{\Lambda} \equiv \int_0^{\Lambda}dx_*x_*P(x_*)$ where the cut-off $\Lambda$ depends on $N$ in such a way that $\int_{\Lambda}^{\infty}dx_*P(x_*)=1/N$. In orther words such that there is less 1 variable with density above $\Lambda$.
 
 Following, e.g.,~\cite{Cui2020,Hatton2024} we can compute self-consistently $\Lambda$, $\langle x_*\rangle_{\Lambda}$ and $\langle x_*^2\rangle_{\Lambda}\equiv\int_0^{\Lambda}dx_*x_*^2P(x_*)$. The resulting distribution is plotted against simulations in Fig.~\ref{fig: cavity sol.}. Simulations correspond to $A_s=\mu$, showing that neglecting the $A_s$ term in analytical expressions does not introduce a significant error. 
 
 The properties of large random dynamical systems are often portrayed in the $(\sigma \sqrt{N},\mu N)$ plane \cite{bunin2017ecological}.
-In particular, we are interested in the case in which the number of degrees of freedom $N$ is the only parameter changing in the system and the strength and heterogeneity of the interactions is fixed. This choice, equivalently expressed as having $\tilde{\mu}$ and $\tilde{\sigma}^2$ increasing with $N$, reflects a strong-interaction regime and has been also employed, for example, to study ecological scenarios whith large differences in species abundance and chaotic turnover~\cite{mallmin2024chaotic}.
-If we keep the mean $\mu$ and standard deviation $\sigma$ of interactions fixed, an increase in the number of degrees of freedom $N$ moves the system along a square-root trajectory in that plane. In the GLV model, the boundary between the stable and unstable parameter regions is the horizontal line $\sigma_c\sqrt{N} = \mu_s$ \cite{bunin2017ecological}, hence stability is never possible at large $N$. 
+If we keep the mean $\mu$ and standard deviation $\sigma$ of interactions fixed, an increase in the number of degrees of freedom $N$ moves the system along a square-root trajectory in that plane. In the GLV model, the boundary between the stable and unstable parameter regions is the horizontal line $\sigma_c\sqrt{N} = \mu_s - \mu N / N \approx \mu_s$ \cite{bunin2017ecological}, hence stability is never possible at large $N$. 
 
 In Fig.~\ref{fig: stability line + sims} we plot the stability condition $N\langle (\sigma/\psi(x_*))^2\rangle < 1$ for $\alpha = 1$, $\beta = 3/2$ derived from \eqref{eq: dist general} (solid line) together with results from simulations (shading). Here, because the boundary between the stable and unstable phases is a straight line with positive slope, increasing $N$ will eventually bring the system in the stable region. This behavior corresponds to the ``anti-May" phase defined previously. 
 
-Finally, Fig.~\ref{fig: alpha-beta} shows results of simulations for $\sigma_c\sqrt{N}$ in the $(\alpha,\beta)$ plane, at fixed $\tilde{\mu}=\mu N$ and $\gamma = 1$. (Numerically, we define $\sigma_c\sqrt{N}$ as the value of $\sigma$ above which full stable coexistence has a probability lower than $50\%$.) In these simulations, we use $\mu_s = \mu$, which would never be stable in the GLV model. Fig.~\ref{fig: alpha-beta} illustrates the transition between a ``May" phase for $\alpha \geq \beta$ and an ``anti-May" phase for $\alpha < \beta$, showing that our analytical results are robust to heterogeneous interactions.
+Finally, Fig.~\ref{fig: alpha-beta} shows results of simulations for $\sigma_c\sqrt{N}$ in the $(\alpha,\beta)$ plane, at fixed $\mu N$ and $\gamma = 1$. (Numerically, we define $\sigma_c$ as the value of $\sigma$ above which full stable coexistence has a probability lower than $50\%$.) In these simulations, we use $\mu_s = \mu$, which would never be stable in the GLV model. Fig.~\ref{fig: alpha-beta} illustrates the transition between a ``May" phase for $\alpha \geq \beta$ and an ``anti-May" phase for $\alpha < \beta$, showing that our analytical results are robust to heterogeneous interactions.
 
 %Conclusion
 \paragraph*{}
@@ -228,7 +228,7 @@ In this letter, we have shown that the condition $\sigma\sqrt{N}< \mu_s$ does no
 In particular, we have seen that the competitive Lotka-Volterra model, often cited in support of May's general prediction, exemplifies a special cancellation in the more general stability condition $N\langle (\sigma/\psi)^2\rangle < 1$.
 In models where self-interactions grow slower than cross-interactions~\cite{Hatton2024,samadder2024interconnection}, the opposite behavior is observed: stability becomes \emph{more} likely with increasing diversity $N$.
 
-A modification of our model~\eqref{dynamics} of general ecological relevance describing the case in which per capita growth rates depend only on the sum of the other densities (weighted by interaction strength) is $\dot{x_i}/x_i=1-F(\sum_jA_{ij}x_j)$, where $F$ is an arbitrary function.
+A modification of our model~\eqref{dynamics} of general ecological relevance describing the case in which per capita growth rates depend only on a linear combination of the densities is $\dot{x_i}/x_i=1-F(\sum_jA_{ij}x_j)$, where the function $F$ characterizes the effects of competition.
 General models of this kind are used, for example, to study the growth of a clonal population in the presence of a limiting factor~\cite{mazzolini2023universality}.
 All the models in this class are destabilized by diversity.
 The Jacobian matrix at equilibrium is $J_{ij}^*=-A_{ij}x_i^*F'(\sum_jA_{ij}x_j^*) \quad \forall i,j$ leading to the same simplification of the stability condition~\eqref{eq: random-stability} possible for GLV.
