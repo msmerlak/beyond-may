@@ -12,25 +12,23 @@ We now added a Supplemental Material document where report results of simulation
 
 - *The way of writing the matrix elements in Equations (7) is somewhat confusing. For clarity, the Kronecker delta can be used on the right side of these equations.*
 
-We thank the referee for this comment, we modified Equations (7) accordingly.
+We modified Equations (7) accordingly.
 
 - *The mean field equations depend on the expected values of <x_^\gamma> and <x_^{2\gamma}>. The self-consistency condition requires that the probability distribution (12) has exactly the same expected values. This should be discussed in detail.*
 
-We agree with the referee that the discussion about the expected values and self-consistency conditions needed more clarification. 
+We agree with the referee that the discussion about the expected values and self-consistency conditions needed clarifications. 
 
 In some cases, for example, $\alpha=1, \beta=3, \gamma=1$, both expectations converge to finite values and we can safely compute the self-consistency equations. However in potential cases of interest, and in the example case $\alpha=1, \beta=3/2, \gamma=1$ characterized by a distribution with a power-law tail with exponent $-3/2$, the moments diverge. We now modified the discussion removing the Gaussian approximation and considering the introduction of a cut-off. The idea behind this cut-off is described in the main text and in the Supplemental Material.
 
 ## Referee B
 
-We thank the referee for the thorough and critical review. We address each of the comments below point by point. We believe the results of our paper are now more transparent thanks to the work needed to address the points raised by the referee.
+We thank the referee for their thorough and critical review of our work. We address each of the comments below point by point. We believe the results of our paper are more transparent thanks to these modifications.
 
 - *Modelling Framework Justification:*
     
      *The rationale behind the proposed generalization of the GLV model is claimed to be "natural" based on physical and biological grounds, specifically using power laws. Nevertheless, the literature extensively demonstrates species abundance growth being well-described by logistic equations or oscillatory predator-prey equations, that indeed are linear (except for the carrying capacity term). The justifications provided are weak, with the provided examples failing to convincingly represent the complex dynamics of natural systems, such as forest biomass distribution. If we think to a forest there are various heights of trees, and in general the biomass in not uniformly distributed, and thus also the growth is not necessary constrained by the surface. The sublinear scaling of the “production function”, f, if this is really the right conclusion based on the references of the manuscript, must be the result of a cooperative behavior of the interacting system and as such it should not appear as hand-added like the authors do. Furthermore, in reference 27 the sublinear scaling with k=3/4 refers to the scaling of the single individual growth rather than to a community.*
 
-We understand the criticism of the referee, pointing out the need for better justification of models of this kind in ecology. Our goal in this letter, however, is not to propose a model for a specific ecological scenario. Rather, we employ this model for complex systems (following references [18] and [19]) to show in a minimal setting the existence of the two opposite complexity-stability relationships in disordered dynamical systems, possibly with applications beyond ecology.
-
-Nevertheless, the examples we provide are indicative that models of this class can be relevant in ecology (see reference [17], where a discussion of possible mechanisms is present; even though admittedly more work is required in that direction, which is beyond the scope of our paper).
+We recently published a separate paper (cited as Ref. [17]) to outline in some detail the ecological motivations and consequences of competitive models with sublinear production. The goal of the present letter is different. Following Refs. [18] and [19], we show in a minimal setting (and for an audience of physicists) the existence of the two opposite complexity-stability relationships in disordered dynamical systems. We have reword
 
 We are aware that reference [27] refers to the scaling of single individuals. We now mention that explicitly.
 
