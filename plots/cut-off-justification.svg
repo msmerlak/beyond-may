@@ -27,8 +27,8 @@
      inkscape:zoom="1.0425"
      inkscape:cx="292.56595"
      inkscape:cy="161.15108"
-     inkscape:window-width="1366"
-     inkscape:window-height="704"
+     inkscape:window-width="1920"
+     inkscape:window-height="1016"
      inkscape:window-x="0"
      inkscape:window-y="27"
      inkscape:window-maximized="1"
@@ -88,18 +88,6 @@
          id="rect3" />
     </clipPath>
   </defs>
-  <polyline
-     clip-path="url(#clip982)"
-     style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:0.1"
-     points="1048.53,1474.16 1048.53,47.2441 "
-     id="polyline3"
-     transform="translate(289.21033)" />
-  <polyline
-     clip-path="url(#clip982)"
-     style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:0.1"
-     points="2290.65,1474.16 2290.65,47.2441 "
-     id="polyline4"
-     transform="translate(289.21033)" />
   <polyline
      clip-path="url(#clip980)"
      style="fill:none;stroke:#000000;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
@@ -165,18 +153,6 @@
      fill-rule="nonzero"
      fill-opacity="1"
      id="path12"
-     transform="translate(289.21033)" />
-  <polyline
-     clip-path="url(#clip982)"
-     style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:0.1"
-     points="158.35,894.86 2352.76,894.86 "
-     id="polyline12"
-     transform="translate(289.21033)" />
-  <polyline
-     clip-path="url(#clip982)"
-     style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:0.1"
-     points="158.35,104.56 2352.76,104.56 "
-     id="polyline13"
      transform="translate(289.21033)" />
   <polyline
      clip-path="url(#clip980)"

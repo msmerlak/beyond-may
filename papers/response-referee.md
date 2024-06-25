@@ -6,15 +6,9 @@ We thank the referee for the thoughtful review of our work and for raising impor
 
 We agree that indeed a spectrum of different exponents is probably more realistic, and thank the reviewer for pointing that out.
 
-We can consider the case in which the exponents are not identical for every variable $x_i$ but instead we have them from Gaussian distributions: $\alpha_i\sim\mathcal N(\alpha,\sigma_e)$, $\beta_i\sim\mathcal N(\beta,\sigma_e)$ and $\gamma_i\sim\mathcal N(\gamma,\sigma_e)$, respectively with mean $\alpha$, $\beta$ and $\gamma$, and, for simplicity, all with the same standard deviation $\sigma_e$. 
+We consider now the case in which the exponents are not identical for every variable $x_i$ but instead we have them from Gaussian distributions: $\alpha_i\sim\mathcal N(\alpha,\sigma_e)$, $\beta_i\sim\mathcal N(\beta,\sigma_e)$ and $\gamma_i\sim\mathcal N(\gamma,\sigma_e)$, respectively with mean $\alpha$, $\beta$ and $\gamma$, and, for simplicity, all with the same standard deviation $\sigma_e$. 
 
-Simulations show that all our results are robust as long as $\sigma_e$ is small enough that $\displaystyle{\min_i\beta_i>\max_i\alpha_i}$.
-
-As an example, we show in the plot below the probability of stability vs. $\sigma_e$ for a system with $S=100$, $\mu=\mu_s=\sigma=0.01$, $\alpha=\gamma=1$ and $\beta=3/2$.
-The probability of stability is obtained as the fraction of stable systems out of $100$ realizations for each value of $\sigma_e$.
-![](../plots/stoch-exp.png)
-
-We decided, however, to not include this analysis in the letter because we would like to keep the focus on the existence of the two complexity-stability regimes rather than exploring more detailed ecological scenarios. We stick to the case in which $f$, $g$ and $h$ are independent of the variable index, following references [18] and [19].
+We now added a Supplemental Material document where report results of simulations showing that our results are robust as long as $\sigma_e$ is small enough that $\displaystyle{\min_i\beta_i>\max_i\alpha_i}$. We also added a paragraph in the main text where we discuss this point.
 
 - *The way of writing the matrix elements in Equations (7) is somewhat confusing. For clarity, the Kronecker delta can be used on the right side of these equations.*
 
@@ -24,37 +18,7 @@ We thank the referee for this comment, we modified Equations (7) accordingly.
 
 We agree with the referee that the discussion about the expected values and self-consistency conditions needed more clarification. 
 
-In some cases, for example, $\alpha=1, \beta=3, \gamma=1$, both expectations converge to finite values and we can safely compute the self-consistency equations. However in potential cases of interest, and in the example case $\alpha=1, \beta=3/2, \gamma=1$ characterized by a distribution with a power-law tail with exponent $-3/2$, the moments diverge. We now modified the discussion removing the Gaussian approximation and considering the introduction of a cut-off. The idea behind this cut-off can be described by the example below.
-
-Consider, as an example that allows for a complete analytical treatment, the case of a power law distribution 
-$$
-P(x)=\frac{x^{-\alpha}}{\mathcal{Z}} ,
-$$
-defined from 1 to $\infty$ and with 
-$$
-\mathcal{Z}=\int_1^{\infty}dxx^{-\alpha}.
-$$
-
-Consider the case $\alpha=3/2$. The distribution is normalized with $\mathcal{Z}=2$, but the mean diverges. However, we would like to be able to describe the behavior of the sample mean 
-$$
-\bar{x}_N\equiv\frac{1}{N}\sum_{i=1}^Nx_i,
-$$
-where the $x_i$ are extracted from $P(x)$.
-For this purpose, we can define the quantity
-$$
-\langle x\rangle_{\Lambda}\equiv\int_1^{\Lambda}dxP(x)x,
-$$
-with the cut-off $\Lambda$ defined such that $\int_{\Lambda}^{\infty}dxP(x)=1/N$, i.e., such that there is statistically less than 1 variable with value above $\Lambda$ out of $N$ extracted variables. For the case $\alpha=3/2$ we have 
-$$
-\frac{1}{2}\int_{\Lambda}^{\infty}dxx^{-3/2}=\Lambda^{-1/2},
-$$
-and therefore $\Lambda=N^2$. We have for the mean
-$$
-\langle x\rangle_{\Lambda}=\frac{1}{2}\int_1^{N^2}dxx^{-1/2} = N-1.
-$$
-The result is plotted below, alongside the sample mean for extractions of $N=10,$ $10^2,$ $10^3,$ $10^4,$ $10^5,$ $10^6$.
-
-![](../plots/cut-off-justification.png)
+In some cases, for example, $\alpha=1, \beta=3, \gamma=1$, both expectations converge to finite values and we can safely compute the self-consistency equations. However in potential cases of interest, and in the example case $\alpha=1, \beta=3/2, \gamma=1$ characterized by a distribution with a power-law tail with exponent $-3/2$, the moments diverge. We now modified the discussion removing the Gaussian approximation and considering the introduction of a cut-off. The idea behind this cut-off is described in the main text and in the Supplemental Material.
 
 ## Referee B
 
@@ -68,9 +32,7 @@ We understand the criticism of the referee, pointing out the need for better jus
 
 Nevertheless, the examples we provide are indicative that models of this class can be relevant in ecology (see reference [17], where a discussion of possible mechanisms is present; even though admittedly more work is required in that direction, which is beyond the scope of our paper).
 
-Finally, we are aware of the fact that reference [27] refers to the scaling of single individuals, indeed we mention it to introduce the scaling at the higher level of organization:
-
-"Biologically, the growth of organisms (populations of cells) has long been known to scale like $f (x) \sim x^k$ with $k\simeq 3/4$ [27], which can be understood in terms of hydrodynamic constraints on vascular and pulmonary networks. For reasons that are not currently understood, a similar pattern of growth appears to recur at the level of ecological communities [17, 28]".
+We are aware that reference [27] refers to the scaling of single individuals. We now mention that explicitly.
 
 - *Feasibility Condition Neglected:*
 
@@ -78,7 +40,6 @@ Finally, we are aware of the fact that reference [27] refers to the scaling of s
 
 We thank the referee for raising this point.
 We have now specified that the distribution in Eq.(11) is defined from zero to infinity and that in the specific case we analyze the system is always feasible. This happens because, given that $\alpha<\beta$, at low enough density each degree of freedom effectively decouples from the others and only feels self-interactions and therefore never crosses zero.
-We also now point to reference [17] where a discussion on the feasibility of ecological systems described by this kind of distribution when a realistic lower threshold beyond which a species can be considered extinct is present.
 
 - *Lack of Proper Scaling:*
     
@@ -88,7 +49,7 @@ This is a delicate point and we thank the referee for raising it. This gives us 
 
 As also discussed in reference [25] (end of "I. MODEL DEFINITION"), the choice of scaling or not the interaction depends on the ecological setting of interest. 
 We believe that it is appropriate to fix the strength and heterogeneity of the interaction ($mean(A)=\mu$ and $var(A)=\sigma^2$) if our goal is to study the effects of changes in the number of degrees of freedom.
-In this setting, while the full limit in which $N\to\infty$ leads to the homogeneous interaction case, the cavity approximation does a good job at describing the empirical distributions obtained from simulations as long as $\sigma\sqrt{N}$ is not negligible with respect to $\mu N$.
+In this setting, while the full limit in which $N\to\infty$ leads to the homogeneous interaction case with $x^*\to0$ due to competitive pressure, the cavity approximation does a good job at describing the empirical distributions obtained from simulations as long as $\sigma\sqrt{N}$ is not negligible with respect to $\mu N$.
 
 We now discuss this and point out that it amounts to consider a strong-interactions regime and compare with the reference mentioned by the referee (E Mallmin, A Traulsen, S De Monte *PNAS* 2024, now reference [35] in the manuscript) for an ecological example in which this choice is made to study chaotic turnover of species with broad abundance distributions.
 
