@@ -26,7 +26,6 @@
 \affiliation{National Institute of Oceanography and Applied Geophysics (OGS), via Beirut 2, 34014 Trieste, Italy}
 
 \author{Matteo Smerlak}
-\affiliation{Laboratoire Biophysique et Evolution, ESPCI ParisTech, 10 rue Vauquelin, 75005 Paris, France}
 \affiliation{Capital Fund Management, 23 Rue de l'Université, 75007 Paris, France}
 
 
@@ -79,7 +78,7 @@ The classic generalized Lotka-Volterra (GLV) competition model studied by Bunin 
 
 However, it is natural both physically and biologically to consider more general functions, including power laws $f(x)\sim x^\alpha$, $g(x)\sim x^\beta$, $h(x) \sim x^\gamma$.
 From a physical perspective, we can imagine populations $x_i$ forming three-dimensional clusters whose growth is limited to their two-dimensional surface, leading to a production function $f(x) \sim x^{2/3}$.
-Biologically, the growth of organisms (populations of cells) has long been known to scale like $f(x) \sim x^k$ with $k\simeq 3/4$~\cite{Brown2004}, which can be understood in terms of hydrodynamic constraints on vascular and pulmonary networks.
+Biologically, at the individual organism level (populations of cells), growth has long been known to scale like $f(x) \sim x^k$ with $k\simeq 3/4$~\cite{Brown2004}, which can be understood in terms of hydrodynamic constraints on vascular and pulmonary networks.
 For reasons that are not currently understood, a similar pattern of growth appears to recur at the level of ecological communities~\cite{Hatton2015,Hatton2024}.
 In a different direction, it has been recently suggested that predator-prey interactions can be modelled with a square root law, i.e. $g(x) \sim h(x) \sim x^{1/2}$~\cite{Barbier2021,mazzarisi2024}.
 
@@ -208,9 +207,9 @@ defined from $0$  to $\infty$, and where the expectation values must be computed
 Equipped with the equilibrium distribution $P(x_*)$, we can compute, for given $N$ and $\mu$, the maximal heterogeneity $\sigma_c$ compatible with the linear stability condition $N\langle (\sigma/\psi(x_*))^2\rangle < 1$.
 
 Let us focus on the choice $\alpha=1$, $\beta=3/2$ and $\gamma=1$, with $A_s=0$.  
-In this case the system is always feasible (see Ref.~\cite{Hatton2024} for a discussion on the inclusion of extinction thresholds at low density in an ecological setting) and the distribution can be normalized. However, the first and second moments formally diverge.
+In this case the system is always feasible and the distribution can be normalized. However, the first and second moments formally diverge.
 This is problem can be overcome considering that we are dealing with a large, but \emph{finite}, number of degrees of freedom. 
-We are therefore interested in predicting the sample mean and variance for a given $N$. Consider the sample mean $\bar{x}_{N}\equiv\sum_{i}^N x_i /N$. We can approximate it with $\bar{x}_N \approx \langle x_* \rangle_{\Lambda} \equiv \int_0^{\Lambda}dx_*x_*P(x_*)$ where the cut-off $\Lambda$ depends on $N$ in such a way that $\int_{\Lambda}^{\infty}dx_*P(x_*)=1/N$. In orther words such that there is less 1 variable with density above $\Lambda$.
+We are therefore interested in predicting the sample mean and variance for a given $N$. Consider the sample mean $\bar{x}_{N}\equiv\sum_{i}^N x_i /N$. We can approximate it with $\bar{x}_N \approx \langle x_* \rangle_{\Lambda} \equiv \int_0^{\Lambda}dx_*x_*P(x_*)$ where the cut-off $\Lambda$ depends on $N$ in such a way that $\int_{\Lambda}^{\infty}dx_*P(x_*)=1/N$. In orther words such that there is less 1 variable with density above $\Lambda$ (see Supplemental Material).
 
 Following, e.g.,~\cite{Cui2020,Hatton2024} we can compute self-consistently $\Lambda$, $\langle x_*\rangle_{\Lambda}$ and $\langle x_*^2\rangle_{\Lambda}\equiv\int_0^{\Lambda}dx_*x_*^2P(x_*)$. The resulting distribution is plotted against simulations in Fig.~\ref{fig: cavity sol.}. Simulations correspond to $A_s=\mu$, showing that neglecting the $A_s$ term in analytical expressions does not introduce a significant error. 
 
@@ -219,7 +218,10 @@ If we keep the mean $\mu$ and standard deviation $\sigma$ of interactions fixed,
 
 In Fig.~\ref{fig: stability line + sims} we plot the stability condition $N\langle (\sigma/\psi(x_*))^2\rangle < 1$ for $\alpha = 1$, $\beta = 3/2$ derived from \eqref{eq: dist general} (solid line) together with results from simulations (shading). Here, because the boundary between the stable and unstable phases is a straight line with positive slope, increasing $N$ will eventually bring the system in the stable region. This behavior corresponds to the ``anti-May" phase defined previously. 
 
-Finally, Fig.~\ref{fig: alpha-beta} shows results of simulations for $\sigma_c\sqrt{N}$ in the $(\alpha,\beta)$ plane, at fixed $\mu N$ and $\gamma = 1$. (Numerically, we define $\sigma_c$ as the value of $\sigma$ above which full stable coexistence has a probability lower than $50\%$.) In these simulations, we use $\mu_s = \mu$, which would never be stable in the GLV model. Fig.~\ref{fig: alpha-beta} illustrates the transition between a ``May" phase for $\alpha \geq \beta$ and an ``anti-May" phase for $\alpha < \beta$, showing that our analytical results are robust to heterogeneous interactions.
+Fig.~\ref{fig: alpha-beta} shows results of simulations for $\sigma_c\sqrt{N}$ in the $(\alpha,\beta)$ plane, at fixed $\mu N$ and $\gamma = 1$. (Numerically, we define $\sigma_c$ as the value of $\sigma$ above which full stable coexistence has a probability lower than $50\%$.) In these simulations, we use $\mu_s = \mu$, which would never be stable in the GLV model. Fig.~\ref{fig: alpha-beta} illustrates the transition between a ``May" phase for $\alpha \geq \beta$ and an ``anti-May" phase for $\alpha < \beta$, showing that our analytical results are robust to heterogeneous interactions.
+
+Finally, we check the robustness of our findings in the scenario in which the exponents are not the same for every variable $x_i$. As a test, we can extract them from different Gaussian distributions: $\alpha_i\sim\mathcal N(\alpha,\sigma_e)$, $\beta_i\sim\mathcal N(\beta,\sigma_e)$ and $\gamma_i\sim\mathcal N(\gamma,\sigma_e)$, respectively with mean $\alpha$, $\beta$ and $\gamma$, and, for simplicity, all with the same standard deviation $\sigma_e$. 
+Simulations show (see Supplemental Material) that our results hold as long as $\sigma_e$ is small enough, in particular, we observe a loss of stability when $\min_i\beta_i>\max_i\alpha_i$.
 
 %Conclusion
 \paragraph*{}

@@ -23,11 +23,11 @@
      inkscape:pageopacity="0.0"
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
-     inkscape:zoom="1.1833333"
-     inkscape:cx="300"
-     inkscape:cy="200.28169"
-     inkscape:window-width="1366"
-     inkscape:window-height="704"
+     inkscape:zoom="0.836743"
+     inkscape:cx="273.68021"
+     inkscape:cy="244.99757"
+     inkscape:window-width="1920"
+     inkscape:window-height="1016"
      inkscape:window-x="0"
      inkscape:window-y="27"
      inkscape:window-maximized="1"
@@ -82,31 +82,6 @@
      fill-rule="evenodd"
      fill-opacity="1"
      id="path3" />
-  <polyline
-     clip-path="url(#clip612)"
-     style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none"
-     points="441.345,1423.18 441.345,47.2441 "
-     id="polyline3" />
-  <polyline
-     clip-path="url(#clip612)"
-     style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none"
-     points="838.177,1423.18 838.177,47.2441 "
-     id="polyline4" />
-  <polyline
-     clip-path="url(#clip612)"
-     style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none"
-     points="1235.01,1423.18 1235.01,47.2441 "
-     id="polyline5" />
-  <polyline
-     clip-path="url(#clip612)"
-     style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none"
-     points="1631.84,1423.18 1631.84,47.2441 "
-     id="polyline6" />
-  <polyline
-     clip-path="url(#clip612)"
-     style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none"
-     points="2028.68,1423.18 2028.68,47.2441 "
-     id="polyline7" />
   <polyline
      clip-path="url(#clip610)"
      style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none"
@@ -291,31 +266,6 @@
      fill-rule="nonzero"
      fill-opacity="1"
      id="path34" />
-  <polyline
-     clip-path="url(#clip612)"
-     style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none"
-     points="249.542,1384.24 2352.76,1384.24 "
-     id="polyline34" />
-  <polyline
-     clip-path="url(#clip612)"
-     style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none"
-     points="249.542,1059.73 2352.76,1059.73 "
-     id="polyline35" />
-  <polyline
-     clip-path="url(#clip612)"
-     style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none"
-     points="249.542,735.212 2352.76,735.212 "
-     id="polyline36" />
-  <polyline
-     clip-path="url(#clip612)"
-     style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none"
-     points="249.542,410.699 2352.76,410.699 "
-     id="polyline37" />
-  <polyline
-     clip-path="url(#clip612)"
-     style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; stroke-opacity:0.1; fill:none"
-     points="249.542,86.1857 2352.76,86.1857 "
-     id="polyline38" />
   <polyline
      clip-path="url(#clip610)"
      style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none"
