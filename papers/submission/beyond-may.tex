@@ -48,20 +48,19 @@ It is, on the face of it, a perplexing conclusion.
 On the one hand, May's mathematical argument is simple and seemingly model-free, suggesting universal applicability, also beyond biology \cite{Haldane2011, Moran2019}.
 On the other hand, it is clear that at least some large, complex systems are stable---else which regularities would biology be studying in the first place? 
 In fact, empirical observation suggests the opposite relationship between complexity and stability: species-rich, strongly-coupled communities such as rainforests tend to be stable over time, while sparser ones, for instance arctic communities, often exhibit large fluctuations, extinctions, and invasions~\cite{Hutchinson1959,Odum1959,MacArthur1955}. 
-The tension between May's theoretical argument and observation is at the center of the longstanding ``diversity-stability debate" in ecology \cite{McCann2000, Loreau2022}.
+The tension between May's theoretical argument and observation is at the center of the longstanding ``diversity-stability debate" in ecology \cite{McCann2000, Loreau2022,Hatton2024}.
 
 May's argument can be summarized as follows \cite{May1972}.
 Consider a system with $N$ populations $x_i$, characterized by an equilibrium point $\mathbf x^*$.
 Near that equilibrium $\mathbf x = \mathbf x^* + \delta \mathbf x$, the dynamics of the system is described by linear equations $d(\delta \mathbf x)/dt = A (\delta \mathbf x)$, and the stability of these equations requires that all eigenvalues of $A$ have negative real part.
 But if $A$ can be represented as $A = B - I$, where $B$ consists of random, independent interactions (with zero 
-mean and variance $\sigma^2$), and $-I$ corresponds to stabilizing self-interactions on some natural timescale, 
-then the circular law of random matrix theory implies that all eigenvalues of $A$ will have negative real part only if $\sigma^2 N < 1$.
-This places a sharp constraint on both diversity $N$ and interaction strength $\sigma$, often referred to as ``complexity begets instability".
+mean and variance $\sigma^2$), and $-I$ corresponds to stabilizing self-interactions on some natural timescale,  the circular law of random matrix theory implies that all eigenvalues of $A$ will have negative real part only if $\sigma^2 N < 1$.
+This condition places a sharp constraint on both diversity $N$ and interaction strength $\sigma$, often referred to as ``complexity begets instability".
 (This argument generalizes to $\langle B_{ij}\rangle \neq 0$, incomplete connectivity, or correlated interactions \cite{allesina2015stability}.)
 
 Many authors have sought to ease the tension between May's prediction and empirical observation by invoking effects not captured by dynamical systems with random coefficients~\cite{McCann2000,Chesson2000,Mougi2012,Rohr2014,Barabas2017,Grilli2017}. 
-In this letter, we use recent results in the physics of disordered systems \cite{Ahmadian2015, Roy2019} to show that May's argument itself is incomplete: in random dynamical systems, stability does not necessarily decrease with dimensionality and interaction strength---the opposite behavior is also possible, without the need for special or additional structure.
-For an in-depth discussion of the ecological implications of our result, see \cite{Hatton2024}.
+In this Letter, we use recent results in the physics of disordered systems \cite{Ahmadian2015, Roy2019} to show that May's argument itself is incomplete: in random dynamical systems, stability does not necessarily decrease with dimensionality and interaction strength---the opposite behavior is also possible, without the need for special or additional structure.
+For an in-depth discussion of the ecological implications of our result, see our recent paper \cite{Hatton2024}.
 
 %Model
 \paragraph*{}
@@ -70,13 +69,11 @@ For an in-depth discussion of the ecological implications of our result, see \ci
     \dot{x}_i = f(x_i) - \sum_{j}A_{ij}g(x_i)h(x_j) \, .
 \end{equation}
 Here $f(x_i)$ represents the self-dynamics of a population $i$ (growth and self-regulation), while $g(x_i)$ and $h(x_j)$ capture the cross-interaction of $i$ with other populations. That interaction is weighted by a coefficient $A_{ij}>0$, such that it implies a negative effect of $j$ on the growth of $i$. Non-zero diagonal elements $A_{ii}$ accounts for additional self-interactions with the same functional form as cross-interactions. 
-We refer to $f$ as the ``production function'' and $g$ as the ``response function''.
+We refer to $f$ as the ``production function'' and $g$ as the ``coupling function''.
 
 This general setting has been used to study universality in network dynamics \cite{Barzel2013} and to construct minimal models of complex dynamics \cite{Barzel2015}, with applications ranging from biological~\cite{Alon2006,Karlebach2008} 
 to social~\cite{Pastor-Satorras2001,Hufnagel2004,Dodds2005} systems.
-The classic generalized Lotka-Volterra (GLV) competition model studied by Bunin and collaborators \cite{bunin2017ecological, biroli2018marginally} corresponds to $f$, $g$, $h$ all linear. 
-
-However, it is natural both physically and biologically to consider more general functions, including power laws $f(x)\sim x^\alpha$, $g(x)\sim x^\beta$, $h(x) \sim x^\gamma$.
+In particular, the classic generalized Lotka-Volterra (GLV) competition model studied by Bunin and collaborators \cite{bunin2017ecological, biroli2018marginally} corresponds to $f$, $g$, $h$ all linear. However, it is natural both physically and biologically to consider more general functions, including power laws $f(x)\sim x^\alpha$, $g(x)\sim x^\beta$, $h(x) \sim x^\gamma$.
 From a physical perspective, we can imagine populations $x_i$ forming three-dimensional clusters whose growth is limited to their two-dimensional surface, leading to a production function $f(x) \sim x^{2/3}$.
 Biologically, at the individual organism level (populations of cells), growth has long been known to scale like $f(x) \sim x^k$ with $k\simeq 3/4$~\cite{Brown2004}, which can be understood in terms of hydrodynamic constraints on vascular and pulmonary networks.
 For reasons that are not currently understood, a similar pattern of growth appears to recur at the level of ecological communities~\cite{Hatton2015,Hatton2024}.
@@ -91,7 +88,7 @@ Defining
     \psi(x) \equiv (\mu_s - \mu) -  \left(\frac{f'(x)}{f(x)} - \frac{g'(x)}{g(x)}\right)\frac{f(x)}{g(x)h'(x)},
     \label{eq: psi}
 \end{equation}
-an elementary calculation shows that stability of the homogeneous equilibrium $x_i^* = x^*$ requires $\psi(x^*)g(x^*)h'(x^*) > 0$, or $\psi(x^*)>0$ if we assume that $g$ and $h$ are positive, increasing functions. This stability condition involves the relative strength of diagonal and off-diagonal interactions ($\mu_s - \mu$), but also on the relative growth rate of the production and response functions near the equilibrium ($f'(x^*)/f(x^*) - g'(x^*)/g(x^*)$).
+an elementary calculation shows that stability of the homogeneous equilibrium $x_i^* = x^*$ requires $\psi(x^*)g(x^*)h'(x^*) > 0$, or $\psi(x^*)>0$ if we assume that $g$ and $h$ are positive, increasing functions. This stability condition involves the relative strength of diagonal and off-diagonal interactions ($\mu_s - \mu$), but also on the relative growth rate of the production and coupling functions near the equilibrium ($f'(x^*)/f(x^*) - g'(x^*)/g(x^*)$).
 
 With power laws, the condition $\psi(x^*)>0$ evaluates to 
 \begin{equation}
@@ -189,7 +186,7 @@ where $A_s$ is a random variable with the statistics of $A_{ii}$ and $\xi$ is a 
     }
     \label{fig: alpha-beta}
 \end{figure}
-We are interested in the case in which the number of degrees of freedom $N$ is the only parameter changing in the system and the strength and heterogeneity of the interactions are fixed~\cite{kessler2015generalized,fried2016communities}. This choice reflects a strong-interaction regime and has been employed, for example, to study ecological scenarios with large differences in species abundance and chaotic turnover~\cite{mallmin2024chaotic}. As we show below, the cavity approximation does a good job at describing the effects of heterogeneity in the interactions as long as $\sigma \sqrt{N}$ is not negligible relative to $\mu N$, at which point we recover the homogeneous case.
+We are interested in the case in which the number of degrees of freedom $N$ is the only parameter changing in the system and the strength and heterogeneity of the interactions are fixed~\cite{kessler2015generalized,fried2016communities}. Compared to the case where $\mu$ and $\sigma$ scale with $N$ (considered in \cite{bunin2017ecological} and follow-up works), our choice reflects a strong-interaction regime; it has been employed, for example, to study ecological scenarios with large differences in species abundance and chaotic turnover~\cite{mallmin2024chaotic}. As we show below, the cavity approximation does a good job at describing the effects of heterogeneity in the interactions as long as $\sigma \sqrt{N}$ is not negligible relative to $\mu N$, at which point we recover the homogeneous case.
 
 The equation above can be solved for $x_*$ for specific values of
 $(\alpha-\beta)/\gamma$, or if $A_s=0$.
@@ -202,16 +199,14 @@ The equilibrium distribution $P(x_*)$ can then be obtained as the pushforward of
     P(x_*)=\frac{|\alpha-\beta|x_*^{\alpha-\beta-1}}{\sqrt{2\pi\sigma^2N \langle x_*^{2\gamma}\rangle}}
     \exp{\left\{-\frac{(x_*^{\alpha-\beta}- \mu N \langle x_*^{\gamma}\rangle)^2}{2\sigma^2N\langle x_*^{2\gamma}\rangle}\right\}} \, ,
 \end{equation}
-defined from $0$  to $\infty$, and where the expectation values must be computed self-consistently.
-
-Equipped with the equilibrium distribution $P(x_*)$, we can compute, for given $N$ and $\mu$, the maximal heterogeneity $\sigma_c$ compatible with the linear stability condition $N\langle (\sigma/\psi(x_*))^2\rangle < 1$.
+defined from $0$  to $\infty$, and where the expectation values must be computed self-consistently. Equipped with the equilibrium distribution $P(x_*)$, we can compute, for given $N$ and $\mu$, the maximal heterogeneity $\sigma_c$ compatible with the linear stability condition $N\langle (\sigma/\psi(x_*))^2\rangle < 1$.
 
 Let us focus on the choice $\alpha=1$, $\beta=3/2$ and $\gamma=1$, with $A_s=0$.  
 In this case the system is always feasible and the distribution can be normalized. However, the first and second moments formally diverge.
-This is problem can be overcome considering that we are dealing with a large, but \emph{finite}, number of degrees of freedom. 
-We are therefore interested in predicting the sample mean and variance for a given $N$. Consider the sample mean $\bar{x}_{N}\equiv\sum_{i}^N x_i /N$. We can approximate it with $\bar{x}_N \approx \langle x_* \rangle_{\Lambda} \equiv \int_0^{\Lambda}dx_*x_*P(x_*)$ where the cut-off $\Lambda$ depends on $N$ in such a way that $\int_{\Lambda}^{\infty}dx_*P(x_*)=1/N$. In orther words such that there is less 1 variable with density above $\Lambda$ (see Supplemental Material).
+This problem can be overcome by considering that we are dealing with a large, but \emph{finite}, number of degrees of freedom. 
+We are therefore interested in predicting the sample mean and variance for a given $N$. Consider the sample mean $\bar{x}_{N}\equiv\sum_{i}^N x_i /N$. We can approximate it with $\bar{x}_N \approx \langle x_* \rangle_{\Lambda} \equiv \int_0^{\Lambda}dx_*x_*P(x_*)$, where the cut-off $\Lambda$ depends on $N$ in such a way that $\int_{\Lambda}^{\infty}dx_*P(x_*)=1/N$, see Supplemental Material.
 
-Following, e.g.,~\cite{Cui2020,Hatton2024} we can compute self-consistently $\Lambda$, $\langle x_*\rangle_{\Lambda}$ and $\langle x_*^2\rangle_{\Lambda}\equiv\int_0^{\Lambda}dx_*x_*^2P(x_*)$. The resulting distribution is plotted against simulations in Fig.~\ref{fig: cavity sol.}. Simulations correspond to $A_s=\mu$, showing that neglecting the $A_s$ term in analytical expressions does not introduce a significant error. 
+Following, e.g.,~\cite{Cui2020,Hatton2024} we can compute self-consistently: $\Lambda$, $\langle x_*\rangle_{\Lambda}$ and $\langle x_*^2\rangle_{\Lambda}\equiv\int_0^{\Lambda}dx_*x_*^2P(x_*)$. The resulting distribution is plotted against simulations in Fig.~\ref{fig: cavity sol.}. Simulations correspond to $A_s=\mu$, showing that neglecting the $A_s$ term in analytical expressions does not introduce a significant error. 
 
 The properties of large random dynamical systems are often portrayed in the $(\sigma \sqrt{N},\mu N)$ plane \cite{bunin2017ecological}.
 If we keep the mean $\mu$ and standard deviation $\sigma$ of interactions fixed, an increase in the number of degrees of freedom $N$ moves the system along a square-root trajectory in that plane. In the GLV model, the boundary between the stable and unstable parameter regions is the horizontal line $\sigma_c\sqrt{N} = \mu_s - \mu N / N \approx \mu_s$ \cite{bunin2017ecological}, hence stability is never possible at large $N$. 
@@ -220,20 +215,19 @@ In Fig.~\ref{fig: stability line + sims} we plot the stability condition $N\lang
 
 Fig.~\ref{fig: alpha-beta} shows results of simulations for $\sigma_c\sqrt{N}$ in the $(\alpha,\beta)$ plane, at fixed $\mu N$ and $\gamma = 1$. (Numerically, we define $\sigma_c$ as the value of $\sigma$ above which full stable coexistence has a probability lower than $50\%$.) In these simulations, we use $\mu_s = \mu$, which would never be stable in the GLV model. Fig.~\ref{fig: alpha-beta} illustrates the transition between a ``May" phase for $\alpha \geq \beta$ and an ``anti-May" phase for $\alpha < \beta$, showing that our analytical results are robust to heterogeneous interactions.
 
-Finally, we check the robustness of our findings in the scenario in which the exponents are not the same for every variable $x_i$. As a test, we can extract them from different Gaussian distributions: $\alpha_i\sim\mathcal N(\alpha,\sigma_e)$, $\beta_i\sim\mathcal N(\beta,\sigma_e)$ and $\gamma_i\sim\mathcal N(\gamma,\sigma_e)$, respectively with mean $\alpha$, $\beta$ and $\gamma$, and, for simplicity, all with the same standard deviation $\sigma_e$. 
-Simulations show (see Supplemental Material) that our results hold as long as $\sigma_e$ is small enough, in particular, we observe a loss of stability when $\min_i\beta_i>\max_i\alpha_i$.
+Finally, we check the robustness of our findings in the scenario in which the exponents are not the same for every variable $x_i$. As a test, we can sample exponents from different Gaussian distributions: $\alpha_i\sim\mathcal N(\alpha,\sigma_e)$, $\beta_i\sim\mathcal N(\beta,\sigma_e)$ and $\gamma_i\sim\mathcal N(\gamma,\sigma_e)$, respectively with mean $\alpha$, $\beta$ and $\gamma$, and, for simplicity, all with the same standard deviation $\sigma_e$. 
+Simulations show that our results hold as long as $\sigma_e$ is small enough, in particular, we observe a loss of stability when $\min_i\beta_i>\max_i\alpha_i$ (Supplemental Material).
 
 %Conclusion
 \paragraph*{}
 \emph{Discussion.---}The relationship between complexity and stability in high-dimensional dynamical systems has been a longstanding puzzle, in ecology and other fields. 
-In this letter, we have shown that the condition $\sigma\sqrt{N}< \mu_s$ does not provide a complete picture of the relationship between complexity and stability. 
+In this Letter, we have shown that the condition $\sigma\sqrt{N}< \mu_s$ does not provide a complete picture of the relationship between complexity and stability. 
 In particular, we have seen that the competitive Lotka-Volterra model, often cited in support of May's general prediction, exemplifies a special cancellation in the more general stability condition $N\langle (\sigma/\psi)^2\rangle < 1$.
 In models where self-interactions grow slower than cross-interactions~\cite{Hatton2024,samadder2024interconnection}, the opposite behavior is observed: stability becomes \emph{more} likely with increasing diversity $N$.
 
-A modification of our model~\eqref{dynamics} of general ecological relevance describing the case in which per capita growth rates depend only on a linear combination of the densities is $\dot{x_i}/x_i=1-F(\sum_jA_{ij}x_j)$, where the function $F$ characterizes the effects of competition.
+A modification of our model~\eqref{dynamics} of general ecological relevance describing the case in which per capita growth rates depend on a linear combination of the densities is $\dot{x_i}/x_i=1-F(\sum_jA_{ij}x_j)$, where the function $F$ characterizes the effects of competition.
 General models of this kind are used, for example, to study the growth of a clonal population in the presence of a limiting factor~\cite{mazzolini2023universality}.
-All the models in this class are destabilized by diversity.
-The Jacobian matrix at equilibrium is $J_{ij}^*=-A_{ij}x_i^*F'(\sum_jA_{ij}x_j^*) \quad \forall i,j$ leading to the same simplification of the stability condition~\eqref{eq: random-stability} possible for GLV.
+All the models in this class are destabilized by diversity. (The Jacobian matrix at equilibrium is $J_{ij}^*=-A_{ij}x_i^*F'(\sum_jA_{ij}x_j^*)$, leading to the same simplification of the stability condition~\eqref{eq: random-stability} as in the GLV model.)
 
 Future work can look at the case where two-body interactions are not separable, or include higher order interaction to generalize the results in Ref. \cite{Gibbs2022} based on the GLV model. 
 
