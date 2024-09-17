@@ -6,6 +6,10 @@
 videos
 notebooks
 _research
+papers
+plots
+data
+tests
 
 ################################################################################
 #                                    Julia                                     #

@@ -75,4 +75,3 @@ end
         size=(600, 400),
     )
     savefig(plotsdir("mu-sigma-$dist"))
-end
