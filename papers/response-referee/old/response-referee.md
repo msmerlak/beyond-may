@@ -1,3 +1,80 @@
+
+# Response
+## Referee A
+
+We appreciate the positive feedback from the referee. We address the remaining comment below. 
+
+*In my opinion, the arguments leading to Eq. (11) and the discussion*  
+*after this equation are not very clear. What is the solution to the*  
+*consistency condition for <x_^gamma> and <x_^2gamma>? Do these two*  
+*quantities depend on N, and if so, how?*  
+
+*For example, for the case gamma=1, discussed after Eq. (11), both*  
+*means correspond exactly to the moments <x_> and <x_^2> and, as the*  
+*authors noted, are not well defined for the probability distribution*  
+*(11). This means that conclusions need to be drawn more carefully.* 
+
+We have now included the analysis on the cut-off argument previously in the SI in as an appendix in the main text, as we changed the format from letter to regular article. 
+Moreover, we have now modified the paragraph below Eq. (11) and conclude with a sentence clarifying that the same "renormalization" procedure we describe for $\alpha = 1$, $\beta = 2/3$, and $\gamma = 1$ can be extended to other choices of exponents in the case they result in diverging expectation values.
+Finally, for clarity, we now write explicitly the self-consistent equations for $\Lambda$, $\langle x_{*}\rangle_{\Lambda}$, and, $\langle x_{*}^2\rangle$.
+
+## Referee B
+
+*The authors clarify most of my previous concerns and clarify the*  
+*scaling issue, and the paper is surely improved. I have still one*  
+*relevant concern, I hope the authors fix before publication.*  
+
+We thank the referee for the previous comments, which helped improving the paper, and address the last concern below.
+
+- *In the response to reviewers the authors claim they better highlight*  
+	*that their result are valid only for competitive Lotka Volterra. It is*  
+	*true they added a couple of times the word competitive but in my*  
+	*opinion the paper is not clear enough on this points and the results* *are presented are too general.* 
+
+1) *The title "Beyond May: Complexity-stability relationships in*  
+	*disordered dynamical systems" seem to present results that are* 
+	*completely general. I suggest to make a more proper title such as*  
+	*""Beyond May: Complexity-stability relationships in competitive*  
+	*disordered Generalized Lotka Volterra Dynamics", or something similar.*  
+	*Otherwise the title is misleading.* 
+	
+	 We have now modified the title to make it clear that our work regards competitive disordered interactions only. We have additionally modified the abstract to stress our focus on competitive systems "We focus on competitive systems, and, using ...".
+
+2) *Many comparison are made with respect to systems that have not such*  
+	*constraint (positive mu), and this makes confusion.* 
+	
+	*E.g. 1, " the classic generalized Lotka-Volterra (GLV) competition*  
+	*model studied by Bunin and collaborators [25, 26] corresponds to f, g,*  
+	*h all linear." But this is not true as in Bunin and Biroli works mu*  
+	*can also be negative, is not constrained to assume positive value.*   
+
+	We now modified this sentence specifying that the linear case of our model corresponds to GLV only when constrained to competitive interactions. 
+	
+	*E.g. 2, "Compared to the case where μ and σ scale with N (considered*  
+	*in [25] and follow-up works), our choice reflects a strong-interaction*  
+	*regime; it has been employed, for example, to study ecological*  
+	*scenarios with large differences in species abundance and chaotic*  
+	*turnover [35]". Again in the cited papers mu can be also negative.*  
+	
+	We have removed the reference to [25] in order to avoid confusion. 
+	We kept reference [35], because in this paper only competitive interactions ($\mu > 0$) are considered, as in our work.
+
+- *I'm not sure it is worth to have a supplementary file. If it is not*  
+	*published as letter and thus there is room it would be suitable to*  
+	*better explain already in the main text the finite size argument to*  
+	*solve self consist equations and the sensitivity to random exponents*  
+	
+	*Justification for/against Letter:*  
+	  
+	*These calculations hold for a very specific cases and makes many*  
+	*assumption that in general do not hold. Having more space the authors*  
+	*could include the SI in the main text.*
+	
+	Following the indication of the referee, we have now included the SI in the main text and changed the format from Letter to Regular article.
+
+
+---
+# OLD
 ## Referee A
 
 We thank the referee for the thoughtful review of our work and for raising important points, addressed below, which we think helped us improve the paper.
