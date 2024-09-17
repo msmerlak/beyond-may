@@ -1,2 +1,0 @@
-# Letter to the Editor
-
